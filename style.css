@@ -1,4 +1,6 @@
 body {
     font-family: 'inter', sans-serif;
+    position: relative;
+    z-index: 1; /* Asegura que el contenido esté por encima del video */
 }
 

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const rssFeeds = [
         'https://www.clarin.com/rss/deportes/'
     ];
-    const itemsPerPage = 15;
+    const itemsPerPage = 15; // Mostrar 15 publicaciones
     let currentPage = 1;
     let allItems = [];
 
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             card.innerHTML = `
                 <div class="card h-100">
-                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia">
+                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia"  loading="lazy>
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
                         <p class="card-text">${item.description}</p>
@@ -48,12 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (const url of rssFeeds) {
             try {
-                const response = await fetch(`http://localhost:3000/rss/${encodeURIComponent(url)}`);
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
                 if (!response.ok) {
                     throw new Error(`Error en la respuesta del servidor: ${response.status}`);
                 }
-                const data = await response.text();
-                const feed = await parser.parseString(data);
+                const data = await response.json();
+                const feed = await parser.parseString(data.contents);
                 allItems = allItems.concat(feed.items); // Concatenar todos los items
             } catch (error) {
                 console.error(`Error al obtener noticias de ${url}:`, error);
@@ -106,4 +106,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Cargar noticias al iniciar
     cargarNoticias();
-});
+}); 
