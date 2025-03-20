@@ -88,3 +88,29 @@
     filter: blur(10px); /* Desenfoque gaussiano */
     opacity: 0.7; /* Ajustar la opacidad */
 }
+
+.footer {
+    background-color: #1b5e20;
+    color: #ffffff;
+    padding: 20px 0;
+}
+
+.footer-logo {
+    flex: 1;
+}
+
+.footer-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

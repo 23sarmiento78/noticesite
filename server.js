@@ -1,31 +1,31 @@
 const express = require('express');
-const fetch = require('node-fetch'); // Importa node-fetch versión 2.x
 const cors = require('cors');
+const fetch = require('node-fetch');
+const RSSParser = require('rss-parser');
 
 const app = express();
-const port = 3000;
+const parser = new RSSParser();
 
-app.use(cors()); // Habilita CORS para todas las rutas
+app.use(cors());
 
-app.get('/rss/:url(*)', async (req, res) => {
-    const url = req.params.url;
+app.get('/rss/:url', async (req, res) => {
+    const url = decodeURIComponent(req.params.url);
     try {
-        const response = await fetch(url, { // Utiliza node-fetch versión 2.x
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
-        });
+        const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`Network response was not ok: ${response.status}`);
         }
         const data = await response.text();
-        res.send(data);
+        const feed = await parser.parseString(data);
+        res.json(feed);
     } catch (error) {
-        console.error('Error fetching RSS:', error);
-        res.status(500).send('Error fetching RSS');
+        console.error(`Error fetching RSS feed: ${error}`);
+        res.status(500).send('Error fetching RSS feed');
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+// Cambia el puerto a 3001
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

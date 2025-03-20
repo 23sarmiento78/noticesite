@@ -1,47 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
     const parser = new RSSParser();
+    const rssFeeds = [
+        'https://www.clarin.com/rss/deportes/'
+    ];
+    const itemsPerPage = 15;
+    let currentPage = 1;
+    let allItems = [];
 
-    // Enlaces RSS de ESPN
-    const rssFeeds = {
-        sports: [
-            'https://www.espn.com/espn/rss/news',
-            'https://www.espn.com/espn/rss/nfl/news',
-            'https://www.espn.com/espn/rss/nba/news',
-            'https://www.espn.com/espn/rss/mlb/news',
-            'https://www.espn.com/espn/rss/nhl/news',
-            'https://www.espn.com/espn/rss/rpm/news',
-            'https://soccernet.espn.com/rss/news',
-            'https://www.espn.com/espn/rss/ncb/news',
-            'https://www.espn.com/espn/rss/ncf/news'
-        ],
-        gamers: [
-            // Agrega aquí tus feeds de gamers
-        ]
-    };
-
-    // Función para obtener la imagen predeterminada según la URL del feed
-    function obtenerImagenPredeterminada(url) {
-        if (url.includes('nfl')) return 'assets/img/nfl.jpg';
-        if (url.includes('nba')) return 'assets/img/nba.jpg';
-        if (url.includes('mlb')) return 'assets/img/mlb.jpg';
-        if (url.includes('nhl')) return 'assets/img/nhl.jpg';
-        if (url.includes('rpm')) return 'assets/img/rpm.jpg';
-        if (url.includes('soccer')) return 'assets/img/soccer.jpg';
-        if (url.includes('ncb')) return 'assets/img/nba.jpg';
-        if (url.includes('ncf')) return 'assets/img/soccer.jpg';
-        return 'assets/img/nba.jpg';
+    // Función para obtener la imagen de la noticia
+    function obtenerImagenNoticia(item) {
+        if (item.enclosure && item.enclosure.url) {
+            return item.enclosure.url;
+        }
+        return 'assets/img/default.jpg'; // Imagen predeterminada si no hay imagen en el feed
     }
 
-    // Función para mostrar noticias de un feed RSS
-    async function mostrarNoticias(feedUrls, containerId) {
+    // Función para mostrar noticias en formato de cartas
+    function mostrarNoticiasEnCartas(items, containerId) {
         const container = document.getElementById(containerId);
         container.innerHTML = ''; // Limpiar el contenedor
 
-        let newsCount = 0; // Contador de noticias mostradas
-        let allItems = []; // Array para almacenar todos los items de los feeds
+        items.forEach((item, index) => {
+            const imagenNoticia = obtenerImagenNoticia(item); // Obtener imagen de la noticia
 
-        // Obtener todos los items de todos los feeds
-        for (const url of feedUrls) {
+            const card = document.createElement('div');
+            card.classList.add('col', 'mb-3');
+            if (index < 3) { // Las primeras 3 noticias son destacadas
+                card.classList.add('featured');
+            }
+            card.innerHTML = `
+                <div class="card h-100">
+                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.title}</h5>
+                        <p class="card-text">${item.description}</p>
+                        <a href="${item.link}" class="btn btn-primary">Leer más</a>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // Función para cargar noticias y manejar la paginación
+    async function cargarNoticias() {
+        allItems = []; // Reiniciar el array de items
+
+        for (const url of rssFeeds) {
             try {
                 const response = await fetch(`http://localhost:3000/rss/${encodeURIComponent(url)}`);
                 if (!response.ok) {
@@ -55,33 +60,50 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Mostrar solo las primeras 9 noticias de todos los items
-        for (const item of allItems) {
-            if (newsCount >= 9) {
-                break; // Salir del bucle si se han mostrado 9 noticias
-            }
+        actualizarPaginacion();
+    }
 
-            const imagenPredeterminada = obtenerImagenPredeterminada(item.link); // Usar link para obtener imagen
+    // Función para actualizar la paginación
+    function actualizarPaginacion() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const itemsToShow = allItems.slice(startIndex, endIndex);
 
-            const articleElement = document.createElement('div');
-            articleElement.classList.add('col-md-4', 'mb-4');
-            articleElement.innerHTML = `
-                <div class="card">
-                    <div class="card-body">
-                        <img src="${imagenPredeterminada}" class="card-img-top" alt="Imagen predeterminada">
-                        <h5 class="card-title">${item.title}</h5>
-                        <a href="${item.link}" class="btn btn-primary">Leer más</a>
-                    </div>
-                </div>
-            `;
-            container.appendChild(articleElement);
-            newsCount++;
+        mostrarNoticiasEnCartas(itemsToShow, 'news-cards-container');
+
+        // Actualizar la paginación
+        const totalPages = Math.ceil(allItems.length / itemsPerPage);
+        const paginationContainer = document.querySelector('.pagination');
+        paginationContainer.innerHTML = '';
+
+        if (currentPage > 1) {
+            paginationContainer.innerHTML += `<li class="page-item"><a class="page-link" href="#">Anterior</a></li>`;
+        }
+
+        for (let i = 1; i <= totalPages; i++) {
+            paginationContainer.innerHTML += `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link" href="#">${i}</a></li>`;
+        }
+
+        if (currentPage < totalPages) {
+            paginationContainer.innerHTML += `<li class="page-item"><a class="page-link" href="#">Siguiente</a></li>`;
         }
     }
 
-    // Mostrar noticias de deportes
-    mostrarNoticias(rssFeeds.sports, 'sports-news-container');
+    // Evento para manejar la paginación
+    document.querySelector('.pagination').addEventListener('click', function(event) {
+        if (event.target.tagName === 'A') {
+            const page = event.target.textContent;
+            if (page === 'Anterior') {
+                if (currentPage > 1) currentPage--;
+            } else if (page === 'Siguiente') {
+                if (currentPage < Math.ceil(allItems.length / itemsPerPage)) currentPage++;
+            } else {
+                currentPage = parseInt(page);
+            }
+            actualizarPaginacion();
+        }
+    });
 
-    // Mostrar noticias de gamers (si tienes feeds)
-    mostrarNoticias(rssFeeds.gamers, 'gamer-news-container');
+    // Cargar noticias al iniciar
+    cargarNoticias();
 });

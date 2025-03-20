@@ -1,27 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
     const parser = new RSSParser();
-
-    // Enlaces RSS de noticias de videojuegos
-    const gamerFeeds = [
-        'https://www.ign.com/rss/videos/feed?tags=xbox-one',
-        // Agrega aquí otros feeds de noticias de videojuegos
+    const rssFeeds = [
+        'https://www.clarin.com/rss/tecnologia/'
     ];
+    const itemsPerPage = 15;
+    let currentPage = 1;
+    let allItems = [];
 
-    // Función para obtener la imagen predeterminada según la URL del feed
-    function obtenerImagenPredeterminada(url) {
-        return 'assets/img/banner-1.jpg'; // Usar banner-1.jpg para todas las noticias de videojuegos
+    // Función para obtener la imagen de la noticia
+    function obtenerImagenNoticia(item) {
+        if (item.enclosure && item.enclosure.url) {
+            return item.enclosure.url;
+        }
+        return 'assets/img/default.jpg'; // Imagen predeterminada si no hay imagen en el feed
     }
 
-    // Función para mostrar noticias de un feed RSS
-    async function mostrarNoticias(feedUrls, containerId) {
+    // Función para mostrar noticias en formato de cartas
+    function mostrarNoticiasEnCartas(items, containerId) {
         const container = document.getElementById(containerId);
         container.innerHTML = ''; // Limpiar el contenedor
 
-        let newsCount = 0; // Contador de noticias mostradas
-        let allItems = []; // Array para almacenar todos los items de los feeds
+        items.forEach((item, index) => {
+            const imagenNoticia = obtenerImagenNoticia(item); // Obtener imagen de la noticia
 
-        // Obtener todos los items de todos los feeds
-        for (const url of feedUrls) {
+            const card = document.createElement('div');
+            card.classList.add('col', 'mb-3');
+            if (index < 3) { // Las primeras 3 noticias son destacadas
+                card.classList.add('featured');
+            }
+            card.innerHTML = `
+                <div class="card h-100">
+                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia"  loading="lazy>
+                    <div class="card-body">
+                        <h5 class="card-title">${item.title}</h5>
+                        <p class="card-text">${item.description}</p>
+                        <a href="${item.link}" class="btn btn-primary">Leer más</a>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // Función para cargar noticias y manejar la paginación
+    async function cargarNoticias() {
+        allItems = []; // Reiniciar el array de items
+
+        for (const url of rssFeeds) {
             try {
                 const response = await fetch(`http://localhost:3000/rss/${encodeURIComponent(url)}`);
                 if (!response.ok) {
@@ -35,57 +60,50 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Mostrar solo las primeras 9 noticias de todos los items
-        for (const item of allItems) {
-            if (newsCount >= 9) {
-                break; // Salir del bucle si se han mostrado 9 noticias
-            }
+        actualizarPaginacion();
+    }
 
-            // Obtener la URL de la miniatura o usar la imagen predeterminada
-            let imageUrl = obtenerImagenPredeterminada(item.link); // Imagen predeterminada
-            if (item.media && item.media.thumbnail && item.media.thumbnail.url) {
-                // No usar la miniatura del feed, siempre usar banner-1.jpg
-            }
+    // Función para actualizar la paginación
+    function actualizarPaginacion() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const itemsToShow = allItems.slice(startIndex, endIndex);
 
-            // Verificar si la URL de la imagen es válida
-            const img = new Image();
-            img.onload = function() {
-                // La imagen se cargó correctamente, mostrar la noticia
-                const articleElement = document.createElement('div');
-                articleElement.classList.add('col-md-4', 'mb-4');
-                articleElement.innerHTML = `
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="${imageUrl}" class="card-img-top" alt="Imagen predeterminada">
-                            <h5 class="card-title">${item.title}</h5>
-                            <a href="${item.link}" class="btn btn-primary">Leer más</a>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(articleElement);
-            };
-            img.onerror = function() {
-                // La imagen no se cargó, usar la imagen predeterminada
-                imageUrl = obtenerImagenPredeterminada(item.link);
-                const articleElement = document.createElement('div');
-                articleElement.classList.add('col-md-4', 'mb-4');
-                articleElement.innerHTML = `
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="${imageUrl}" class="card-img-top" alt="Imagen predeterminada">
-                            <h5 class="card-title">${item.title}</h5>
-                            <a href="${item.link}" class="btn btn-primary">Leer más</a>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(articleElement);
-            };
-            img.src = imageUrl; // Iniciar la carga de la imagen
+        mostrarNoticiasEnCartas(itemsToShow, 'tech-news-cards-container');
 
-            newsCount++;
+        // Actualizar la paginación
+        const totalPages = Math.ceil(allItems.length / itemsPerPage);
+        const paginationContainer = document.querySelector('.pagination');
+        paginationContainer.innerHTML = '';
+
+        if (currentPage > 1) {
+            paginationContainer.innerHTML += `<li class="page-item"><a class="page-link" href="#">Anterior</a></li>`;
+        }
+
+        for (let i = 1; i <= totalPages; i++) {
+            paginationContainer.innerHTML += `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link" href="#">${i}</a></li>`;
+        }
+
+        if (currentPage < totalPages) {
+            paginationContainer.innerHTML += `<li class="page-item"><a class="page-link" href="#">Siguiente</a></li>`;
         }
     }
 
-    // Mostrar noticias de videojuegos
-    mostrarNoticias(gamerFeeds, 'gamer-news-container');
+    // Evento para manejar la paginación
+    document.querySelector('.pagination').addEventListener('click', function(event) {
+        if (event.target.tagName === 'A') {
+            const page = event.target.textContent;
+            if (page === 'Anterior') {
+                if (currentPage > 1) currentPage--;
+            } else if (page === 'Siguiente') {
+                if (currentPage < Math.ceil(allItems.length / itemsPerPage)) currentPage++;
+            } else {
+                currentPage = parseInt(page);
+            }
+            actualizarPaginacion();
+        }
+    });
+
+    // Cargar noticias al iniciar
+    cargarNoticias();
 });

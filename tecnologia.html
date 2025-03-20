@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias de Deportes y Tecnología - HGARUNA</title>
+    <meta name="description" content="Mantente informado con las últimas noticias de deportes y tecnología en HGARUNA.">
+    <meta name="keywords" content="noticias, deportes, tecnología, HGARUNA">
+    <meta name="author" content="HGARUNA">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <style>
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+        font-family: 'Arial', sans-serif;
+    }
+    .navbar {
+        background-color: transparent !important;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+    }
+    .navbar-brand, .nav-link {
+        color: #ffffff !important;
+        font-weight: bold;
+    }
+    .nav-link:hover {
+        color: #ffcc00 !important; /* Cambia el color al pasar el mouse */
+    }
+    .card {
+        background-color: #1e1e1e;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 10px;
+        flex: 1;
+    }
+    .card img {
+        border-radius: 10px 10px 0 0;
+    }
+    .card-title {
+        color: #76ff03;
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    .card-text {
+        color: #b0bec5;
+    }
+    .btn-primary {
+        background-color: #1b5e20;
+        border: none;
+        color: #ffffff;
+    }
+    .btn-primary:hover {
+        background-color: #2e7d32;
+    }
+    .news-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .col {
+        flex: 1 1 calc(33.333% - 10px);
+        box-sizing: border-box;
+    }
+    footer {
+        background-color: #ffcc00; 
+        color: #ffffff;
+        padding: 20px 0;
+        text-align: center;
+    }
+    footer a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    footer img {
+        width: 50px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<video autoplay muted loop id="background-video" style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; z-index: -1;">
+    <source src="assets/img/videojuegos.mp4" type="video/mp4">
+    Tu navegador no soporta el elemento de video.
+</video>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">
+        <img src="assets/img/logo3.png" style="width: 80px; height: auto;" alt="Logo de HGARUNA"> <span style="font-size: 24px; font-family: 'Poppins-Medium', sans-serif; color: white;">HGARUNA</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="deportes.html">Deportes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tecnologia.html">Tecnología</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="cine.html">cine</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="autos.html">Motores</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div id="featured-news-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <!-- Aquí se insertarán las noticias destacadas -->
+    </div>
+    <a class="carousel-control-prev" href="#featured-news-carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#featured-news-carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Noticias de Tecnología</h2>
+        <div id="tech-news-cards-container" class="news-row">
+            <!-- Aquí se insertarán las cartas de noticias de tecnología -->
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <!-- Paginación dinámica -->
+        </ul>
+    </nav>
+
+    <footer class="text-black py-5" style="background-color: #e5ff00;">
+        <div class="container">
+            <div class="row text-left justify-content-between">
+                <div class="col-md-3 col-sm-6 mb-4 footer-col">
+                    <div class="logo-container">
+                        <a class="navbar-brand" href="#">
+                            <img src="assets/img/logo3.png" style="width: 80px; height: auto;" alt="Logo de HGARUNA"> <span style="font-size: 24px; font-family: 'Poppins-Medium', sans-serif; color: rgb(0, 0, 0);">HGARUNA</span>
+                        </a>
+                    </div>
+                    <p class="footer-link-container"><a href="#" class="text-decoration-none text-black footer-link">STATEMENT OF ACCESSIBILITY</a></p>
+                    <p class="footer-link-container"><a href="#" class="text-decoration-none text-black footer-link">PRIVACY POLICY</a></p>
+                    <p style="color: black; margin-top: 20px;">&copy; 2022 Organization Name's</p>
+                </div>
+                <div class="col-md-2 col-sm-6 mb-3 footer-col">
+                    <ul class="list-unstyled">
+                        <li style="margin-bottom: 10px;"><a href="deportes.html" class="text-decoration-none text-black footer-link">Deportes</a></li>
+                        <li style="margin-bottom: 10px;"><a href="autos.html" class="text-decoration-none text-black footer-link">Motores</a></li>
+                        <li style="margin-bottom: 10px;"><a href="tecnologia.html" class="text-decoration-none text-black footer-link">Tecnologia</a></li>
+                        <li style="margin-bottom: 10px;"><a href="cine.html" class="text-decoration-none text-black footer-link">Cine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-sm-6 mb-3 footer-col text-black">
+                    <h5 class="mb-3" style="color: black;">ADDRESS</h5>
+                    <p style="margin-bottom: 0; color: black;">Argentina</p>
+                    <p style="margin-bottom: 0; color: black;">Cordoba</p>
+                    <h5 class="mt-4 mb-3" style="color: black;">CONTACT US</h5>
+                    <p style="color: black;">
+                        email: <a href="mailto:info@org.org" class="text-decoration-none text-black footer-link">23sarmiento@gmail.com</a><br>
+                        tel: +54 3541-237972
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="lib\rss-parser.min.js"></script>
+    <script src="assets/js/banner.js"></script>
+    <script src="assets/js/noticias.js"></script>
+    <script src="assets/js/gamer.js"></script>
+    <script src="assets/js/pagination.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html> 
