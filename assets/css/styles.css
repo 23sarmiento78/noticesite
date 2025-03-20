@@ -25,3 +25,23 @@
         padding: 5px 10px;
     }
 }
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.news-card-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.news-card-image img {
+    width: 100%;
+    height: auto;
+}
+
+.news-description {
+    flex-grow: 1;
+}

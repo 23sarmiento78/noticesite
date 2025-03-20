@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.classList.add('featured');
             }
             card.innerHTML = `
-                <div class="card h-100">
+             <div class="card h-100">
                     <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia"  loading="lazy>
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
@@ -106,4 +106,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Cargar noticias al iniciar
     cargarNoticias();
-}); 
+
+    // Declarar e inicializar la variable noticias
+    const noticias = [
+        // Datos de ejemplo para noticias
+        { title: "Noticia 1 - This is the first news.", content: "Content 1" },
+        { title: "Noticia 2 - This is the second news.", content: "Content 2" },
+    ];
+
+    // Verificar si el título está definido antes de usar substring
+    noticias.forEach(noticia => {
+        if (noticia.title && typeof noticia.title === 'string') {
+            const tituloCorto = noticia.title.substring(0, 50);
+            // Hacer algo con el título corto
+            console.log(tituloCorto);
+        } else {
+            console.warn('Título indefinido o no es una cadena:', noticia);
+        }
+    });
+});

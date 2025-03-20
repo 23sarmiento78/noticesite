@@ -32,21 +32,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.classList.add('featured');
             }
             card.innerHTML = `
-                <div class="card h-100">
-                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">${item.title}</h5>
-                        <p class="card-text">${item.description}</p>
-                        <a href="${item.link}" class="btn btn-primary">Leer más</a>
-                    </div>
-                </div>
+                 <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 news-card">
+            <div class="news-card-image">
+                <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia" loading="lazy">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">${item.title}</h5>
+                <p class="card-text news-description">${item.description.substring(0, 150)}...</p>
+                <a href="${item.link}" class="btn btn-primary">Leer más</a>
+            </div>
+        </div>
+    </div>
+    </div>
             `;
             container.appendChild(card);
         });
     }
 
     async function cargarNoticias() {
-        errorMessageDiv.textContent = ''; // Clear previous error
+        if (errorMessageDiv) {
+            errorMessageDiv.textContent = ''; // Clear previous error if it exists
+        }
         newsContainer.innerHTML = '<p>Cargando noticias...</p>'; // Show loading message
         allItems = [];
 
@@ -61,7 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 allItems = allItems.concat(feed.items);
             } catch (error) {
                 console.error(`Error al obtener noticias de ${url}:`, error);
-                errorMessageDiv.textContent = 'Hubo un error al cargar las noticias. Por favor, intente de nuevo más tarde.';
+                // Check if errorMessageDiv exists before setting its text content
+                if (errorMessageDiv) {
+                    errorMessageDiv.textContent = 'Hubo un error al cargar las noticias. Por favor, intente de nuevo más tarde.';
+                } else {
+                    // You might want to log a message if the div is not found
+                    console.error("errorMessageDiv not found in the DOM.");
+                }
                 newsContainer.innerHTML = ''; // Clear loading message
                 return; // Stop loading if an error occurs
             }
