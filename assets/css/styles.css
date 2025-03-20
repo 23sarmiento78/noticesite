@@ -1,0 +1,27 @@
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .card-img-top {
+        height: auto;
+        object-fit: contain;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .card-text {
+        font-size: 14px;
+    }
+
+    .card .btn {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+}

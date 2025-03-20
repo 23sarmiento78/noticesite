@@ -1,49 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
     const parser = new RSSParser();
-
-    // Enlace RSS de Clarín Deportes
     const rssFeeds = [
         'https://www.clarin.com/rss/deportes/'
     ];
+    const itemsPerPage = 9;
+    let currentPage = 1;
+    let allItems = [];
 
-    // Función para obtener la imagen de la noticia
     function obtenerImagenNoticia(item) {
         if (item.enclosure && item.enclosure.url) {
-            console.log(`Imagen encontrada: ${item.enclosure.url}`);
             return item.enclosure.url;
         }
-        console.log('No se encontró imagen, usando imagen predeterminada');
-        return 'assets/img/default.jpg'; // Imagen predeterminada si no hay imagen en el feed
+        return 'assets/img/default.jpg';
     }
 
-    // Función para mostrar noticias en un carrusel
-    async function mostrarNoticiasEnCarrusel(feedUrls, containerId) {
+    function mostrarNoticiasEnCarrusel(items, containerId) {
         const container = document.getElementById(containerId);
-        container.innerHTML = ''; // Limpiar el contenedor
-
-        let allItems = []; // Array para almacenar todos los items de los feeds
-
-        // Obtener todos los items de todos los feeds
-        for (const url of feedUrls) {
-            try {
-                const response = await fetch(`http://localhost:3000/rss/${encodeURIComponent(url)}`);
-                if (!response.ok) {
-                    throw new Error(`Error en la respuesta del servidor: ${response.status}`);
-                }
-                const data = await response.text();
-                const feed = await parser.parseString(data);
-                allItems = allItems.concat(feed.items); // Concatenar todos los items
-            } catch (error) {
-                console.error(`Error al obtener noticias de ${url}:`, error);
-            }
-        }
+        container.innerHTML = '';
 
         let carouselInner = document.createElement('div');
         carouselInner.classList.add('carousel-inner');
 
-        // Mostrar solo las primeras 9 noticias de todos los items
-        allItems.slice(0, 9).forEach((item, index) => {
-            const imagenNoticia = obtenerImagenNoticia(item); // Obtener imagen de la noticia
+        items.forEach((item, index) => {
+            const imagenNoticia = obtenerImagenNoticia(item);
 
             const carouselItem = document.createElement('div');
             carouselItem.classList.add('carousel-item');
@@ -62,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         container.appendChild(carouselInner);
 
-        // Agregar controles del carrusel
         container.innerHTML += `
             <a class="carousel-control-prev" href="#${containerId}" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -75,6 +53,67 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 
-    // Mostrar noticias destacadas en el carrusel
-    mostrarNoticiasEnCarrusel(rssFeeds, 'featured-news-carousel');
+    async function cargarNoticias() {
+        allItems = [];
+
+        for (const url of rssFeeds) {
+            try {
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                if (!response.ok) {
+                    throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+                }
+                const data = await response.json();
+                const feed = await parser.parseString(data.contents);
+                allItems = allItems.concat(feed.items);
+                console.log("Datos RSS recibidos:", feed);
+                console.log("Todos los items:", allItems);
+            } catch (error) {
+                console.error(`Error al obtener noticias de ${url}:`, error);
+                document.getElementById('featured-news-carousel').innerHTML = '<p>Error al cargar las noticias. Por favor, inténtelo más tarde.</p>';
+                return;
+            }
+        }
+
+        actualizarPaginacion();
+    }
+
+    function actualizarPaginacion() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const itemsToShow = allItems.slice(startIndex, endIndex);
+
+        mostrarNoticiasEnCarrusel(itemsToShow, 'featured-news-carousel');
+
+        const totalPages = Math.ceil(allItems.length / itemsPerPage);
+        const paginationContainer = document.querySelector('.pagination');
+        paginationContainer.innerHTML = '';
+
+        if (currentPage > 1) {
+            paginationContainer.innerHTML += `<li class="page-item"><a class="page-link" href="#">Anterior</a></li>`;
+        }
+
+        for (let i = 1; i <= totalPages; i++) {
+            paginationContainer.innerHTML += `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link" href="#">${i}</a></li>`;
+        }
+
+        if (currentPage < totalPages) {
+            paginationContainer.innerHTML += `<li class="page-item"><a class="page-link" href="#">Siguiente</a></li>`;
+        }
+    }
+
+    document.querySelector('.pagination').addEventListener('click', function(event) {
+        if (event.target.tagName === 'A') {
+            const page = event.target.textContent;
+            if (page === 'Anterior') {
+                if (currentPage > 1) currentPage--;
+            } else if (page === 'Siguiente') {
+                if (currentPage < Math.ceil(allItems.length / itemsPerPage)) currentPage++;
+            } else {
+                currentPage = parseInt(page);
+            }
+            actualizarPaginacion();
+        }
+    });
+
+    cargarNoticias();
 });

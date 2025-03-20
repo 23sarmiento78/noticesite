@@ -1,37 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
     const parser = new RSSParser();
     const rssFeeds = [
-        'https://www.clarin.com/rss/deportes/',
-        'https://www.clarin.com/rss/tecnologia/'
+        'https://www.clarin.com/rss/espectaculos/cine/',
+        'https://www.clarin.com/rss/autos/',
+        'https://www.clarin.com/rss/tecnologia/',
+        'https://www.clarin.com/rss/deportes/'
     ];
     const itemsPerPage = 15;
     let currentPage = 1;
     let allItems = [];
+    const newsContainer = document.getElementById('news-cards-container');
+    const paginationContainer = document.querySelector('.pagination');
+    const errorMessageDiv = document.getElementById('error-message');
 
-    // Función para obtener la imagen de la noticia
     function obtenerImagenNoticia(item) {
         if (item.enclosure && item.enclosure.url) {
             return item.enclosure.url;
         }
-        return 'assets/img/default.jpg'; // Imagen predeterminada si no hay imagen en el feed
+        return 'assets/img/default.jpg';
     }
 
-    // Función para mostrar noticias en formato de cartas
     function mostrarNoticiasEnCartas(items, containerId) {
         const container = document.getElementById(containerId);
-        container.innerHTML = ''; // Limpiar el contenedor
+        container.innerHTML = '';
 
         items.forEach((item, index) => {
-            const imagenNoticia = obtenerImagenNoticia(item); // Obtener imagen de la noticia
-
+            const imagenNoticia = obtenerImagenNoticia(item);
             const card = document.createElement('div');
             card.classList.add('col', 'mb-3');
-            if (index < 3) { // Las primeras 3 noticias son destacadas
+            if (index < 3) {
                 card.classList.add('featured');
             }
             card.innerHTML = `
                 <div class="card h-100">
-                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia"  loading="lazy>
+                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
                         <p class="card-text">${item.description}</p>
@@ -43,9 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Función para cargar noticias y manejar la paginación
     async function cargarNoticias() {
-        allItems = []; // Reiniciar el array de items
+        errorMessageDiv.textContent = ''; // Clear previous error
+        newsContainer.innerHTML = '<p>Cargando noticias...</p>'; // Show loading message
+        allItems = [];
 
         for (const url of rssFeeds) {
             try {
@@ -55,16 +58,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 const data = await response.text();
                 const feed = await parser.parseString(data);
-                allItems = allItems.concat(feed.items); // Concatenar todos los items
+                allItems = allItems.concat(feed.items);
             } catch (error) {
                 console.error(`Error al obtener noticias de ${url}:`, error);
+                errorMessageDiv.textContent = 'Hubo un error al cargar las noticias. Por favor, intente de nuevo más tarde.';
+                newsContainer.innerHTML = ''; // Clear loading message
+                return; // Stop loading if an error occurs
             }
         }
 
         actualizarPaginacion();
     }
 
-    // Función para actualizar la paginación
     function actualizarPaginacion() {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
@@ -72,9 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         mostrarNoticiasEnCartas(itemsToShow, 'news-cards-container');
 
-        // Actualizar la paginación
         const totalPages = Math.ceil(allItems.length / itemsPerPage);
-        const paginationContainer = document.querySelector('.pagination');
         paginationContainer.innerHTML = '';
 
         if (currentPage > 1) {
@@ -90,8 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Evento para manejar la paginación
-    document.querySelector('.pagination').addEventListener('click', function(event) {
+    paginationContainer.addEventListener('click', function(event) {
         if (event.target.tagName === 'A') {
             const page = event.target.textContent;
             if (page === 'Anterior') {
@@ -105,6 +107,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Cargar noticias al iniciar
     cargarNoticias();
-}); 
+});
