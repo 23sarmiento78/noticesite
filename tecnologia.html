@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias de Deportes y Tecnología - HGARUNA</title>
-    <meta name="description" content="Mantente informado con las últimas noticias de deportes y tecnología en HGARUNA.">
-    <meta name="keywords" content="noticias, deportes, tecnología, HGARUNA">
+    <title>Noticias de Tecnología - HGARUNA</title>
+    <meta name="description" content="Mantente informado con las últimas noticias de tecnología en HGARUNA.">
+    <meta name="keywords" content="noticias, tecnología, HGARUNA">
     <meta name="author" content="HGARUNA">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Últimas Noticias de Tecnología - HGARUNA">
+    <meta property="og:description" content="Descubre las noticias más recientes en tecnología en HGARUNA.">
+    <meta property="og:image" content="URL_DE_LA_IMAGEN_COMPARTIDA">
+    <meta property="og:url" content="URL_DEL_SITIO">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Últimas Noticias de Tecnología - HGARUNA">
+    <meta name="twitter:description" content="Descubre las noticias más recientes en tecnología en HGARUNA.">
+    <meta name="twitter:image" content="URL_DE_LA_IMAGEN_COMPARTIDA">
+    <meta name="twitter:site" content="@TU_CUENTA_DE_TWITTER">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    <style>
@@ -59,10 +71,24 @@
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
+        justify-content: center; /* Centrar las cartas */
     }
     .col {
         flex: 1 1 calc(33.333% - 10px);
         box-sizing: border-box;
+        max-width: calc(33.333% - 10px); /* Asegura que las columnas no excedan el ancho */
+    }
+    @media (max-width: 992px) {
+        .col {
+            flex: 1 1 calc(50% - 10px);
+            max-width: calc(50% - 10px); /* Ajuste para pantallas medianas */
+        }
+    }
+    @media (max-width: 768px) {
+        .col {
+            flex: 1 1 100%;
+            max-width: 100%; /* Ajuste para pantallas pequeñas */
+        }
     }
     footer {
         background-color: #ffcc00; 
@@ -108,10 +134,13 @@
                 <a class="nav-link" href="tecnologia.html">Tecnología</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="cine.html">cine</a>
+                <a class="nav-link" href="cine.html">Cine</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="autos.html">Motores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="loultimo.html">Lo Último</a>
             </li>
         </ul>
     </div>
@@ -136,6 +165,17 @@
         <h2 class="text-center mb-4">Noticias de Tecnología</h2>
         <div id="tech-news-cards-container" class="news-row">
             <!-- Aquí se insertarán las cartas de noticias de tecnología -->
+            <div class="col">
+                <div class="card">
+                    <img src="assets/img/imagen1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Título de la Noticia</h5>
+                        <p class="card-text">Descripción breve de la noticia...</p>
+                        <a href="#" class="btn btn-primary">Leer más</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Repetir estructura de la carta para más noticias -->
         </div>
     </div>
 
@@ -145,7 +185,7 @@
         </ul>
     </nav>
 
-    <footer class="text-black py-5" style="background-color: #e5ff00;">
+    <footer class="text-black py-5" style="background-color: #ffcc00;">
         <div class="container">
             <div class="row text-left justify-content-between">
                 <div class="col-md-3 col-sm-6 mb-4 footer-col">
@@ -190,4 +230,4 @@
     <script src="assets/js/pagination.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
-</html> 
+</html>

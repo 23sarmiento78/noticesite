@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const parser = new RSSParser();
     const rssFeeds = [
-        'https://www.clarin.com/rss/deportes/'
+        'https://www.clarin.com/rss/lo-ultimo/'
     ];
-    const itemsPerPage = 15; // Mostrar 15 publicaciones
+    const itemsPerPage = 15;
     let currentPage = 1;
     let allItems = [];
 

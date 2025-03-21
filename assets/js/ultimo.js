@@ -1,39 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
     const parser = new RSSParser();
     const rssFeeds = [
-        'https://www.clarin.com/rss/espectaculos/cine/',
-        'https://www.clarin.com/rss/autos/',
-        'https://www.clarin.com/rss/tecnologia/',
-        'https://www.clarin.com/rss/deportes/',
-        'https://www.clarin.com/rss/lo-ultimo/',
-        'https://www.clarin.com/rss/internacional/',
+        'https://www.clarin.com/rss/internacional/'
     ];
-    const itemsPerPage = 15;
+    const itemsPerPage = 15; // Mostrar 15 publicaciones
     let currentPage = 1;
     let allItems = [];
-    const newsContainer = document.getElementById('news-cards-container');
-    const paginationContainer = document.querySelector('.pagination');
-    const errorMessageDiv = document.getElementById('error-message');
 
+    // Función para obtener la imagen de la noticia
     function obtenerImagenNoticia(item) {
         if (item.enclosure && item.enclosure.url) {
             return item.enclosure.url;
         }
-        return 'assets/img/default.jpg';
+        return 'assets/img/default.jpg'; // Imagen predeterminada si no hay imagen en el feed
     }
 
+    // Función para mostrar noticias en formato de cartas
     function mostrarNoticiasEnCartas(items, containerId) {
         const container = document.getElementById(containerId);
-        container.innerHTML = '';
+        container.innerHTML = ''; // Limpiar el contenedor
 
         items.forEach((item, index) => {
-            const imagenNoticia = obtenerImagenNoticia(item);
+            const imagenNoticia = obtenerImagenNoticia(item); // Obtener imagen de la noticia
+
             const card = document.createElement('div');
             card.classList.add('col', 'mb-3');
-          
+            if (index < 3) { // Las primeras 3 noticias son destacadas
+                card.classList.add('featured');
+            }
             card.innerHTML = `
-     <div class="card h-100">
-                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia" loading="lazy">
+                <div class="card h-100">
+                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia"  loading="lazy>
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
                         <p class="card-text">${item.description}</p>
@@ -45,47 +42,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Función para cargar noticias y manejar la paginación
     async function cargarNoticias() {
-        if (errorMessageDiv) {
-            errorMessageDiv.textContent = ''; // Clear previous error if it exists
-        }
-        newsContainer.innerHTML = '<p>Cargando noticias...</p>'; // Show loading message
-        allItems = [];
+        allItems = []; // Reiniciar el array de items
 
         for (const url of rssFeeds) {
             try {
-                const response = await fetch(`http://localhost:3000/rss/${encodeURIComponent(url)}`);
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
                 if (!response.ok) {
                     throw new Error(`Error en la respuesta del servidor: ${response.status}`);
                 }
-                const data = await response.text();
-                const feed = await parser.parseString(data);
-                allItems = allItems.concat(feed.items);
+                const data = await response.json();
+                const feed = await parser.parseString(data.contents);
+                allItems = allItems.concat(feed.items); // Concatenar todos los items
             } catch (error) {
                 console.error(`Error al obtener noticias de ${url}:`, error);
-                // Check if errorMessageDiv exists before setting its text content
-                if (errorMessageDiv) {
-                    errorMessageDiv.textContent = 'Hubo un error al cargar las noticias. Por favor, intente de nuevo más tarde.';
-                } else {
-                    // You might want to log a message if the div is not found
-                    console.error("errorMessageDiv not found in the DOM.");
-                }
-                newsContainer.innerHTML = ''; // Clear loading message
-                return; // Stop loading if an error occurs
             }
         }
 
         actualizarPaginacion();
     }
 
+    // Función para actualizar la paginación
     function actualizarPaginacion() {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const itemsToShow = allItems.slice(startIndex, endIndex);
 
-        mostrarNoticiasEnCartas(itemsToShow, 'news-cards-container');
+        mostrarNoticiasEnCartas(itemsToShow, 'day-cards-container');
 
+        // Actualizar la paginación
         const totalPages = Math.ceil(allItems.length / itemsPerPage);
+        const paginationContainer = document.querySelector('.pagination');
         paginationContainer.innerHTML = '';
 
         if (currentPage > 1) {
@@ -101,7 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    paginationContainer.addEventListener('click', function(event) {
+    // Evento para manejar la paginación
+    document.querySelector('.pagination').addEventListener('click', function(event) {
         if (event.target.tagName === 'A') {
             const page = event.target.textContent;
             if (page === 'Anterior') {
@@ -115,5 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Cargar noticias al iniciar
     cargarNoticias();
-});
+}); 
