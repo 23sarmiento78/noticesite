@@ -63,7 +63,11 @@ app.get('/rss/:url', async (req, res) => {
             const itemId = item.guid; // Usamos 'guid' como identificador único
 
             if (!publishedItemIds.includes(itemId)) {
-                const tweetText = `${item.title} ${item.link}`;
+                let tweetText = `${item.title} ${item.link}`;
+
+                // Agrega hashtags
+                tweetText += ' #Noticias #Actualidad #ÚltimaHora #LoÚltimo #AlMomento'; // Agrega hashtags aquí
+
                 await publishTweet(tweetText);
                 publishedItemIds.push(itemId); // Almacena el ID del artículo publicado
             } else {
