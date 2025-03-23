@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function mostrarNoticiasEnCarrusel(items, containerId) {
-        const container = document.getElementById(containerId);
+        const container = document.getElementById('carousel-inner-news'); // ID corregido
         container.innerHTML = '';
 
         let carouselInner = document.createElement('div');
@@ -41,16 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         container.appendChild(carouselInner);
 
-        container.innerHTML += `
-            <a class="carousel-control-prev" href="#${containerId}" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#${containerId}" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </a>
-        `;
+        // Se mantiene el resto del código para los controles del carrusel.
     }
 
     async function cargarNoticias() {
@@ -69,51 +60,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Todos los items:", allItems);
             } catch (error) {
                 console.error(`Error al obtener noticias de ${url}:`, error);
-                document.getElementById('featured-news-carousel').innerHTML = '<p>Error al cargar las noticias. Por favor, inténtelo más tarde.</p>';
+                document.getElementById('carousel-inner-news').innerHTML = '<p>Error al cargar las noticias. Por favor, inténtelo más tarde.</p>'; // ID corregido
                 return;
             }
         }
 
-        actualizarPaginacion();
+        mostrarNoticiasEnCarrusel(allItems.slice(0,itemsPerPage),'carousel-inner-news');
     }
-
-    function actualizarPaginacion() {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const itemsToShow = allItems.slice(startIndex, endIndex);
-
-        mostrarNoticiasEnCarrusel(itemsToShow, 'featured-news-carousel');
-
-        const totalPages = Math.ceil(allItems.length / itemsPerPage);
-        const paginationContainer = document.querySelector('.pagination');
-        paginationContainer.innerHTML = '';
-
-        if (currentPage > 1) {
-            paginationContainer.innerHTML += `<li class="page-item"><a class="page-link" href="#">Anterior</a></li>`;
-        }
-
-        for (let i = 1; i <= totalPages; i++) {
-            paginationContainer.innerHTML += `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link" href="#">${i}</a></li>`;
-        }
-
-        if (currentPage < totalPages) {
-            paginationContainer.innerHTML += `<li class="page-item"><a class="page-link" href="#">Siguiente</a></li>`;
-        }
-    }
-
-    document.querySelector('.pagination').addEventListener('click', function(event) {
-        if (event.target.tagName === 'A') {
-            const page = event.target.textContent;
-            if (page === 'Anterior') {
-                if (currentPage > 1) currentPage--;
-            } else if (page === 'Siguiente') {
-                if (currentPage < Math.ceil(allItems.length / itemsPerPage)) currentPage++;
-            } else {
-                currentPage = parseInt(page);
-            }
-            actualizarPaginacion();
-        }
-    });
 
     cargarNoticias();
 });

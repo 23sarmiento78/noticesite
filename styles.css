@@ -1,0 +1,12 @@
+
+
+/* Eliminar las reglas de flex y max-width aquí */
+
+footer a {
+    color: black !important;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+

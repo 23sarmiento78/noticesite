@@ -1,11 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
     const parser = new RSSParser();
     const rssFeeds = [
-        'https://www.clarin.com/rss/lo-ultimo/'
+        {
+            title: "Autos",
+            url: "https://www.clarin.com/rss/autos/"
+        },
+        {
+            title: "Espectáculos",
+            url: "https://www.clarin.com/rss/espectaculos/"
+        },
+        {
+            title: "Cine",
+            url: "https://www.clarin.com/rss/espectaculos/cine/"
+        },
+        {
+            title: "Fútbol",
+            url: "https://www.clarin.com/rss/deportes/"
+        }
     ];
-    const itemsPerPage = 15;
+    const itemsPerPage = 30; // Mostrar 30 publicaciones
     let currentPage = 1;
     let allItems = [];
+    const carouselNewsContainer = document.getElementById('carouselNewsContainer');
 
     // Función para obtener la imagen de la noticia
     function obtenerImagenNoticia(item) {
@@ -20,17 +36,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById(containerId);
         container.innerHTML = ''; // Limpiar el contenedor
 
-        items.forEach((item, index) => {
+        items.forEach((item) => {
             const imagenNoticia = obtenerImagenNoticia(item); // Obtener imagen de la noticia
 
             const card = document.createElement('div');
             card.classList.add('col', 'mb-3');
-            if (index < 3) { // Las primeras 3 noticias son destacadas
-                card.classList.add('featured');
-            }
             card.innerHTML = `
                 <div class="card h-100">
-                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia"  loading="lazy>
+                    <img src="${imagenNoticia}" class="card-img-top" alt="Imagen de la noticia" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
                         <p class="card-text">${item.description}</p>
@@ -46,21 +59,27 @@ document.addEventListener('DOMContentLoaded', function() {
     async function cargarNoticias() {
         allItems = []; // Reiniciar el array de items
 
-        for (const url of rssFeeds) {
+        for (const feed of rssFeeds) {
             try {
-                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`);
                 if (!response.ok) {
                     throw new Error(`Error en la respuesta del servidor: ${response.status}`);
                 }
                 const data = await response.json();
-                const feed = await parser.parseString(data.contents);
-                allItems = allItems.concat(feed.items); // Concatenar todos los items
+                const parsedFeed = await parser.parseString(data.contents);
+                allItems = allItems.concat(parsedFeed.items); // Concatenar todos los items
             } catch (error) {
-                console.error(`Error al obtener noticias de ${url}:`, error);
+                console.error(`Error al obtener noticias de ${feed.title}:`, error);
             }
         }
 
-        actualizarPaginacion();
+        // Mostrar noticias en el carrusel
+        mostrarNoticiasEnCartas(allItems.filter(item => item.title.includes("Autos")), 'carouselNewsContainer');
+
+        // Mostrar noticias en las categorías
+        mostrarNoticiasEnCartas(allItems.filter(item => item.title.includes("Espectáculos")), 'categoria1-news-container');
+        mostrarNoticiasEnCartas(allItems.filter(item => item.title.includes("Cine")), 'categoria2-news-container');
+        mostrarNoticiasEnCartas(allItems.filter(item => item.title.includes("Fútbol")), 'categoria3-news-container');
     }
 
     // Función para actualizar la paginación
@@ -104,6 +123,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Función para cargar noticias desde un archivo específico
+    function loadNewsFromFile(file) {
+        fetch(file)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach((newsItem, index) => {
+                    const carouselItem = document.createElement('div');
+                    carouselItem.className = index === 0 ? 'carousel-item active' : 'carousel-item';
+                    carouselItem.innerHTML = `
+                        <img src="${newsItem.image}" class="d-block w-100" alt="${newsItem.title}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>${newsItem.title}</h5>
+                            <p>${newsItem.description}</p>
+                        </div>
+                    `;
+                    carouselNewsContainer.appendChild(carouselItem);
+                });
+            })
+            .catch(error => console.error('Error al cargar las noticias:', error));
+    }
+
+    // Cargar noticias de los diferentes archivos
+    loadNewsFromFile('assets/js/ultimo.js');
+    loadNewsFromFile('assets/js/deportes.js');
+    loadNewsFromFile('assets/js/cine.js');
+
     // Cargar noticias al iniciar
     cargarNoticias();
-}); 
+});
