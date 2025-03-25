@@ -4,44 +4,40 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
 <url>
-  <loc>https://es.hgaruna.org/</loc>
+  <loc>https://es.hgaruna.org/index.html</loc>
   <lastmod>2025-03-25T00:31:03+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://es.hgaruna.org/deportes</loc>
+  <loc>https://es.hgaruna.org/deportes.html</loc>
   <lastmod>2025-03-25T00:31:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://es.hgaruna.org/tecnologia</loc>
+  <loc>https://es.hgaruna.org/tecnologia.html</loc>
   <lastmod>2025-03-25T00:31:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://es.hgaruna.org/cultura</loc>
+  <loc>https://es.hgaruna.org/cultura.html</loc>
   <lastmod>2025-03-25T00:31:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://es.hgaruna.org/autos</loc>
+  <loc>https://es.hgaruna.org/autos.html</loc>
   <lastmod>2025-03-25T00:31:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://es.hgaruna.org/ultimo</loc>
+  <loc>https://es.hgaruna.org/ultimo.html</loc>
   <lastmod>2025-03-25T00:31:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://es.hgaruna.org/politica_privacidad</loc>
+  <loc>https://es.hgaruna.org/politica_privacidad.html</loc>
   <lastmod>2025-03-25T00:31:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
-
 
 </urlset>
