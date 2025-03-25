@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     rssFeeds.forEach(feed => {
         currentPage[feed.containerId] = 1;
-        allItems[feed.containerId] = [];
+        allItems[feed.containerId] =[];
     });
 
     function obtenerImagenNoticia(item) {
@@ -82,14 +82,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById(containerId);
         if (!container) return;
 
-        const rowContainer = container.querySelector('.row.row-cols-1.row-cols-md-3.g-4');
-        if (!rowContainer) return;
-        rowContainer.innerHTML = '';
+        const newsGrid = container.querySelector('.news-grid'); // Selector corregido
+        if (!newsGrid) return;
+        newsGrid.innerHTML = '';
 
-        items.forEach((item) => {
+        items.forEach((item, index) => {
             const imagenNoticia = obtenerImagenNoticia(item);
             const col = document.createElement('div');
-            col.classList.add('col');
+            col.style.width = 'calc(33.33% - 20px)';
             col.innerHTML = `
                 <div class="card h-100" itemscope itemtype="http://schema.org/NewsArticle">
                     <meta itemprop="datePublished" content="${item.pubDate}" />
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             `;
-            rowContainer.appendChild(col);
+            newsGrid.appendChild(col);
         });
     }
 
@@ -165,5 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
             actualizarPaginacion(containerId);
         }
     });
+
     cargarNoticias();
 });
