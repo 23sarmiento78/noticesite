@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://es.hgaruna.org/sitemap.xml
