@@ -26,15 +26,15 @@
             font-family: 'Inter', sans-serif;
             position: relative;
             z-index: 1;
-            background-color: #ffffff; /* Fondo blanco para la página */
-            color: #000000; /* Color de texto negro */
+            background-color: #121212;
+            color: #e0e0e0;
         }
 
-        /* Estilos para el navbar */
-        .navbar {
-            background-color: #ffffff; /* Fondo blanco para el navbar */
-            border-bottom: 1px solid #000; /* Línea negra en la parte inferior del navbar */
+        body {
+            font-family: 'Arial', sans-serif;
         }
+
+       
 
         footer a {
             color: black !important;
@@ -45,54 +45,147 @@
             text-decoration: underline;
         }
 
-        /* Estilos para las noticias debajo (Flexbox) */
+       
+#main-carousel {
+    width: 70%;
+    height: auto;
+}
+
+#main-carousel-buttons {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+    align-items: center;
+}
+
+
+
+#main-carousel-buttons button[data-category="autos"] {
+    background-image: url('assets/img/botonauto.jpg'); /* Ruta corregida */
+    margin: 10px;
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#main-carousel-buttons button[data-category="tecnologia"] {
+    background-image: url('assets/img/botontecnologia.jpg'); /* Ruta corregida */
+    margin: 10px;
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#main-carousel-buttons button[data-category="cultura"] {
+    background-image: url('assets/img/botoncultura.jpg'); /* Ruta corregida */
+    margin: 10px;
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#main-carousel-buttons button[data-category="futbol"] {
+    background-image: url('assets/img/botonfutbol.jpg'); /* Ruta corregida */
+    margin: 10px;
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    #main-carousel-container {
+        flex-direction: column; /* Cambia la dirección a columna */
+    }
+
+    #main-carousel {
+        width: 100%; /* Asegúrate de que el carrusel ocupe todo el ancho */
+    }
+
+    #main-carousel-buttons {
+        width: 100%; /* Asegúrate de que los botones ocupen todo el ancho */
+        margin: 20px 0; /* Espaciado vertical */
+        display: grid; /* Cambia a grid para dos filas */
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+        gap: 10px; /* Espaciado entre botones */
+    }
+
+    #main-carousel-buttons button {
+        width: 100%; /* Ajusta el ancho de los botones para que se vean bien en móviles */
+        height: 150px; /* Aumenta la altura de los botones */
+        font-size: 24px; /* Aumenta el tamaño de la fuente */
+        margin: 0; /* Elimina el margen para que se alineen correctamente */
+        padding: 15px; /* Aumenta el padding para hacer los botones más grandes */
+    }
+}
+
+@media (max-width: 792px) {
+    #main-carousel-buttons {
+        display: grid; /* Cambia a grid para dos columnas */
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+        width: 100%; /* Asegúrate de que los botones ocupen todo el ancho */
+    }
+
+    #main-carousel-buttons button {
+        width: auto; /* Ajusta el ancho de los botones */
+        margin: 5px; /* Espaciado entre botones */
+        height: 150px; /* Aumenta la altura de los botones */
+        font-size: 24px; /* Aumenta el tamaño de la fuente */
+        padding: 15px; /* Aumenta el padding para hacer los botones más grandes */
+    }
+}
+
+        /* Estilos para las noticias debajo */
         .news-container {
             margin-top: 20px;
         }
 
-        .news-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 20px;
+        .news-row {
+            margin-bottom: 20px;
         }
 
-        .news-grid > div { /* Estilo para cada carta */
-            width: calc(33.33% - 20px); /* Ancho para 3 columnas menos el gap */
-            box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
-            border: 1px solid #000; /* Marco negro */
-            padding: 15px; /* Espaciado interno */
-            margin-bottom: 20px; /* Espaciado vertical entre noticias */
-            background-color: #ffffff; /* Fondo blanco para las cartas */
-            border-radius: 8px; /* Bordes redondeados */
-            transition: transform 0.3s, box-shadow 0.3s; /* Efecto de transición */
-        }
-
-        .news-grid > div:hover {
-            transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
-        }
-
-        /* Adaptaciones para pantallas más pequeñas */
-        @media (max-width: 768px) {
-            .news-grid > div {
-                width: calc(50% - 20px); /* Dos columnas en móviles */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .news-grid > div {
-                width: 100%; /* Una columna en móviles muy pequeños */
-            }
+        .navbar-nav .nav-item {
+            position: relative;
         }
     </style>
 </head>
-
 <body>
 
     <header class="bg-warning text-center py-4">
         <h1 class="display-4">Deportes - Todo en Uno</h1>
-        <p class="lead">Mantente informado con las últimas noticias deportivas.</p>
+        <p class="lead">Mantente informado con las últimas noticias de deportes y buena vida.</p>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -125,16 +218,56 @@
                     <li class="nav-item">
                         <a class="nav-link" href="ultimo.html">Lo Último |</a>
                     </li>
-                </ul>
+                    </ul>
             </div>
         </div>
     </nav>
 
+    <div id="main-carousel-container" class="container-fluid mt-5 d-flex">
+        <div id="main-carousel" class="carousel slide" data-ride="carousel" style="flex: 1;">
+            <div class="carousel-inner" id="carousel-inner-news">
+                <div class="carousel-item active">
+                    <img src="assets/img/ejemplo.jpg" class="d-block w-100" alt="Ejemplo de noticia" style="height: 500px; object-fit: cover;">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#main-carousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#main-carousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
+        <div id="main-carousel-buttons" class="row">
+            <div class="col-6 mb-2">
+                <button data-category="autos" class="btn btn-dark " style="background-image: url('assets/img/botonauto.jpg');">Motores</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button data-category="tecnologia" class="btn btn-dark " style="background-image: url('assets/img/botontecnologia.jpg');">Tecnología</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button data-category="futbol" class="btn btn-dark " style="background-image: url('assets/img/botonfutbol.jpg');">Fútbol</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button data-category="cultura" class="btn btn-dark " style="background-image: url('assets/img/botoncultura.jpg');">Cultura</button>
+            </div>
+        </div>
+    </div>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Últimas Noticias de Deportes</h1>
-        <div id="categoria1-news-container" class="news-container">
-            <div class="news-grid"> 
-                <!-- Aquí se agregarán las noticias -->
+        <div id="categoria3-news-container" class="news-row">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <!-- Las noticias de deportes se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Buena Vida</h1>
+        <div id="buena-vida-news-container" class="news-row">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <!-- Las noticias de buena vida se cargarán aquí -->
             </div>
         </div>
     </div>
@@ -150,7 +283,7 @@
                         </a>
                     </div>
                     <p class="footer-link-container"><a href="#" class="text-decoration-none text-white footer-link">Declaración de Accesibilidad</a></p>
-                    <p class="footer-link-container"><a href="#" class="text-decoration-none text-white footer-link">Política de Privacidad</a></p>
+                    <p class="footer-link-container"><a href="politica_privacidad.html" class="text-decoration-none text-white footer-link">Política de Privacidad</a></p>
                     <p style="color: white; margin-top: 20px;">&copy; 2022 Nombre de la Organización</p>
                 </div>
                 <div class="col-md-2 col-sm-6 mb-3 footer-col">
@@ -171,12 +304,13 @@
             </div>
         </div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="lib/rss-parser.min.js"></script>
-    <script src="rssfeeds.js"></script>
-    <script src="assets/js/paginacion.js"></script>
+    <script src="rssFeeds.js"></script> <!-- Archivo JS para manejar el RSS de deportes -->
+    <script src="assets/js/buenaVida.js"></script> <!-- Archivo JS para manejar el RSS de Buena Vida -->
     <script src="assets/js/banner.js"></script>
 </body>
 

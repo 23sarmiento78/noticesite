@@ -1,6 +1,8 @@
 
 
-/* Eliminar las reglas de flex y max-width aquí */
+body {
+ background-color: aliceblue;
+}
 
 footer a {
     color: black !important;
