@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
 
     <meta name="google-site-verification" content="A_918X7KKtfL8qfhTYHTKrLtzu5HP2cGtH8pR1BL_uA" />
     <!-- Open Graph Meta Tags -->
@@ -21,173 +22,12 @@
     <meta property="og:image" content="https://es.hgaruna.org/assets/img/logo3.png">
     <meta property="og:url" content="https://es.hgaruna.org/tecnologia.html">
     <meta property="og:type" content="website">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            z-index: 1;
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-        }
-
-       
-
-        footer a {
-            color: black !important;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        
-#main-carousel {
-    width: 70%;
-    height: auto;
-}
-
-#main-carousel-buttons {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center items vertically */
-    align-items: center;
-}
-
-
-
-#main-carousel-buttons button[data-category="autos"] {
-    background-image: url('assets/img/botonauto.jpg'); /* Ruta corregida */
-    margin: 10px;
-    padding: 5px 10px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 200px;
-    height: 80px;
-    background-size: cover;
-    background-position: center;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-#main-carousel-buttons button[data-category="tecnologia"] {
-    background-image: url('assets/img/botontecnologia.jpg'); /* Ruta corregida */
-    margin: 10px;
-    padding: 5px 10px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 200px;
-    height: 80px;
-    background-size: cover;
-    background-position: center;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-#main-carousel-buttons button[data-category="cultura"] {
-    background-image: url('assets/img/botoncultura.jpg'); /* Ruta corregida */
-    margin: 10px;
-    padding: 5px 10px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 200px;
-    height: 80px;
-    background-size: cover;
-    background-position: center;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-#main-carousel-buttons button[data-category="futbol"] {
-    background-image: url('assets/img/botonfutbol.jpg'); /* Ruta corregida */
-    margin: 10px;
-    padding: 5px 10px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 200px;
-    height: 80px;
-    background-size: cover;
-    background-position: center;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-@media (max-width: 768px) {
-    #main-carousel-container {
-        flex-direction: column; /* Cambia la dirección a columna */
-    }
-
-    #main-carousel {
-        width: 100%; /* Asegúrate de que el carrusel ocupe todo el ancho */
-    }
-
-    #main-carousel-buttons {
-        width: 100%; /* Asegúrate de que los botones ocupen todo el ancho */
-        margin: 20px 0; /* Espaciado vertical */
-        display: grid; /* Cambia a grid para dos filas */
-        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-        gap: 10px; /* Espaciado entre botones */
-    }
-
-    #main-carousel-buttons button {
-        width: 100%; /* Ajusta el ancho de los botones para que se vean bien en móviles */
-        height: 150px; /* Aumenta la altura de los botones */
-        font-size: 24px; /* Aumenta el tamaño de la fuente */
-        margin: 0; /* Elimina el margen para que se alineen correctamente */
-        padding: 15px; /* Aumenta el padding para hacer los botones más grandes */
-    }
-}
-
-@media (max-width: 792px) {
-    #main-carousel-buttons {
-        display: grid; /* Cambia a grid para dos columnas */
-        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-        width: 100%; /* Asegúrate de que los botones ocupen todo el ancho */
-    }
-
-    #main-carousel-buttons button {
-        width: auto; /* Ajusta el ancho de los botones */
-        margin: 5px; /* Espaciado entre botones */
-        height: 150px; /* Aumenta la altura de los botones */
-        font-size: 24px; /* Aumenta el tamaño de la fuente */
-        padding: 15px; /* Aumenta el padding para hacer los botones más grandes */
-    }
-}
-
-        /* Estilos para las noticias debajo */
-        .news-container {
-            margin-top: 20px;
-        }
-
-        .news-row {
-            margin-bottom: 20px;
-        }
-
-        .navbar-nav .nav-item {
-            position: relative;
-        }
-    </style>
 </head>
 <body>
-
     <header class="bg-warning text-center py-4">
-        <h1 class="display-4">Tecno - Todo en Uno</h1>
-        <p class="lead">Mantente informado con las últimas instancias tecnologicas y de Politica</p>
+        <h1 class="display-4">Noticias de Tecnología - Todo en Uno</h1>
+        <p class="lead">Mantente informado con las últimas instancias tecnológicas y de política.</p>
     </header>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -200,31 +40,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio |</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="deportes.html">Deportes |</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tecnologia.html">Tecnología |</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cultura.html">Cultura |</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="autos.html">Motores |</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="ultimo.html">Lo Último |</a>
-                    </li>
-                    </ul>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio |</a></li>
+                    <li class="nav-item"><a class="nav-link" href="deportes.html">Deportes |</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tecnologia.html">Tecnología |</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cultura.html">Cultura |</a></li>
+                    <li class="nav-item"><a class="nav-link" href="autos.html">Motores |</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ultimo.html">Lo Último |</a></li>
+                </ul>
             </div>
+            <!-- Buscador Global en el navbar -->
+            <form class="d-flex position-relative ms-3" style="width: 320px;">
+                <input id="buscador-global" type="text" class="form-control form-control-sm" placeholder="Buscar noticias...">
+                <div id="buscador-resultados" class="list-group position-absolute w-100 mt-1" style="z-index: 10; display: none;"></div>
+            </form>
         </div>
     </nav>
 
-    <div id="main-carousel-container" class="container-fluid mt-5 d-flex">
-        <div id="main-carousel" class="carousel slide" data-ride="carousel" style="flex: 1;">
+    <div id="main-carousel-container" class="container-fluid mt-5">
+        <div id="main-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" id="carousel-inner-news">
                 <div class="carousel-item active">
                     <img src="assets/img/ejemplo.jpg" class="d-block w-100" alt="Ejemplo de noticia" style="height: 500px; object-fit: cover;">
@@ -239,18 +72,19 @@
                 <span class="sr-only">Siguiente</span>
             </a>
         </div>
-        <div id="main-carousel-buttons" class="row">
-            <div class="col-6 mb-2">
-                <button data-category="autos" class="btn btn-dark " style="background-image: url('assets/img/botonauto.jpg');">Motores</button>
+        <!-- Botones debajo del carrusel -->
+        <div id="main-carousel-buttons" class="row justify-content-center mt-3">
+            <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
+                <a href="autos.html" class="btn btn-dark w-100" style="background-image: url('assets/img/botonauto.jpg'); background-size: cover; background-position: center;">Motores</a>
             </div>
-            <div class="col-6 mb-2">
-                <button data-category="tecnologia" class="btn btn-dark " style="background-image: url('assets/img/botontecnologia.jpg');">Tecnología</button>
+            <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
+                <a href="tecnologia.html" class="btn btn-dark w-100" style="background-image: url('assets/img/botontecnologia.jpg'); background-size: cover; background-position: center;">Tecnología</a>
             </div>
-            <div class="col-6 mb-2">
-                <button data-category="futbol" class="btn btn-dark " style="background-image: url('assets/img/botonfutbol.jpg');">Fútbol</button>
+            <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
+                <a href="deportes.html" class="btn btn-dark w-100" style="background-image: url('assets/img/botonfutbol.jpg'); background-size: cover; background-position: center;">Fútbol</a>
             </div>
-            <div class="col-6 mb-2">
-                <button data-category="cultura" class="btn btn-dark " style="background-image: url('assets/img/botoncultura.jpg');">Cultura</button>
+            <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
+                <a href="cultura.html" class="btn btn-dark w-100" style="background-image: url('assets/img/botoncultura.jpg'); background-size: cover; background-position: center;">Cultura</a>
             </div>
         </div>
     </div>
@@ -272,38 +106,44 @@
         </div>
     </div>
 
-    <footer class="text-white py-5" style="background-color: #333;">
+    
+    <footer class="text-white py-5" style="background: #181a1b; color: #fff; border-top: 2px solid #222;">
         <div class="container">
-            <div class="row text-left justify-content-between">
-                <div class="col-md-3 col-sm-6 mb-4 footer-col">
-                    <div class="logo-container">
-                        <a class="navbar-brand" href="#">
-                            <img src="assets/img/logo3.png" style="width: 80px; height: auto;" alt="Logo de HGARUNA">
-                            <span style="font-size: 24px; font-family: 'Poppins-Medium', sans-serif; color: white;">HGARUNA</span>
-                        </a>
+            <div class="row text-left justify-content-between align-items-start">
+                <div class="col-md-4 col-sm-12 mb-4 footer-col d-flex align-items-center">
+                    <img src="assets/img/logo3.png" style="width: 60px; height: auto; margin-right: 15px; filter: drop-shadow(0 0 10px #fff8);" alt="Logo de HGARUNA">
+                    <div>
+                        <span style="font-size: 24px; font-family: 'Poppins-Medium', sans-serif; color: #fff; font-weight: bold;">HGARUNA</span>
+                        <p class="mb-1"><a href="#" class="text-decoration-none text-white footer-link">Declaración de Accesibilidad</a></p>
+                        <p class="mb-1"><a href="politica_privacidad.html" class="text-decoration-none text-white footer-link">Política de Privacidad</a></p>
+                        <p class="mb-0" style="color: #bbb; margin-top: 10px; font-size: 14px;">&copy; 2024 HGARUNA. Todos los derechos reservados.</p>
                     </div>
-                    <p class="footer-link-container"><a href="#" class="text-decoration-none text-white footer-link">Declaración de Accesibilidad</a></p>
-                    <p class="footer-link-container"><a href="politica_privacidad.html" class="text-decoration-none text-white footer-link">Política de Privacidad</a></p>
-                    <p style="color: white; margin-top: 20px;">&copy; 2022 Nombre de la Organización</p>
                 </div>
-                <div class="col-md-2 col-sm-6 mb-3 footer-col">
+                <div class="col-md-4 col-sm-6 mb-3 footer-col">
                     <h5 class="text-white">Enlaces Rápidos</h5>
                     <ul class="list-unstyled">
+                        <li style="margin-bottom: 10px;"><a href="index.html" class="text-decoration-none text-white footer-link">Inicio</a></li>
                         <li style="margin-bottom: 10px;"><a href="deportes.html" class="text-decoration-none text-white footer-link">Deportes</a></li>
                         <li style="margin-bottom: 10px;"><a href="autos.html" class="text-decoration-none text-white footer-link">Motores</a></li>
                         <li style="margin-bottom: 10px;"><a href="tecnologia.html" class="text-decoration-none text-white footer-link">Tecnología</a></li>
                         <li style="margin-bottom: 10px;"><a href="cine.html" class="text-decoration-none text-white footer-link">Cine</a></li>
+                        <li style="margin-bottom: 10px;"><a href="cultura.html" class="text-decoration-none text-white footer-link">Cultura</a></li>
                         <li style="margin-bottom: 10px;"><a href="politica_privacidad.html" class="text-decoration-none text-white footer-link">Política de Privacidad</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2 col-sm-6 mb-3 footer-col">
+                <div class="col-md-4 col-sm-6 mb-3 footer-col">
                     <h5 class="text-white">Contacto</h5>
-                    <p style="margin-bottom: 0; color: white;">Email: <a href="mailto:info@org.org" class="text-decoration-none text-white footer-link">23sarmiento@gmail.com</a></p>
-                    <p style="color: white;">Tel: +54 3541-237972</p>
+                    <p class="mb-1" style="color: #bbb;">Email: <a href="mailto:23sarmiento@gmail.com" class="text-decoration-none text-white footer-link">23sarmiento@gmail.com</a></p>
+                    <p class="mb-1" style="color: #bbb;">Tel: +54 3541-237972</p>
+                    <div class="mt-3">
+                        <a href="https://wa.me/543541237972" target="_blank" class="btn btn-outline-light btn-sm me-2" title="WhatsApp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+                        <a href="mailto:23sarmiento@gmail.com" class="btn btn-outline-light btn-sm" title="Email"><i class="bi bi-envelope"></i> Email</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/ed049ded8509e4d6db0392a08/08fdfccfe4f042b0cea044918.js");</script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

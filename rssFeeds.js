@@ -71,6 +71,16 @@ document.addEventListener('DOMContentLoaded', function() {
         allItems[feed.containerId] = [];
     });
 
+    // Guardar copia de todas las noticias para búsqueda
+    let copiaAllItems = {};
+    let copiaDestacadas = [];
+
+    // Mapeo de containerId a categoría
+    const containerIdToCategoria = {};
+    rssFeeds.forEach(feed => {
+        containerIdToCategoria[feed.containerId] = feed.title;
+    });
+
     function obtenerImagenNoticia(item) {
         if (item.enclosure && item.enclosure.url) {
             return item.enclosure.url;
@@ -78,20 +88,32 @@ document.addEventListener('DOMContentLoaded', function() {
         return 'assets/img/default.jpg';
     }
 
+    // Modificar mostrarNoticiasEnCartas para aceptar items filtrados
     function mostrarNoticiasEnCartas(items, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
-
         const rowContainer = container.querySelector('.row.row-cols-1.row-cols-md-3.g-4');
         if (!rowContainer) return;
         rowContainer.innerHTML = '';
-
+        if (items.length === 0) {
+            rowContainer.innerHTML = '<div class="col"><div class="alert alert-warning text-center">No se encontraron resultados.</div></div>';
+            return;
+        }
         items.forEach((item) => {
             const imagenNoticia = obtenerImagenNoticia(item);
+            // Buscar la categoría por containerId
+            let categoria = '';
+            for (const [cid, arr] of Object.entries(allItems)) {
+                if (arr.includes(item)) {
+                    categoria = containerIdToCategoria[cid] || '';
+                    break;
+                }
+            }
             const col = document.createElement('div');
             col.classList.add('col');
             col.innerHTML = `
                 <div class="card h-100" itemscope itemtype="http://schema.org/NewsArticle">
+                    <span class="badge bg-primary mb-2" style="position:absolute;top:10px;left:10px;z-index:2;font-size:1rem;">${categoria}</span>
                     <meta itemprop="datePublished" content="${item.pubDate}" />
                     <meta itemprop="dateModified" content="${item.pubDate}" />
                     <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
@@ -112,6 +134,52 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Modificar mostrarNoticiasDestacadas para guardar copia
+    function mostrarNoticiasDestacadas() {
+        let todasNoticias = [];
+        Object.values(allItems).forEach(arr => {
+            todasNoticias = todasNoticias.concat(arr);
+        });
+        todasNoticias.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+        const destacadas = todasNoticias.slice(0, 3);
+        copiaDestacadas = destacadas;
+        const container = document.getElementById('destacadas-news-row');
+        if (!container) return;
+        container.innerHTML = '';
+        if (destacadas.length === 0) {
+            container.innerHTML = '<div class="col"><div class="alert alert-warning text-center">No se encontraron resultados.</div></div>';
+            return;
+        }
+        destacadas.forEach(item => {
+            // Buscar la categoría por containerId
+            let categoria = '';
+            for (const [cid, arr] of Object.entries(allItems)) {
+                if (arr.includes(item)) {
+                    categoria = containerIdToCategoria[cid] || '';
+                    break;
+                }
+            }
+            const imagenNoticia = obtenerImagenNoticia(item);
+            const col = document.createElement('div');
+            col.classList.add('col');
+            col.innerHTML = `
+                <div class="card h-100 shadow-lg" itemscope itemtype="http://schema.org/NewsArticle">
+                    <span class="badge bg-primary mb-2" style="position:absolute;top:10px;left:10px;z-index:2;font-size:1rem;">${categoria}</span>
+                    <meta itemprop="datePublished" content="${item.pubDate}" />
+                    <img src="${imagenNoticia}" class="card-img-top" alt="${item.title}" loading="lazy" itemprop="image">
+                    <div class="card-body">
+                        <h5 itemprop="headline">${item.title}</h5>
+                        <p class="card-text" itemprop="description">${item.description}</p>
+                        <a href="${item.link}" class="btn btn-primary" itemprop="url" target="_blank">Leer más</a>
+                        <p class="card-text"><small class="text-body-secondary">Publicado: ${new Date(item.pubDate).toLocaleTimeString()}</small></p>
+                    </div>
+                </div>
+            `;
+            container.appendChild(col);
+        });
+    }
+
+    // Guardar copia de allItems después de cargar
     async function cargarNoticias() {
         for (const feed of rssFeeds) {
             try {
@@ -127,6 +195,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error(`Error al obtener noticias de ${feed.title}:`, error);
             }
         }
+        // Guardar copia para búsqueda
+        copiaAllItems = JSON.parse(JSON.stringify(allItems));
+        mostrarNoticiasDestacadas();
     }
 
     function actualizarPaginacion(containerId) {
@@ -165,5 +236,55 @@ document.addEventListener('DOMContentLoaded', function() {
             actualizarPaginacion(containerId);
         }
     });
+
+    // Buscador global mejorado
+    const buscador = document.getElementById('buscador-global');
+    const resultadosBox = document.getElementById('buscador-resultados');
+    if (buscador && resultadosBox) {
+        buscador.addEventListener('input', function() {
+            const texto = buscador.value.trim().toLowerCase();
+            resultadosBox.innerHTML = '';
+            if (!texto) {
+                resultadosBox.style.display = 'none';
+                return;
+            }
+            // Unir todas las noticias de todos los feeds
+            let todasNoticias = [];
+            Object.entries(allItems).forEach(([cid, arr]) => {
+                arr.forEach(item => {
+                    todasNoticias.push({ ...item, categoria: containerIdToCategoria[cid] });
+                });
+            });
+            // Filtrar por título o categoría
+            const filtradas = todasNoticias.filter(item =>
+                (item.title && item.title.toLowerCase().includes(texto)) ||
+                (item.categoria && item.categoria.toLowerCase().includes(texto))
+            );
+            if (filtradas.length === 0) {
+                resultadosBox.innerHTML = '<div class="list-group-item text-center text-muted">No se encontraron resultados.</div>';
+                resultadosBox.style.display = 'block';
+                return;
+            }
+            filtradas.slice(0, 10).forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'list-group-item d-flex justify-content-between align-items-center';
+                div.innerHTML = `
+                    <span>${item.title}</span>
+                    <span class="badge bg-primary">${item.categoria}</span>
+                `;
+                div.onclick = () => window.open(item.link, '_blank');
+                resultadosBox.appendChild(div);
+            });
+            resultadosBox.style.display = 'block';
+        });
+        // Ocultar resultados al perder foco
+        buscador.addEventListener('blur', function() {
+            setTimeout(() => { resultadosBox.style.display = 'none'; }, 200);
+        });
+        buscador.addEventListener('focus', function() {
+            if (buscador.value.trim()) resultadosBox.style.display = 'block';
+        });
+    }
+
     cargarNoticias();
 });
