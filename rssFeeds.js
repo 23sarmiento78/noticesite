@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
             col.classList.add('col');
             col.innerHTML = `
                 <div class="card h-100" itemscope itemtype="http://schema.org/NewsArticle">
-                    <span class="badge bg-primary mb-2" style="position:absolute;top:10px;left:10px;z-index:2;font-size:1rem;">${categoria}</span>
+                    <span class="badge bg-primary mb-2" style="position:absolute;top:10px;left:10px;z-index:2;">${categoria}</span>
                     <meta itemprop="datePublished" content="${item.pubDate}" />
                     <meta itemprop="dateModified" content="${item.pubDate}" />
                     <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h5 itemprop="headline">${item.title}</h5>
                         <p class="card-text" itemprop="description">${item.description}</p>
                         <a href="${item.link}" class="btn btn-primary" itemprop="url">Leer más</a>
-                        <p class="card-text"><small class="text-body-secondary">Publicado: ${new Date(item.pubDate).toLocaleTimeString()}</small></p>
+                        <p class="card-text"><small>Publicado: ${new Date(item.pubDate).toLocaleTimeString()}</small></p>
                     </div>
                 </div>
             `;
@@ -164,14 +164,14 @@ document.addEventListener('DOMContentLoaded', function() {
             col.classList.add('col');
             col.innerHTML = `
                 <div class="card h-100 shadow-lg" itemscope itemtype="http://schema.org/NewsArticle">
-                    <span class="badge bg-primary mb-2" style="position:absolute;top:10px;left:10px;z-index:2;font-size:1rem;">${categoria}</span>
+                    <span class="badge bg-primary mb-2" style="position:absolute;top:10px;left:10px;z-index:2;">${categoria}</span>
                     <meta itemprop="datePublished" content="${item.pubDate}" />
                     <img src="${imagenNoticia}" class="card-img-top" alt="${item.title}" loading="lazy" itemprop="image">
                     <div class="card-body">
                         <h5 itemprop="headline">${item.title}</h5>
                         <p class="card-text" itemprop="description">${item.description}</p>
                         <a href="${item.link}" class="btn btn-primary" itemprop="url" target="_blank">Leer más</a>
-                        <p class="card-text"><small class="text-body-secondary">Publicado: ${new Date(item.pubDate).toLocaleTimeString()}</small></p>
+                        <p class="card-text"><small>Publicado: ${new Date(item.pubDate).toLocaleTimeString()}</small></p>
                     </div>
                 </div>
             `;
