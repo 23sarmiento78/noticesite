@@ -392,6 +392,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "El país sudamericano experimenta un boom en startups y empresas de tecnología...",
           link: "https://eltiempo.com/ejemplo1",
           pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&h=600&fit=crop",
+          },
         },
         {
           title: "Medellín se consolida como hub de innovación",
@@ -399,6 +402,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "La ciudad paisa atrae inversión internacional en proyectos tecnológicos...",
           link: "https://eltiempo.com/ejemplo2",
           pubDate: new Date(Date.now() - 3600000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop",
+          },
         },
       ],
       "El País Internacional": [
