@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       title: "Cine",
       url: "https://www.clarin.com/rss/espectaculos/cine/",
       containerId: "categoria2-news-container",
-      fuente: "Clar��n",
+      fuente: "Clar���n",
     },
     {
       title: "Fútbol",
@@ -50,11 +50,23 @@ document.addEventListener("DOMContentLoaded", function () {
       containerId: "categoria8-news-container",
       fuente: "Clarín",
     },
-    // BBC Mundo (simulado con contenido de ejemplo)
+    // BBC Feeds
     {
-      title: "BBC Mundo",
-      url: "example",
+      title: "BBC World",
+      url: "https://api.allorigins.win/get?url=https://feeds.bbci.co.uk/news/world/rss.xml",
       containerId: "bbc-mundo-container",
+      fuente: "BBC",
+    },
+    {
+      title: "BBC Technology",
+      url: "https://api.allorigins.win/get?url=https://feeds.bbci.co.uk/news/technology/rss.xml",
+      containerId: "bbc-tech-container",
+      fuente: "BBC",
+    },
+    {
+      title: "BBC Sport",
+      url: "https://api.allorigins.win/get?url=https://feeds.bbci.co.uk/sport/rss.xml",
+      containerId: "bbc-sport-container",
       fuente: "BBC",
     },
     // La Nación Argentina (simulado con contenido de ejemplo)
@@ -71,35 +83,23 @@ document.addEventListener("DOMContentLoaded", function () {
       containerId: "eltiempo-container",
       fuente: "El Tiempo",
     },
-    // El País España (simulado con contenido de ejemplo)
+    // El País España feeds
+    {
+      title: "El País Portada España",
+      url: "https://api.allorigins.win/get?url=https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+      containerId: "elpais-portada-container",
+      fuente: "El País",
+    },
     {
       title: "El País Internacional",
-      url: "example",
+      url: "https://api.allorigins.win/get?url=https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/internacional",
       containerId: "elpais-internacional-container",
       fuente: "El País",
     },
     {
-      title: "El País Economía",
-      url: "example",
-      containerId: "elpais-economia-container",
-      fuente: "El País",
-    },
-    {
-      title: "El País Deportes",
-      url: "example",
-      containerId: "elpais-deportes-container",
-      fuente: "El País",
-    },
-    {
-      title: "El País Tecnología",
-      url: "example",
-      containerId: "elpais-tech-container",
-      fuente: "El País",
-    },
-    {
-      title: "El País Cultura",
-      url: "example",
-      containerId: "elpais-cultura-container",
+      title: "El País Lo Más Visto",
+      url: "https://api.allorigins.win/get?url=https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+      containerId: "elpais-populares-container",
       fuente: "El País",
     },
   ];
@@ -332,35 +332,79 @@ document.addEventListener("DOMContentLoaded", function () {
   // Función para generar contenido de ejemplo para feeds no disponibles
   function generarContenidoEjemplo(feedTitle, fuente) {
     const noticias = {
-      "BBC Mundo": [
+      "BBC World": [
         {
-          title: "Análisis: Los desafíos económicos globales en 2025",
+          title: "Global economic challenges in 2025: An analysis",
           description:
-            "Un análisis profundo de las tendencias económicas que marcarán este año a nivel mundial...",
-          link: "https://bbc.com/mundo/ejemplo1",
+            "A deep analysis of economic trends that will mark this year globally...",
+          link: "https://bbc.com/news/world/ejemplo1",
           pubDate: new Date().toISOString(),
           enclosure: {
             url: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop",
           },
         },
         {
-          title: "Avances tecnológicos que cambiarán el futuro",
+          title: "International summit addresses climate crisis",
           description:
-            "Las últimas innovaciones en inteligencia artificial y tecnología están transformando...",
-          link: "https://bbc.com/mundo/ejemplo2",
+            "World leaders gather to discuss urgent strategies against climate change...",
+          link: "https://bbc.com/news/world/ejemplo2",
           pubDate: new Date(Date.now() - 3600000).toISOString(),
           enclosure: {
-            url: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
+            url: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e5?w=800&h=600&fit=crop",
           },
         },
         {
-          title: "Crisis climática: nuevas medidas internacionales",
+          title: "Europe signs strategic trade agreements",
           description:
-            "Los países se reúnen para discutir estrategias urgentes ante el cambio climático...",
-          link: "https://bbc.com/mundo/ejemplo3",
+            "The European Union signs new treaties that will strengthen its global position...",
+          link: "https://bbc.com/news/world/ejemplo3",
           pubDate: new Date(Date.now() - 7200000).toISOString(),
           enclosure: {
-            url: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e5?w=800&h=600&fit=crop",
+            url: "https://images.unsplash.com/photo-1494390248081-4e521a5940db?w=800&h=600&fit=crop",
+          },
+        },
+      ],
+      "BBC Technology": [
+        {
+          title: "AI breakthroughs reshape multiple industries",
+          description:
+            "Latest innovations in artificial intelligence promise to revolutionize sectors...",
+          link: "https://bbc.com/news/technology/ejemplo1",
+          pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Cybersecurity: New threats detected",
+          description:
+            "Experts warn about sophisticated cyber attacks targeting critical infrastructure...",
+          link: "https://bbc.com/news/technology/ejemplo2",
+          pubDate: new Date(Date.now() - 3600000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
+          },
+        },
+      ],
+      "BBC Sport": [
+        {
+          title: "Premier League: Weekend results and standings",
+          description:
+            "Manchester City and Liverpool maintain their fight for the title...",
+          link: "https://bbc.com/sport/football/ejemplo1",
+          pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Champions League: Analysis of qualified teams",
+          description:
+            "English teams seek to shine in the top European competition...",
+          link: "https://bbc.com/sport/football/ejemplo2",
+          pubDate: new Date(Date.now() - 1800000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop",
           },
         },
       ],
@@ -408,6 +452,28 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         },
       ],
+      "El País Portada España": [
+        {
+          title: "España: nuevas políticas económicas anunciadas",
+          description:
+            "El gobierno español presenta un paquete de medidas económicas para impulsar el crecimiento...",
+          link: "https://elpais.com/espana/ejemplo1",
+          pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Madrid: obras de infraestructura en progreso",
+          description:
+            "La capital avanza con importantes proyectos de modernización urbana...",
+          link: "https://elpais.com/espana/ejemplo2",
+          pubDate: new Date(Date.now() - 1800000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1554188248-986adbb73be4?w=800&h=600&fit=crop",
+          },
+        },
+      ],
       "El País Internacional": [
         {
           title: "Europa: acuerdos comerciales estratégicos",
@@ -427,6 +493,28 @@ document.addEventListener("DOMContentLoaded", function () {
           pubDate: new Date(Date.now() - 1800000).toISOString(),
           enclosure: {
             url: "https://images.unsplash.com/photo-1526711657229-e7e080ed7aa1?w=800&h=600&fit=crop",
+          },
+        },
+      ],
+      "El País Lo Más Visto": [
+        {
+          title: "Las noticias más leídas de la semana en España",
+          description:
+            "Resumen de los temas que más han captado la atención de los lectores españoles...",
+          link: "https://elpais.com/mas-visto/ejemplo1",
+          pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Trending: política y sociedad en España",
+          description:
+            "Los temas más comentados en redes sociales y medios de comunicación...",
+          link: "https://elpais.com/mas-visto/ejemplo2",
+          pubDate: new Date(Date.now() - 3600000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&h=600&fit=crop",
           },
         },
       ],
@@ -539,38 +627,84 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         let response;
-        if (feed.url.startsWith("/rss/")) {
-          // Usar nuestro propio endpoint RSS
-          response = await fetch(feed.url);
-        } else if (feed.url.includes("api.allorigins.win")) {
-          // Para feeds usando allorigins
-          response = await fetch(feed.url);
-        } else {
-          // Para otros feeds, usar allorigins como fallback
-          response = await fetch(
-            `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`,
-          );
-        }
-
-        if (!response.ok) {
-          throw new Error(
-            `Error en la respuesta del servidor: ${response.status}`,
-          );
-        }
-
         let parsedFeed;
-        if (feed.url.startsWith("/rss/")) {
-          // Nuestro endpoint devuelve JSON directamente
-          const data = await response.json();
-          parsedFeed = data;
-        } else if (feed.url.includes("api.allorigins.win")) {
-          // AllOrigins devuelve JSON con contents
-          const data = await response.json();
-          parsedFeed = await parser.parseString(data.contents);
-        } else {
-          // Feeds XML directos
-          const xmlText = await response.text();
-          parsedFeed = await parser.parseString(xmlText);
+        let useProxy = feed.url.includes("api.allorigins.win");
+
+        try {
+          if (feed.url.startsWith("/rss/")) {
+            // Usar nuestro propio endpoint RSS
+            response = await fetch(feed.url);
+            if (!response.ok) {
+              throw new Error(
+                `Error en la respuesta del servidor: ${response.status}`,
+              );
+            }
+            const data = await response.json();
+            parsedFeed = data;
+          } else if (useProxy) {
+            // Para feeds usando allorigins
+            response = await fetch(feed.url);
+            if (!response.ok) {
+              throw new Error(
+                `Error en la respuesta del servidor: ${response.status}`,
+              );
+            }
+            const responseText = await response.text();
+            if (!responseText.trim()) {
+              throw new Error("Respuesta vacía del servidor proxy");
+            }
+            let data;
+            try {
+              data = JSON.parse(responseText);
+            } catch (jsonError) {
+              throw new Error(`Error parsing JSON: ${jsonError.message}`);
+            }
+            if (!data.contents) {
+              throw new Error("Respuesta del proxy no contiene contents");
+            }
+            parsedFeed = await parser.parseString(data.contents);
+          } else {
+            // Intentar fetch directo primero
+            try {
+              response = await fetch(feed.url);
+              if (!response.ok) {
+                throw new Error(
+                  `Error en la respuesta del servidor: ${response.status}`,
+                );
+              }
+              const xmlText = await response.text();
+              parsedFeed = await parser.parseString(xmlText);
+            } catch (directError) {
+              console.log(
+                `⚠️ Fetch directo falló para ${feed.title}, intentando con proxy CORS...`,
+              );
+              // Fallback a proxy CORS
+              const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`;
+              response = await fetch(proxyUrl);
+              if (!response.ok) {
+                throw new Error(`Error en proxy CORS: ${response.status}`);
+              }
+              const responseText = await response.text();
+              if (!responseText.trim()) {
+                throw new Error("Respuesta vacía del proxy CORS");
+              }
+              let data;
+              try {
+                data = JSON.parse(responseText);
+              } catch (jsonError) {
+                throw new Error(
+                  `Error parsing JSON del proxy: ${jsonError.message}`,
+                );
+              }
+              if (!data.contents) {
+                throw new Error("Respuesta del proxy no contiene contents");
+              }
+              parsedFeed = await parser.parseString(data.contents);
+              console.log(`✓ Proxy CORS exitoso para ${feed.title}`);
+            }
+          }
+        } catch (fetchError) {
+          throw fetchError;
         }
 
         allItems[feed.containerId] = parsedFeed.items || [];

@@ -129,7 +129,7 @@ async function publicarTweetsPeriodicamente() {
     },
     // El País España
     {
-      title: "El País Portada",
+      title: "El País Portada España",
       url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
       containerId: "elpais-portada-container",
       hashtags: "#España #Noticias #ElPaís",
@@ -141,28 +141,10 @@ async function publicarTweetsPeriodicamente() {
       hashtags: "#Internacional #España #Mundo",
     },
     {
-      title: "El País Economía",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/economia",
-      containerId: "elpais-economia-container",
-      hashtags: "#Economía #España #Finanzas",
-    },
-    {
-      title: "El País Deportes",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/deportes",
-      containerId: "elpais-deportes-container",
-      hashtags: "#Deportes #España #Fútbol",
-    },
-    {
-      title: "El País Tecnología",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/tecnologia",
-      containerId: "elpais-tech-container",
-      hashtags: "#Tecnología #España #Innovación",
-    },
-    {
-      title: "El País Cultura",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/cultura",
-      containerId: "elpais-cultura-container",
-      hashtags: "#Cultura #España #Arte",
+      title: "El País Lo Más Visto",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+      containerId: "elpais-populares-container",
+      hashtags: "#ElPaísMásVisto #España #Trending",
     },
     // La Nación Argentina
     {
@@ -178,12 +160,24 @@ async function publicarTweetsPeriodicamente() {
       containerId: "eltiempo-container",
       hashtags: "#Colombia #ElTiempo #Noticias",
     },
-    // BBC Mundo
+    // BBC Feeds
     {
-      title: "BBC Mundo",
-      url: "https://feeds.bbci.co.uk/mundo/rss.xml",
+      title: "BBC World",
+      url: "https://feeds.bbci.co.uk/news/world/rss.xml",
       containerId: "bbc-mundo-container",
-      hashtags: "#BBCMundo #Internacional #Noticias",
+      hashtags: "#BBCWorld #Internacional #Noticias",
+    },
+    {
+      title: "BBC Technology",
+      url: "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      containerId: "bbc-tech-container",
+      hashtags: "#BBCTech #Tecnología #Innovación",
+    },
+    {
+      title: "BBC Sport",
+      url: "https://feeds.bbci.co.uk/sport/rss.xml",
+      containerId: "bbc-sport-container",
+      hashtags: "#BBCSport #Deportes #Internacional",
     },
     // CNN en Español
     {
