@@ -1,3 +1,50 @@
 User-agent: *
 Allow: /
+
+# Permitir acceso a recursos importantes
+Allow: /assets/
+Allow: /main.css
+Allow: /sitemap.xml
+Allow: /sitemap-news.xml
+
+# Bloquear archivos innecesarios
+Disallow: /admin/
+Disallow: /node_modules/
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /webpack.config.js
+Disallow: /server.js
+Disallow: /gorgojeo.js
+Disallow: /instagramapi.js
+
+# Sitemaps
 Sitemap: https://es.hgaruna.org/sitemap.xml
+Sitemap: https://es.hgaruna.org/sitemap-news.xml
+
+# Crawl-delay para ser respetuoso con el servidor
+Crawl-delay: 1
+
+# Googlebot específico
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bingbot específico
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Facebook crawler
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 2
+
+# Twitter crawler
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 2
+
+# LinkedIn crawler
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 2
