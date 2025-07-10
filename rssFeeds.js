@@ -357,17 +357,14 @@ document.addEventListener("DOMContentLoaded", function () {
           // Nuestro endpoint devuelve JSON directamente
           const data = await response.json();
           parsedFeed = data;
-        } else if (
-          feed.url.includes("bbci.co.uk") ||
-          feed.url.includes("elpais.com")
-        ) {
+        } else if (feed.url.includes("api.allorigins.win")) {
+          // AllOrigins devuelve JSON con contents
+          const data = await response.json();
+          parsedFeed = await parser.parseString(data.contents);
+        } else {
           // Feeds XML directos
           const xmlText = await response.text();
           parsedFeed = await parser.parseString(xmlText);
-        } else {
-          // AllOrigins
-          const data = await response.json();
-          parsedFeed = await parser.parseString(data.contents);
         }
 
         allItems[feed.containerId] = parsedFeed.items || [];
