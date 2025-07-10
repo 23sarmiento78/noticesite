@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       title: "Cine",
       url: "https://www.clarin.com/rss/espectaculos/cine/",
       containerId: "categoria2-news-container",
-      fuente: "Clar��n",
+      fuente: "Clar���n",
     },
     {
       title: "Fútbol",
@@ -53,19 +53,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // BBC Feeds
     {
       title: "BBC World",
-      url: "https://feeds.bbci.co.uk/news/world/rss.xml",
+      url: "https://api.allorigins.win/get?url=https://feeds.bbci.co.uk/news/world/rss.xml",
       containerId: "bbc-mundo-container",
       fuente: "BBC",
     },
     {
       title: "BBC Technology",
-      url: "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      url: "https://api.allorigins.win/get?url=https://feeds.bbci.co.uk/news/technology/rss.xml",
       containerId: "bbc-tech-container",
       fuente: "BBC",
     },
     {
       title: "BBC Sport",
-      url: "https://feeds.bbci.co.uk/sport/rss.xml",
+      url: "https://api.allorigins.win/get?url=https://feeds.bbci.co.uk/sport/rss.xml",
       containerId: "bbc-sport-container",
       fuente: "BBC",
     },
