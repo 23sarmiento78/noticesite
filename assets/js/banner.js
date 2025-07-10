@@ -152,13 +152,29 @@ document.addEventListener("DOMContentLoaded", function () {
           allItems = allItems.concat(feed.items);
           console.log(`✓ Proxy CORS exitoso para ${url}`);
         }
-        // Ya manejado en el try-catch anterior
-        console.log("Datos RSS recibidos:", feed);
-        console.log("Todos los items:", allItems);
+        // Log solo en desarrollo para evitar acumulación de memoria
+        if (
+          window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1"
+        ) {
+          console.log(`✓ Datos RSS cargados: ${allItems.length} items`);
+        }
       } catch (error) {
         console.error(`Error al obtener noticias de ${url}:`, error);
-        document.getElementById("carousel-inner-news").innerHTML =
-          "<p>Error al cargar las noticias. Por favor, inténtelo más tarde.</p>"; // ID corregido
+        // Usar el elemento cacheado y manejo de errores optimizado
+        if (!cachedContainer) {
+          cachedContainer = document.getElementById("carousel-inner-news");
+        }
+        if (cachedContainer) {
+          requestAnimationFrame(() => {
+            cachedContainer.textContent = "";
+            const errorMsg = document.createElement("p");
+            errorMsg.textContent =
+              "Error al cargar las noticias. Por favor, inténtelo más tarde.";
+            errorMsg.className = "text-center text-muted";
+            cachedContainer.appendChild(errorMsg);
+          });
+        }
         return;
       }
     }
