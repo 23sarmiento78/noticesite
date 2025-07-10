@@ -13,7 +13,7 @@ const publishedItemIds = {};
 
 // Configuración de CORS para permitir solo orígenes específicos
 const corsOptions = {
-  origin: "https://es.hgaruna.org",
+  origin: ["https://es.hgaruna.org", "http://localhost:3000"],
   optionsSuccessStatus: 200,
 };
 
