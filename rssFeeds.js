@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       title: "Cine",
       url: "https://www.clarin.com/rss/espectaculos/cine/",
       containerId: "categoria2-news-container",
-      fuente: "Clarín",
+      fuente: "Clar��n",
     },
     {
       title: "Fútbol",
@@ -414,6 +414,19 @@ document.addEventListener("DOMContentLoaded", function () {
             "La Unión Europea firma nuevos tratados que fortalecerán su posición global...",
           link: "https://elpais.com/internacional/ejemplo1",
           pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1494390248081-4e521a5940db?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Cumbre internacional sobre derechos humanos",
+          description:
+            "Líderes mundiales se reúnen para abordar crisis humanitarias urgentes...",
+          link: "https://elpais.com/internacional/ejemplo2",
+          pubDate: new Date(Date.now() - 1800000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1526711657229-e7e080ed7aa1?w=800&h=600&fit=crop",
+          },
         },
       ],
       "El País Economía": [
@@ -423,6 +436,19 @@ document.addEventListener("DOMContentLoaded", function () {
             "Análisis de los principales movimientos en bolsas europeas y americanas...",
           link: "https://elpais.com/economia/ejemplo1",
           pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Inflación en Europa: análisis y perspectivas",
+          description:
+            "Los bancos centrales europeos evalúan nuevas medidas monetarias...",
+          link: "https://elpais.com/economia/ejemplo2",
+          pubDate: new Date(Date.now() - 2700000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=600&fit=crop",
+          },
         },
       ],
       "El País Deportes": [
@@ -432,6 +458,19 @@ document.addEventListener("DOMContentLoaded", function () {
             "Real Madrid y Barcelona mantienen su lucha por el liderato en el campeonato español...",
           link: "https://elpais.com/deportes/ejemplo1",
           pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Champions League: análisis de los clasificados",
+          description:
+            "Los equipos españoles buscan brillar en la máxima competición europea...",
+          link: "https://elpais.com/deportes/ejemplo2",
+          pubDate: new Date(Date.now() - 1800000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop",
+          },
         },
       ],
       "El País Tecnología": [
@@ -441,6 +480,19 @@ document.addEventListener("DOMContentLoaded", function () {
             "Las últimas innovaciones en IA prometen revolucionar múltiples industrias...",
           link: "https://elpais.com/tecnologia/ejemplo1",
           pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Ciberseguridad: nuevas amenazas detectadas",
+          description:
+            "Expertos alertan sobre sofisticados ataques informáticos dirigidos...",
+          link: "https://elpais.com/tecnologia/ejemplo2",
+          pubDate: new Date(Date.now() - 3600000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
+          },
         },
       ],
       "El País Cultura": [
@@ -450,6 +502,19 @@ document.addEventListener("DOMContentLoaded", function () {
             "Los museos europeos presentan las muestras más innovadoras del año...",
           link: "https://elpais.com/cultura/ejemplo1",
           pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Literatura española: premios y reconocimientos",
+          description:
+            "Autores españoles reciben importantes galardones internacionales...",
+          link: "https://elpais.com/cultura/ejemplo2",
+          pubDate: new Date(Date.now() - 2700000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=600&fit=crop",
+          },
         },
       ],
     };
