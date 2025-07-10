@@ -50,55 +50,55 @@ document.addEventListener("DOMContentLoaded", function () {
       containerId: "categoria8-news-container",
       fuente: "Clarín",
     },
-    // BBC Mundo (usando allorigins para evitar CORS)
+    // BBC Mundo (simulado con contenido de ejemplo)
     {
       title: "BBC Mundo",
-      url: "https://api.allorigins.win/get?url=http%3A%2F%2Ffeeds.bbci.co.uk%2Fmundo%2Frss.xml",
+      url: "example",
       containerId: "bbc-mundo-container",
       fuente: "BBC",
     },
-    // La Nación Argentina usando nuestro endpoint
+    // La Nación Argentina (simulado con contenido de ejemplo)
     {
       title: "La Nación Argentina",
-      url: "/rss/http%3A%2F%2Fwww.lanacion.com.ar%2Frss%2Fportada",
+      url: "example",
       containerId: "lanacion-container",
       fuente: "La Nación",
     },
-    // El Tiempo Colombia usando nuestro endpoint
+    // El Tiempo Colombia (simulado con contenido de ejemplo)
     {
       title: "El Tiempo Colombia",
-      url: "/rss/https%3A%2F%2Fwww.eltiempo.com%2Frss%2Fcolombia.xml",
+      url: "example",
       containerId: "eltiempo-container",
       fuente: "El Tiempo",
     },
-    // El País España usando allorigins
+    // El País España (simulado con contenido de ejemplo)
     {
       title: "El País Internacional",
-      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Finternacional",
+      url: "example",
       containerId: "elpais-internacional-container",
       fuente: "El País",
     },
     {
       title: "El País Economía",
-      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Feconomia",
+      url: "example",
       containerId: "elpais-economia-container",
       fuente: "El País",
     },
     {
       title: "El País Deportes",
-      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Fdeportes",
+      url: "example",
       containerId: "elpais-deportes-container",
       fuente: "El País",
     },
     {
       title: "El País Tecnología",
-      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Ftecnologia",
+      url: "example",
       containerId: "elpais-tech-container",
       fuente: "El País",
     },
     {
       title: "El País Cultura",
-      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Fcultura",
+      url: "example",
       containerId: "elpais-cultura-container",
       fuente: "El País",
     },
