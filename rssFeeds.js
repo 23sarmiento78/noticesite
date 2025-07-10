@@ -338,6 +338,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "Un análisis profundo de las tendencias económicas que marcarán este año a nivel mundial...",
           link: "https://bbc.com/mundo/ejemplo1",
           pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop",
+          },
         },
         {
           title: "Avances tecnológicos que cambiarán el futuro",
@@ -345,6 +348,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "Las últimas innovaciones en inteligencia artificial y tecnología están transformando...",
           link: "https://bbc.com/mundo/ejemplo2",
           pubDate: new Date(Date.now() - 3600000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
+          },
         },
         {
           title: "Crisis climática: nuevas medidas internacionales",
@@ -352,6 +358,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "Los países se reúnen para discutir estrategias urgentes ante el cambio climático...",
           link: "https://bbc.com/mundo/ejemplo3",
           pubDate: new Date(Date.now() - 7200000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e5?w=800&h=600&fit=crop",
+          },
         },
       ],
       "La Nación Argentina": [
