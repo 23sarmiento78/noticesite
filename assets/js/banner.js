@@ -52,32 +52,70 @@ document.addEventListener("DOMContentLoaded", function () {
     return "assets/img/default.jpg";
   }
 
-  function mostrarNoticiasEnCarrusel(items, containerId) {
-    const container = document.getElementById("carousel-inner-news"); // ID corregido
-    container.innerHTML = "";
+  // Cache para elementos DOM
+  let cachedContainer = null;
 
-    let carouselInner = document.createElement("div");
+  function mostrarNoticiasEnCarrusel(items, containerId) {
+    // Optimización: cache del elemento DOM
+    if (!cachedContainer) {
+      cachedContainer = document.getElementById("carousel-inner-news");
+      if (!cachedContainer) {
+        console.error("Elemento carousel-inner-news no encontrado");
+        return;
+      }
+    }
+
+    // Optimización: usar DocumentFragment para operaciones DOM batch
+    const fragment = document.createDocumentFragment();
+    const carouselInner = document.createElement("div");
     carouselInner.classList.add("carousel-inner");
 
-    items.forEach((item, index) => {
-      const imagenNoticia = obtenerImagenNoticia(item);
+    // Optimización: usar requestAnimationFrame para operaciones DOM no críticas
+    requestAnimationFrame(() => {
+      items.forEach((item, index) => {
+        const imagenNoticia = obtenerImagenNoticia(item);
 
-      const carouselItem = document.createElement("div");
-      carouselItem.classList.add("carousel-item");
-      if (index === 0) {
-        carouselItem.classList.add("active");
-      }
-      carouselItem.innerHTML = `
-                <img src="${imagenNoticia}" class="d-block w-100" alt="Imagen de la noticia" style="height: 500px; object-fit: cover;">
-                <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.5); padding: 10px;">
-                    <h5>${item.title}</h5>
-                    <a href="${item.link}" class="btn btn-primary">Leer más</a>
-                </div>
-            `;
-      carouselInner.appendChild(carouselItem);
+        const carouselItem = document.createElement("div");
+        carouselItem.classList.add("carousel-item");
+        if (index === 0) {
+          carouselItem.classList.add("active");
+        }
+
+        // Optimización: crear elementos en lugar de innerHTML
+        const img = document.createElement("img");
+        img.src = imagenNoticia;
+        img.className = "d-block w-100";
+        img.alt = "Imagen de la noticia";
+        img.style.cssText = "height: 500px; object-fit: cover;";
+
+        const caption = document.createElement("div");
+        caption.className = "carousel-caption d-none d-md-block";
+        caption.style.cssText =
+          "background-color: rgba(0, 0, 0, 0.5); padding: 10px;";
+
+        const title = document.createElement("h5");
+        title.textContent = item.title || "Sin título";
+
+        const link = document.createElement("a");
+        link.href = item.link || "#";
+        link.className = "btn btn-primary";
+        link.textContent = "Leer más";
+        link.target = "_blank";
+        link.rel = "noopener";
+
+        caption.appendChild(title);
+        caption.appendChild(link);
+        carouselItem.appendChild(img);
+        carouselItem.appendChild(caption);
+        carouselInner.appendChild(carouselItem);
+      });
+
+      fragment.appendChild(carouselInner);
+
+      // Limpiar y agregar nuevo contenido de forma eficiente
+      cachedContainer.textContent = ""; // Más eficiente que innerHTML = ''
+      cachedContainer.appendChild(fragment);
     });
-
-    container.appendChild(carouselInner);
 
     // Se mantiene el resto del código para los controles del carrusel.
   }
