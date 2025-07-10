@@ -440,6 +440,17 @@ document.addEventListener("DOMContentLoaded", function () {
   async function cargarNoticias() {
     for (const feed of rssFeeds) {
       try {
+        if (feed.url === "example") {
+          // Usar contenido de ejemplo
+          const ejemploItems = generarContenidoEjemplo(feed.title, feed.fuente);
+          allItems[feed.containerId] = ejemploItems;
+          actualizarPaginacion(feed.containerId);
+          console.log(
+            `✓ Cargado contenido de ejemplo: ${feed.title} (${ejemploItems.length} noticias)`,
+          );
+          continue;
+        }
+
         let response;
         if (feed.url.startsWith("/rss/")) {
           // Usar nuestro propio endpoint RSS
