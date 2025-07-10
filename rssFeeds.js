@@ -50,11 +50,23 @@ document.addEventListener("DOMContentLoaded", function () {
       containerId: "categoria8-news-container",
       fuente: "Clarín",
     },
-    // BBC Mundo (simulado con contenido de ejemplo)
+    // BBC Feeds
     {
-      title: "BBC Mundo",
-      url: "example",
+      title: "BBC World",
+      url: "https://feeds.bbci.co.uk/news/world/rss.xml",
       containerId: "bbc-mundo-container",
+      fuente: "BBC",
+    },
+    {
+      title: "BBC Technology",
+      url: "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      containerId: "bbc-tech-container",
+      fuente: "BBC",
+    },
+    {
+      title: "BBC Sport",
+      url: "https://feeds.bbci.co.uk/sport/rss.xml",
+      containerId: "bbc-sport-container",
       fuente: "BBC",
     },
     // La Nación Argentina (simulado con contenido de ejemplo)
@@ -71,35 +83,23 @@ document.addEventListener("DOMContentLoaded", function () {
       containerId: "eltiempo-container",
       fuente: "El Tiempo",
     },
-    // El País España (simulado con contenido de ejemplo)
+    // El País España feeds
+    {
+      title: "El País Portada España",
+      url: "https://elpais.com/rss/elpais/portada.xml",
+      containerId: "elpais-portada-container",
+      fuente: "El País",
+    },
     {
       title: "El País Internacional",
-      url: "example",
+      url: "https://elpais.com/rss/internacional/portada.xml",
       containerId: "elpais-internacional-container",
       fuente: "El País",
     },
     {
-      title: "El País Economía",
-      url: "example",
-      containerId: "elpais-economia-container",
-      fuente: "El País",
-    },
-    {
-      title: "El País Deportes",
-      url: "example",
-      containerId: "elpais-deportes-container",
-      fuente: "El País",
-    },
-    {
-      title: "El País Tecnología",
-      url: "example",
-      containerId: "elpais-tech-container",
-      fuente: "El País",
-    },
-    {
-      title: "El País Cultura",
-      url: "example",
-      containerId: "elpais-cultura-container",
+      title: "El País Lo Más Visto",
+      url: "https://elpais.com/rss/tags/noticias_mas_vistas.xml",
+      containerId: "elpais-populares-container",
       fuente: "El País",
     },
   ];
