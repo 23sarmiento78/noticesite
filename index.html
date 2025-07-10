@@ -151,6 +151,108 @@
         color: #bfa046;
         border: 1.5px solid #bfa046;
       }
+
+      /* Estilos para periódico digital profesional */
+      .news-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(191, 160, 70, 0.25) !important;
+      }
+      .news-card:hover .news-image {
+        transform: scale(1.05);
+      }
+      .news-card:hover .btn {
+        background: #bfa046 !important;
+        color: #111 !important;
+        border-color: #bfa046 !important;
+      }
+
+      .featured-news-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(191, 160, 70, 0.3) !important;
+      }
+      .featured-news-card:hover .featured-image {
+        transform: scale(1.08);
+      }
+      .featured-news-card:hover .btn {
+        background: linear-gradient(45deg, #d4b564, #e8c876) !important;
+        transform: scale(1.02);
+      }
+
+      /* Animaciones suaves */
+      .category-badge,
+      .source-badge {
+        transition: all 0.3s ease;
+      }
+      .news-card:hover .category-badge {
+        background: #d4b564 !important;
+        transform: scale(1.05);
+      }
+
+      /* Tipografía mejorada */
+      .news-headline {
+        font-family: "Georgia", serif;
+      }
+      .featured-headline {
+        font-family: "Georgia", serif;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Efectos de loading */
+      .news-image,
+      .featured-image {
+        background: linear-gradient(90deg, #333 0%, #555 50%, #333 100%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+
+      @keyframes loading {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      .news-image[src],
+      .featured-image[src] {
+        animation: none;
+        background: none;
+      }
+
+      /* Mejoras en la navegación */
+      .navbar-brand:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+      }
+
+      /* Grid responsive mejorado */
+      @media (max-width: 768px) {
+        .main-header .display-3 {
+          font-size: 2rem !important;
+        }
+        .news-card,
+        .featured-news-card {
+          margin-bottom: 1.5rem;
+        }
+      }
+
+      /* Efectos de texto */
+      .news-title {
+        position: relative;
+        display: inline-block;
+      }
+      .news-title::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(45deg, #bfa046, #d4b564);
+        border-radius: 2px;
+      }
     </style>
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Noticias - Todo en Uno" />
