@@ -126,7 +126,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (item.enclosure && item.enclosure.url) {
       return item.enclosure.url;
     }
-    return "assets/img/default.jpg";
+    // Usar una imagen de placeholder confiable de Unsplash
+    return "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=600&fit=crop";
   }
 
   // Modificar mostrarNoticiasEnCartas para aceptar items filtrados
