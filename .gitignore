@@ -1,0 +1,82 @@
+# Archivos de configuración con información sensible
+admin/config.js
+admin/config.json
+.env
+.env.local
+.env.production
+
+# API Keys y credenciales
+*.key
+*.pem
+secrets/
+credentials/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos temporales
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de build
+dist/
+build/
+out/
+
+# Archivos de cache
+.cache/
+.parcel-cache/
+
+# Archivos de respaldo
+*.bak
+*.backup
+*.old
+
+# Archivos de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de configuración local
+config.local.js
+settings.local.json
+
+# Archivos de sitemap generados
+sitemap-*.xml
+sitemap.xml.bak
+
+# Archivos de artículos generados
+articles/
+generated-articles/
+
+# Archivos de análisis SEO
+seo-reports/
+analysis-results/
+
+# Archivos de respaldo del panel
+admin-backup/
+panel-backup/ 
