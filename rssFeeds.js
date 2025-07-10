@@ -649,7 +649,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 `Error en la respuesta del servidor: ${response.status}`,
               );
             }
-            const data = await response.json();
+            const responseText = await response.text();
+            if (!responseText.trim()) {
+              throw new Error("Respuesta vacía del servidor proxy");
+            }
+            let data;
+            try {
+              data = JSON.parse(responseText);
+            } catch (jsonError) {
+              throw new Error(`Error parsing JSON: ${jsonError.message}`);
+            }
+            if (!data.contents) {
+              throw new Error("Respuesta del proxy no contiene contents");
+            }
             parsedFeed = await parser.parseString(data.contents);
           } else {
             // Intentar fetch directo primero
@@ -692,7 +704,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const ejemploItems = generarContenidoEjemplo(feed.title, feed.fuente);
         allItems[feed.containerId] = ejemploItems;
         actualizarPaginacion(feed.containerId);
-        console.log(`🔄 Usando contenido de ejemplo para: ${feed.title}`);
+        console.log(`��� Usando contenido de ejemplo para: ${feed.title}`);
       }
     }
     // Guardar copia para búsqueda
