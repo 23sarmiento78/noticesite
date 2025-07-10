@@ -227,20 +227,53 @@ document.addEventListener("DOMContentLoaded", function () {
   async function cargarNoticias() {
     for (const feed of rssFeeds) {
       try {
-        const response = await fetch(
-          `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`,
-        );
+        let response;
+        if (feed.url.startsWith("/rss/")) {
+          // Usar nuestro propio endpoint RSS
+          response = await fetch(feed.url);
+        } else if (
+          feed.url.includes("bbci.co.uk") ||
+          feed.url.includes("elpais.com")
+        ) {
+          // Para feeds externos que permiten CORS
+          response = await fetch(feed.url);
+        } else {
+          // Para otros feeds, usar allorigins como fallback
+          response = await fetch(
+            `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`,
+          );
+        }
+
         if (!response.ok) {
           throw new Error(
             `Error en la respuesta del servidor: ${response.status}`,
           );
         }
-        const data = await response.json();
-        const parsedFeed = await parser.parseString(data.contents);
-        allItems[feed.containerId] = parsedFeed.items;
+
+        let parsedFeed;
+        if (feed.url.startsWith("/rss/")) {
+          // Nuestro endpoint devuelve JSON directamente
+          const data = await response.json();
+          parsedFeed = data;
+        } else if (
+          feed.url.includes("bbci.co.uk") ||
+          feed.url.includes("elpais.com")
+        ) {
+          // Feeds XML directos
+          const xmlText = await response.text();
+          parsedFeed = await parser.parseString(xmlText);
+        } else {
+          // AllOrigins
+          const data = await response.json();
+          parsedFeed = await parser.parseString(data.contents);
+        }
+
+        allItems[feed.containerId] = parsedFeed.items || [];
         actualizarPaginacion(feed.containerId);
       } catch (error) {
         console.error(`Error al obtener noticias de ${feed.title}:`, error);
+        // Inicializar como array vacío en caso de error
+        allItems[feed.containerId] = [];
       }
     }
     // Guardar copia para búsqueda
