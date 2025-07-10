@@ -351,30 +351,133 @@
       </div>
     </div>
 
-    <!-- Sección La Nación y El Tiempo -->
+    <!-- Sección La Nación Argentina -->
     <div class="container mt-5">
       <div class="row">
-        <div class="col-md-6 mb-4">
+        <div class="col-12">
           <h2
             class="news-title text-center mb-4"
-            style="font-size: 1.8rem; font-weight: 700; color: #bfa046"
+            style="font-size: 2rem; font-weight: 700; color: #bfa046"
           >
             <i class="bi bi-newspaper" style="margin-right: 10px"></i>
             La Nación Argentina
           </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
           <div id="lanacion-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
-        <div class="col-md-6 mb-4">
+      </div>
+    </div>
+
+    <!-- Sección El Tiempo Colombia -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12">
           <h2
             class="news-title text-center mb-4"
-            style="font-size: 1.8rem; font-weight: 700; color: #bfa046"
+            style="font-size: 2rem; font-weight: 700; color: #bfa046"
           >
-            <i class="bi bi-clock-history" style="margin-right: 10px"></i>
+            <i class="bi bi-geo-alt" style="margin-right: 10px"></i>
             El Tiempo Colombia
           </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Colombia General
+          </h3>
           <div id="eltiempo-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Bogotá
+          </h3>
+          <div id="eltiempo-bogota-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Medellín
+          </h3>
+          <div id="eltiempo-medellin-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Cali
+          </h3>
+          <div id="eltiempo-cali-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Barranquilla
+          </h3>
+          <div id="eltiempo-barranquilla-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Mundo
+          </h3>
+          <div id="eltiempo-mundo-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Latinoamérica
+          </h3>
+          <div id="eltiempo-latinoamerica-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Tecnósfera
+          </h3>
+          <div id="eltiempo-tecnosfera-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Economía
+          </h3>
+          <div id="eltiempo-economia-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Cultura
+          </h3>
+          <div id="eltiempo-cultura-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
+            Entretenimiento
+          </h3>
+          <div id="eltiempo-entretenimiento-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
@@ -662,15 +765,16 @@
       );
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Sistema RSS Real -->
     <script src="assets/js/rss-config.js"></script>
     <script src="assets/js/rss-manager.js"></script>
     <script src="assets/js/banner-manager.js"></script>
     <script src="assets/js/search-manager.js"></script>
+    <!-- Scripts adicionales -->
     <script src="assets/js/seo-optimizer.js"></script>
-    <script src="assets/js/sitemap-generator.js"></script>
-    <script src="assets/js/news-url-generator.js"></script>
+    <script src="assets/js/analytics-config.js"></script>
     <script src="assets/js/analytics-manager.js"></script>
-    <script src="assets/js/legal-content-manager.js"></script>
+    <script src="assets/js/fallback-content.js"></script>
     <script>
       // Actualizar fecha y hora con optimizaciones de rendimiento
       let dateElement = null;

@@ -8,9 +8,20 @@ class BannerManager {
   }
 
   async init() {
-    await this.loadBannerContent();
-    this.startAutoPlay();
-    this.setupControls();
+    console.log('🎬 Iniciando Banner Manager...');
+    
+    try {
+      // Intentar cargar contenido real del banner
+      await this.loadBannerContent();
+      this.startAutoPlay();
+      this.setupControls();
+      
+    } catch (error) {
+      console.error('Error en Banner Manager:', error);
+      this.loadFallbackBanner();
+      this.startAutoPlay();
+      this.setupControls();
+    }
   }
 
   async loadBannerContent() {
@@ -18,12 +29,16 @@ class BannerManager {
       // Cargar contenido del banner desde múltiples fuentes
       const bannerFeeds = [
         {
-          url: 'https://feeds.bbci.co.uk/news/world/rss.xml',
-          title: 'BBC World News'
+          url: 'https://feeds.bbci.co.uk/news/technology/rss.xml',
+          title: 'BBC Technology'
         },
         {
-          url: 'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada',
+          url: 'https://elpais.com/rss/elpais/portada.xml',
           title: 'El País'
+        },
+        {
+          url: 'https://elpais.com/rss/internacional/portada.xml',
+          title: 'El País Internacional'
         }
       ];
 
@@ -33,26 +48,33 @@ class BannerManager {
         try {
           let xmlContent;
           
-          // Intentar fetch directo para BBC
-          if (feed.url.includes('bbci.co.uk')) {
+          // Intentar con múltiples proxies
+          const proxies = [
+            'https://api.allorigins.win/get?url=',
+            'https://thingproxy.freeboard.io/fetch/',
+            'https://corsproxy.io/?'
+          ];
+          
+          for (const proxy of proxies) {
             try {
-              const response = await fetch(feed.url);
-              if (response.ok) {
-                xmlContent = await response.text();
-              } else {
-                throw new Error('Fetch directo falló');
+              console.log(`🔄 Banner: Intentando ${feed.title} con ${proxy}`);
+              
+              const proxyResponse = await fetch(`${proxy}${encodeURIComponent(feed.url)}`);
+              const data = await proxyResponse.json();
+              xmlContent = data.contents || data.data || data;
+              
+              if (xmlContent) {
+                console.log(`✅ Banner: ${feed.title} cargado con ${proxy}`);
+                break;
               }
             } catch (error) {
-              // Usar proxy como fallback
-              const proxyResponse = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`);
-              const data = await proxyResponse.json();
-              xmlContent = data.contents;
+              console.warn(`⚠️ Banner: Proxy falló para ${feed.title} - ${error.message}`);
+              continue;
             }
-          } else {
-            // Usar proxy para otros feeds
-            const proxyResponse = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`);
-            const data = await proxyResponse.json();
-            xmlContent = data.contents;
+          }
+          
+          if (!xmlContent) {
+            throw new Error(`No se pudo cargar ${feed.title}`);
           }
 
           const parser = new DOMParser();
@@ -126,25 +148,39 @@ class BannerManager {
   loadFallbackBanner() {
     this.slides = [
       {
-        title: 'Noticias Destacadas',
-        description: 'Mantente informado con las últimas noticias del mundo',
-        link: '#',
-        imageUrl: this.getDefaultImage(),
-        source: 'HGARUNA News'
+        title: 'Inteligencia Artificial revoluciona el sector tecnológico',
+        description: 'Las empresas líderes presentan innovaciones revolucionarias en IA que cambiarán el futuro de la tecnología.',
+        link: 'https://elpais.com/tecnologia/',
+        imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=600&fit=crop',
+        source: 'El País'
       },
       {
-        title: 'Tecnología y Innovación',
-        description: 'Descubre las últimas tendencias en tecnología',
-        link: '#',
-        imageUrl: this.getDefaultImage(),
-        source: 'HGARUNA News'
+        title: 'Fútbol: Nuevas transferencias en la ventana de mercado',
+        description: 'Los equipos europeos se preparan para la próxima temporada con importantes fichajes millonarios.',
+        link: 'https://elpais.com/deportes/',
+        imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&h=600&fit=crop',
+        source: 'El País'
       },
       {
-        title: 'Deportes Internacionales',
-        description: 'Toda la información deportiva que necesitas',
-        link: '#',
-        imageUrl: this.getDefaultImage(),
-        source: 'HGARUNA News'
+        title: 'Crisis económica global: Análisis de expertos',
+        description: 'Los economistas analizan las tendencias del mercado internacional y sus implicaciones.',
+        link: 'https://elpais.com/economia/',
+        imageUrl: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&h=600&fit=crop',
+        source: 'El País'
+      },
+      {
+        title: 'Cumbre mundial sobre cambio climático',
+        description: 'Los líderes mundiales se reúnen para discutir medidas contra el calentamiento global.',
+        link: 'https://elpais.com/internacional/',
+        imageUrl: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop',
+        source: 'El País'
+      },
+      {
+        title: 'Apple presenta nuevos productos innovadores',
+        description: 'La empresa tecnológica revela sus últimas innovaciones en el evento anual.',
+        link: 'https://www.bbc.com/news/technology',
+        imageUrl: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=1200&h=600&fit=crop',
+        source: 'BBC'
       }
     ];
     

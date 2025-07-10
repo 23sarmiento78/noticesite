@@ -1,15 +1,19 @@
 // Gestor de Analytics para mejorar SEO y tracking
 class AnalyticsManager {
   constructor() {
-    this.trackingId = 'G-XXXXXXXXXX'; // Reemplazar con tu ID de Google Analytics
+    this.trackingId = null; // Deshabilitado temporalmente
     this.init();
   }
 
   init() {
-    this.loadGoogleAnalytics();
-    this.setupEventTracking();
-    this.setupEnhancedEcommerce();
-    this.setupCustomDimensions();
+    if (this.trackingId) {
+      this.loadGoogleAnalytics();
+      this.setupEventTracking();
+      this.setupEnhancedEcommerce();
+      this.setupCustomDimensions();
+    } else {
+      console.log('📊 Google Analytics deshabilitado - Configura trackingId para habilitar');
+    }
   }
 
   loadGoogleAnalytics() {

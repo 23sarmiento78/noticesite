@@ -2,7 +2,7 @@
 const RSS_CONFIG = {
   // Feeds principales que funcionan bien
   feeds: [
-    // BBC News (funciona bien con CORS)
+    // BBC News
     {
       id: 'bbc-world',
       title: 'BBC World News',
@@ -28,11 +28,11 @@ const RSS_CONFIG = {
       categoria: 'Deportes'
     },
     
-    // El País España (usando proxy confiable)
+    // El País España
     {
       id: 'elpais-portada',
       title: 'El País Portada',
-      url: 'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada',
+      url: 'https://elpais.com/rss/elpais/portada.xml',
       containerId: 'elpais-portada-container',
       fuente: 'El País',
       categoria: 'España'
@@ -40,7 +40,7 @@ const RSS_CONFIG = {
     {
       id: 'elpais-internacional',
       title: 'El País Internacional',
-      url: 'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/internacional',
+      url: 'https://elpais.com/rss/internacional/portada.xml',
       containerId: 'elpais-internacional-container',
       fuente: 'El País',
       categoria: 'Internacional'
@@ -48,7 +48,7 @@ const RSS_CONFIG = {
     {
       id: 'elpais-populares',
       title: 'El País Lo Más Visto',
-      url: 'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada',
+      url: 'https://elpais.com/rss/tags/noticias_mas_vistas.xml',
       containerId: 'elpais-populares-container',
       fuente: 'El País',
       categoria: 'Destacadas'
@@ -118,14 +118,115 @@ const RSS_CONFIG = {
       containerId: 'categoria2-news-container',
       fuente: 'Clarín',
       categoria: 'Cine'
+    },
+
+    // La Nación Colombia
+    {
+      id: 'lanacion-general',
+      title: 'La Nación Colombia',
+      url: 'https://lanacion.com.co/feed',
+      containerId: 'lanacion-container',
+      fuente: 'La Nación',
+      categoria: 'Colombia'
+    },
+
+    // El Tiempo Colombia - Secciones principales
+    {
+      id: 'eltiempo-colombia',
+      title: 'El Tiempo Colombia',
+      url: 'https://www.eltiempo.com/rss/colombia.xml',
+      containerId: 'eltiempo-container',
+      fuente: 'El Tiempo',
+      categoria: 'Colombia'
+    },
+    {
+      id: 'eltiempo-bogota',
+      title: 'El Tiempo Bogotá',
+      url: 'https://www.eltiempo.com/rss/bogota.xml',
+      containerId: 'eltiempo-bogota-container',
+      fuente: 'El Tiempo',
+      categoria: 'Bogotá'
+    },
+    {
+      id: 'eltiempo-medellin',
+      title: 'El Tiempo Medellín',
+      url: 'https://www.eltiempo.com/rss/colombia_medellin.xml',
+      containerId: 'eltiempo-medellin-container',
+      fuente: 'El Tiempo',
+      categoria: 'Medellín'
+    },
+    {
+      id: 'eltiempo-cali',
+      title: 'El Tiempo Cali',
+      url: 'https://www.eltiempo.com/rss/colombia_cali.xml',
+      containerId: 'eltiempo-cali-container',
+      fuente: 'El Tiempo',
+      categoria: 'Cali'
+    },
+    {
+      id: 'eltiempo-barranquilla',
+      title: 'El Tiempo Barranquilla',
+      url: 'https://www.eltiempo.com/rss/colombia_barranquilla.xml',
+      containerId: 'eltiempo-barranquilla-container',
+      fuente: 'El Tiempo',
+      categoria: 'Barranquilla'
+    },
+    {
+      id: 'eltiempo-mundo',
+      title: 'El Tiempo Mundo',
+      url: 'https://www.eltiempo.com/rss/mundo.xml',
+      containerId: 'eltiempo-mundo-container',
+      fuente: 'El Tiempo',
+      categoria: 'Internacional'
+    },
+    {
+      id: 'eltiempo-latinoamerica',
+      title: 'El Tiempo Latinoamérica',
+      url: 'https://www.eltiempo.com/rss/mundo_latinoamerica.xml',
+      containerId: 'eltiempo-latinoamerica-container',
+      fuente: 'El Tiempo',
+      categoria: 'Latinoamérica'
+    },
+    {
+      id: 'eltiempo-tecnosfera',
+      title: 'El Tiempo Tecnósfera',
+      url: 'https://www.eltiempo.com/rss/tecnosfera.xml',
+      containerId: 'eltiempo-tecnosfera-container',
+      fuente: 'El Tiempo',
+      categoria: 'Tecnología'
+    },
+    {
+      id: 'eltiempo-economia',
+      title: 'El Tiempo Economía',
+      url: 'https://www.eltiempo.com/rss/economia.xml',
+      containerId: 'eltiempo-economia-container',
+      fuente: 'El Tiempo',
+      categoria: 'Economía'
+    },
+    {
+      id: 'eltiempo-cultura',
+      title: 'El Tiempo Cultura',
+      url: 'https://www.eltiempo.com/rss/cultura.xml',
+      containerId: 'eltiempo-cultura-container',
+      fuente: 'El Tiempo',
+      categoria: 'Cultura'
+    },
+    {
+      id: 'eltiempo-entretenimiento',
+      title: 'El Tiempo Entretenimiento',
+      url: 'https://www.eltiempo.com/rss/cultura_entretenimiento.xml',
+      containerId: 'eltiempo-entretenimiento-container',
+      fuente: 'El Tiempo',
+      categoria: 'Entretenimiento'
     }
   ],
 
   // Configuración de proxies CORS
   proxies: [
     'https://api.allorigins.win/get?url=',
-    'https://cors-anywhere.herokuapp.com/',
-    'https://thingproxy.freeboard.io/fetch/'
+    'https://thingproxy.freeboard.io/fetch/',
+    'https://corsproxy.io/?',
+    'https://api.codetabs.com/v1/proxy?quest='
   ],
 
   // Configuración de imágenes por defecto

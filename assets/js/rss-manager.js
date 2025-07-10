@@ -90,7 +90,18 @@ class RSSManager {
     }
 
     const proxy = proxies[proxyIndex];
-    const proxyUrl = proxy + encodeURIComponent(url);
+    let proxyUrl;
+    
+    // Manejar diferentes formatos de proxy
+    if (proxy.includes('allorigins.win')) {
+      proxyUrl = proxy + encodeURIComponent(url);
+    } else if (proxy.includes('corsproxy.io')) {
+      proxyUrl = proxy + url;
+    } else if (proxy.includes('codetabs.com')) {
+      proxyUrl = proxy + url;
+    } else {
+      proxyUrl = proxy + encodeURIComponent(url);
+    }
     
     try {
       const response = await fetch(proxyUrl, {
@@ -99,19 +110,26 @@ class RSSManager {
           'Accept': 'application/xml, text/xml, */*',
           'User-Agent': 'Mozilla/5.0 (compatible; RSSReader/1.0)'
         },
-        timeout: 10000
+        timeout: 15000
       });
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
 
-      const data = await response.json();
+      let data;
+      const contentType = response.headers.get('content-type');
+      
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
       
       // Manejar diferentes formatos de respuesta de proxy
-      if (data.contents) {
+      if (typeof data === 'object' && data.contents) {
         return data.contents;
-      } else if (data.data) {
+      } else if (typeof data === 'object' && data.data) {
         return data.data;
       } else if (typeof data === 'string') {
         return data;
@@ -119,7 +137,7 @@ class RSSManager {
         throw new Error('Formato de respuesta de proxy no reconocido');
       }
     } catch (error) {
-      console.warn(`Proxy ${proxyIndex + 1} falló, intentando siguiente...`);
+      console.warn(`Proxy ${proxyIndex + 1} falló (${error.message}), intentando siguiente...`);
       return this.fetchWithProxy(url, proxyIndex + 1);
     }
   }
@@ -258,27 +276,20 @@ class RSSManager {
   async startLoading() {
     console.log('🔄 Iniciando carga de noticias...');
     
-    // Cargar feeds en paralelo con limitación
-    const batchSize = 3;
+    // Cargar feeds secuencialmente para evitar sobrecarga
     const feeds = RSS_CONFIG.feeds;
     
-    for (let i = 0; i < feeds.length; i += batchSize) {
-      const batch = feeds.slice(i, i + batchSize);
-      
-      const promises = batch.map(async (feed) => {
-        try {
-          const result = await this.fetchFeed(feed);
-          this.renderFeed(result);
-        } catch (error) {
-          console.error(`Error procesando ${feed.title}:`, error);
-        }
-      });
-      
-      await Promise.all(promises);
-      
-      // Esperar entre lotes para evitar sobrecarga
-      if (i + batchSize < feeds.length) {
-        await this.delay(1000);
+    for (let i = 0; i < feeds.length; i++) {
+      const feed = feeds[i];
+      try {
+        console.log(`🔄 Cargando ${feed.title} (${i + 1}/${feeds.length})`);
+        const result = await this.fetchFeed(feed);
+        this.renderFeed(result);
+        
+        // Pequeña pausa entre feeds
+        await this.delay(500);
+      } catch (error) {
+        console.error(`Error procesando ${feed.title}:`, error);
       }
     }
     
