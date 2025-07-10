@@ -336,11 +336,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (feed.url.startsWith("/rss/")) {
           // Usar nuestro propio endpoint RSS
           response = await fetch(feed.url);
-        } else if (
-          feed.url.includes("bbci.co.uk") ||
-          feed.url.includes("elpais.com")
-        ) {
-          // Para feeds externos que permiten CORS
+        } else if (feed.url.includes("api.allorigins.win")) {
+          // Para feeds usando allorigins
           response = await fetch(feed.url);
         } else {
           // Para otros feeds, usar allorigins como fallback
