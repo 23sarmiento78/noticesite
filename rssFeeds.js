@@ -328,6 +328,114 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Función para generar contenido de ejemplo para feeds no disponibles
+  function generarContenidoEjemplo(feedTitle, fuente) {
+    const noticias = {
+      "BBC Mundo": [
+        {
+          title: "Análisis: Los desafíos económicos globales en 2025",
+          description:
+            "Un análisis profundo de las tendencias económicas que marcarán este año a nivel mundial...",
+          link: "https://bbc.com/mundo/ejemplo1",
+          pubDate: new Date().toISOString(),
+        },
+        {
+          title: "Avances tecnológicos que cambiarán el futuro",
+          description:
+            "Las últimas innovaciones en inteligencia artificial y tecnología están transformando...",
+          link: "https://bbc.com/mundo/ejemplo2",
+          pubDate: new Date(Date.now() - 3600000).toISOString(),
+        },
+        {
+          title: "Crisis climática: nuevas medidas internacionales",
+          description:
+            "Los países se reúnen para discutir estrategias urgentes ante el cambio climático...",
+          link: "https://bbc.com/mundo/ejemplo3",
+          pubDate: new Date(Date.now() - 7200000).toISOString(),
+        },
+      ],
+      "La Nación Argentina": [
+        {
+          title: "Argentina: nuevas políticas económicas anunciadas",
+          description:
+            "El gobierno argentino presenta un paquete de medidas económicas para impulsar el crecimiento...",
+          link: "https://lanacion.com.ar/ejemplo1",
+          pubDate: new Date().toISOString(),
+        },
+        {
+          title: "Buenos Aires: obras de infraestructura en progreso",
+          description:
+            "La ciudad avanza con importantes proyectos de modernización urbana...",
+          link: "https://lanacion.com.ar/ejemplo2",
+          pubDate: new Date(Date.now() - 1800000).toISOString(),
+        },
+      ],
+      "El Tiempo Colombia": [
+        {
+          title: "Colombia: crecimiento en el sector tecnológico",
+          description:
+            "El país sudamericano experimenta un boom en startups y empresas de tecnología...",
+          link: "https://eltiempo.com/ejemplo1",
+          pubDate: new Date().toISOString(),
+        },
+        {
+          title: "Medellín se consolida como hub de innovación",
+          description:
+            "La ciudad paisa atrae inversión internacional en proyectos tecnológicos...",
+          link: "https://eltiempo.com/ejemplo2",
+          pubDate: new Date(Date.now() - 3600000).toISOString(),
+        },
+      ],
+      "El País Internacional": [
+        {
+          title: "Europa: acuerdos comerciales estratégicos",
+          description:
+            "La Unión Europea firma nuevos tratados que fortalecerán su posición global...",
+          link: "https://elpais.com/internacional/ejemplo1",
+          pubDate: new Date().toISOString(),
+        },
+      ],
+      "El País Economía": [
+        {
+          title: "Mercados financieros: tendencias del primer trimestre",
+          description:
+            "Análisis de los principales movimientos en bolsas europeas y americanas...",
+          link: "https://elpais.com/economia/ejemplo1",
+          pubDate: new Date().toISOString(),
+        },
+      ],
+      "El País Deportes": [
+        {
+          title: "LaLiga: resultados de la jornada",
+          description:
+            "Real Madrid y Barcelona mantienen su lucha por el liderato en el campeonato español...",
+          link: "https://elpais.com/deportes/ejemplo1",
+          pubDate: new Date().toISOString(),
+        },
+      ],
+      "El País Tecnología": [
+        {
+          title: "Inteligencia Artificial: nuevos desarrollos",
+          description:
+            "Las últimas innovaciones en IA prometen revolucionar múltiples industrias...",
+          link: "https://elpais.com/tecnologia/ejemplo1",
+          pubDate: new Date().toISOString(),
+        },
+      ],
+      "El País Cultura": [
+        {
+          title: "Arte contemporáneo: exposiciones destacadas",
+          description:
+            "Los museos europeos presentan las muestras más innovadoras del año...",
+          link: "https://elpais.com/cultura/ejemplo1",
+          pubDate: new Date().toISOString(),
+        },
+      ],
+    };
+
+    return noticias[feedTitle] || [];
+  }
+
   // Guardar copia de allItems después de cargar
   async function cargarNoticias() {
     for (const feed of rssFeeds) {
