@@ -666,21 +666,46 @@
     <script src="assets/js/banner.js"></script>
     <script src="rssFeeds.js"></script>
     <script>
-      // Actualizar fecha y hora
+      // Actualizar fecha y hora con optimizaciones de rendimiento
+      let dateElement = null;
+      let lastMinute = -1;
+
       function actualizarFecha() {
+        // Optimización: solo buscar el elemento una vez
+        if (!dateElement) {
+          dateElement = document.getElementById("fecha-actual");
+          if (!dateElement) return; // Elemento no encontrado
+        }
+
         const ahora = new Date();
-        const opciones = {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        };
-        document.getElementById("fecha-actual").textContent =
-          ahora.toLocaleDateString("es-ES", opciones);
+        const currentMinute = ahora.getMinutes();
+
+        // Optimización: solo actualizar si realmente cambi�� el minuto
+        if (currentMinute === lastMinute) return;
+        lastMinute = currentMinute;
+
+        // Usar requestAnimationFrame para evitar forced reflow
+        requestAnimationFrame(() => {
+          const opciones = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          };
+          dateElement.textContent = ahora.toLocaleDateString("es-ES", opciones);
+        });
       }
-      actualizarFecha();
+
+      // Inicializar cuando el DOM esté completamente cargado
+      if (document.readyState === "complete") {
+        actualizarFecha();
+      } else {
+        document.addEventListener("DOMContentLoaded", actualizarFecha);
+      }
+
+      // Configurar interval más eficiente
       setInterval(actualizarFecha, 60000); // Actualizar cada minuto
     </script>
   </body>

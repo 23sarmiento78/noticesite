@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
       containerId: "eltiempo-container",
       fuente: "El Tiempo",
     },
-    // El País España feeds
+    // El País Espa��a feeds
     {
       title: "El País Portada España",
       url: "https://api.allorigins.win/get?url=https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
@@ -611,9 +611,58 @@ document.addEventListener("DOMContentLoaded", function () {
     return noticias[feedTitle] || [];
   }
 
+  // Función para esperar entre requests para evitar rate limiting
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  // Función para manejar retry con backoff exponencial
+  async function fetchWithRetry(url, options = {}, maxRetries = 3) {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        const response = await fetch(url, options);
+
+        if (response.status === 429) {
+          // Rate limited - check retry-after header
+          const retryAfter = response.headers.get("retry-after");
+          const waitTime = retryAfter
+            ? parseInt(retryAfter) * 1000
+            : Math.pow(2, attempt) * 1000;
+          console.log(
+            `⏳ Rate limited. Esperando ${waitTime / 1000}s antes del reintento ${attempt}/${maxRetries}`,
+          );
+          await delay(waitTime);
+          continue;
+        }
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        return response;
+      } catch (error) {
+        if (attempt === maxRetries) {
+          throw error;
+        }
+        console.log(
+          `⚠️ Intento ${attempt} falló, reintentando en ${Math.pow(2, attempt)}s...`,
+        );
+        await delay(Math.pow(2, attempt) * 1000);
+      }
+    }
+  }
+
   // Guardar copia de allItems después de cargar
   async function cargarNoticias() {
-    for (const feed of rssFeeds) {
+    console.log("🔄 Iniciando carga de noticias con espaciado de requests...");
+
+    for (let i = 0; i < rssFeeds.length; i++) {
+      const feed = rssFeeds[i];
+
+      // Añadir pequeño delay entre requests para evitar rate limiting
+      if (i > 0) {
+        await delay(500); // 500ms entre requests
+      }
       try {
         if (feed.url === "example") {
           // Usar contenido de ejemplo
@@ -642,8 +691,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
             parsedFeed = data;
           } else if (useProxy) {
-            // Para feeds usando allorigins
-            response = await fetch(feed.url);
+            // Para feeds usando allorigins con retry
+            response = await fetchWithRetry(feed.url);
             if (!response.ok) {
               throw new Error(
                 `Error en la respuesta del servidor: ${response.status}`,
@@ -666,7 +715,7 @@ document.addEventListener("DOMContentLoaded", function () {
           } else {
             // Intentar fetch directo primero
             try {
-              response = await fetch(feed.url);
+              response = await fetchWithRetry(feed.url, {}, 2); // Solo 2 intentos para fetch directo
               if (!response.ok) {
                 throw new Error(
                   `Error en la respuesta del servidor: ${response.status}`,
@@ -678,9 +727,9 @@ document.addEventListener("DOMContentLoaded", function () {
               console.log(
                 `⚠️ Fetch directo falló para ${feed.title}, intentando con proxy CORS...`,
               );
-              // Fallback a proxy CORS
+              // Fallback a proxy CORS con retry
               const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`;
-              response = await fetch(proxyUrl);
+              response = await fetchWithRetry(proxyUrl);
               if (!response.ok) {
                 throw new Error(`Error en proxy CORS: ${response.status}`);
               }
