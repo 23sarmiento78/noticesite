@@ -205,14 +205,56 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Modificar mostrarNoticiasDestacadas para guardar copia
+  // Modificar mostrarNoticiasDestacadas para guardar copia y diversificar fuentes
   function mostrarNoticiasDestacadas() {
     let todasNoticias = [];
+
+    // Priorizar noticias de diferentes fuentes para diversidad
+    const fuentes = [
+      "elpais",
+      "bbc",
+      "categoria5",
+      "categoria7",
+      "lanacion",
+      "eltiempo",
+    ];
+    let noticiasSeleccionadas = [];
+
+    // Intentar obtener una noticia de cada fuente principal
+    fuentes.forEach((fuente) => {
+      const containerIds = Object.keys(allItems).filter((id) =>
+        id.includes(fuente),
+      );
+      containerIds.forEach((containerId) => {
+        if (allItems[containerId] && allItems[containerId].length > 0) {
+          const noticia = allItems[containerId][0]; // Tomar la primera (más reciente)
+          if (
+            noticia &&
+            !noticiasSeleccionadas.find((n) => n.title === noticia.title)
+          ) {
+            noticiasSeleccionadas.push(noticia);
+          }
+        }
+      });
+    });
+
+    // Si no tenemos suficientes, agregar del resto
     Object.values(allItems).forEach((arr) => {
       todasNoticias = todasNoticias.concat(arr);
     });
     todasNoticias.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-    const destacadas = todasNoticias.slice(0, 3);
+
+    // Completar hasta 3 noticias si es necesario
+    todasNoticias.forEach((noticia) => {
+      if (
+        noticiasSeleccionadas.length < 3 &&
+        !noticiasSeleccionadas.find((n) => n.title === noticia.title)
+      ) {
+        noticiasSeleccionadas.push(noticia);
+      }
+    });
+
+    const destacadas = noticiasSeleccionadas.slice(0, 3);
     copiaDestacadas = destacadas;
     const container = document.getElementById("destacadas-news-row");
     if (!container) return;
