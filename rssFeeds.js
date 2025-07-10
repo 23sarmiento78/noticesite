@@ -86,19 +86,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // El País España feeds
     {
       title: "El País Portada España",
-      url: "https://elpais.com/rss/elpais/portada.xml",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
       containerId: "elpais-portada-container",
       fuente: "El País",
     },
     {
       title: "El País Internacional",
-      url: "https://elpais.com/rss/internacional/portada.xml",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/internacional",
       containerId: "elpais-internacional-container",
       fuente: "El País",
     },
     {
       title: "El País Lo Más Visto",
-      url: "https://elpais.com/rss/tags/noticias_mas_vistas.xml",
+      url: "https://api.allorigins.win/get?url=https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
       containerId: "elpais-populares-container",
       fuente: "El País",
     },
