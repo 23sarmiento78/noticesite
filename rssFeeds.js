@@ -154,9 +154,44 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       const col = document.createElement("div");
       col.classList.add("col");
+      // Buscar fuente del feed
+      let fuente = "Fuente";
+      for (const feed of rssFeeds) {
+        if (feed.containerId === containerId) {
+          fuente = feed.fuente || feed.title;
+          break;
+        }
+      }
+
       col.innerHTML = `
-                <div class="card h-100" itemscope itemtype="http://schema.org/NewsArticle">
-                    <span class="badge bg-primary mb-2" style="position:absolute;top:10px;left:10px;z-index:2;">${categoria}</span>
+                <article class="card h-100 news-card" itemscope itemtype="http://schema.org/NewsArticle" style="border: none; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+                    <div class="position-relative">
+                        <img src="${imagenNoticia}" class="card-img-top news-image" alt="${item.title}" loading="lazy" itemprop="image" style="height: 200px; object-fit: cover; transition: transform 0.3s ease;">
+                        <div class="overlay-gradient" style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(transparent, rgba(0,0,0,0.7)); pointer-events: none;"></div>
+                        <span class="badge category-badge" style="position: absolute; top: 12px; left: 12px; background: #bfa046; color: #111; font-weight: 600; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem;">${categoria}</span>
+                        <span class="badge source-badge" style="position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); color: #111; font-weight: 500; padding: 4px 8px; border-radius: 15px; font-size: 0.7rem;">${fuente}</span>
+                    </div>
+                    <div class="card-body d-flex flex-column" style="padding: 1.5rem;">
+                        <h5 class="card-title news-headline" itemprop="headline" style="color: #bfa046; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem; font-size: 1.1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${item.title}</h5>
+                        <p class="card-text news-description flex-grow-1" itemprop="description" style="color: #ccc; line-height: 1.5; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 1rem;">${item.description}</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <small class="text-muted" style="color: #888 !important;">
+                                    <i class="bi bi-clock"></i> ${new Date(
+                                      item.pubDate,
+                                    ).toLocaleDateString("es-ES", {
+                                      day: "numeric",
+                                      month: "short",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                    })}
+                                </small>
+                            </div>
+                            <a href="${item.link}" class="btn btn-outline-warning btn-sm w-100" itemprop="url" target="_blank" style="border-color: #bfa046; color: #bfa046; font-weight: 600; transition: all 0.3s ease;">
+                                <i class="bi bi-arrow-right"></i> Leer completo
+                            </a>
+                        </div>
+                    </div>
                     <meta itemprop="datePublished" content="${item.pubDate}" />
                     <meta itemprop="dateModified" content="${item.pubDate}" />
                     <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
@@ -164,14 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <meta itemprop="width" content="800" />
                         <meta itemprop="height" content="600" />
                     </div>
-                    <img src="${imagenNoticia}" class="card-img-top" alt="${item.title}" loading="lazy" itemprop="image">
-                    <div class="card-body">
-                        <h5 itemprop="headline">${item.title}</h5>
-                        <p class="card-text" itemprop="description">${item.description}</p>
-                        <a href="${item.link}" class="btn btn-primary" itemprop="url">Leer más</a>
-                        <p class="card-text"><small>Publicado: ${new Date(item.pubDate).toLocaleTimeString()}</small></p>
-                    </div>
-                </div>
+                </article>
             `;
       rowContainer.appendChild(col);
     });
