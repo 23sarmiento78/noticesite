@@ -142,6 +142,11 @@ class ArticleGenerator {
     }
 
     getAPIKey() {
+        // Primero intentar obtener del archivo de configuración
+        if (typeof getOpenAIKey === 'function' && isAPIKeyConfigured()) {
+            return getOpenAIKey();
+        }
+
         // Intentar obtener de configuración guardada
         const settings = this.loadSettings();
         if (settings.openaiApiKey) {
@@ -160,41 +165,61 @@ class ArticleGenerator {
     async callChatGPT(formData, apiKey) {
         const prompt = this.buildPrompt(formData);
         
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-                model: 'gpt-4',
-                messages: [
-                    {
-                        role: 'system',
-                        content: this.getSystemPrompt()
-                    },
-                    {
-                        role: 'user',
-                        content: prompt
-                    }
-                ],
-                max_tokens: this.getMaxTokens(formData.length),
-                temperature: 0.7,
-                top_p: 1,
-                frequency_penalty: 0.1,
-                presence_penalty: 0.1
-            })
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(this.getErrorMessage(response.status, errorData));
-        }
-
-        const data = await response.json();
-        const content = data.choices[0].message.content;
+        // Intentar primero con GPT-3.5-turbo
+        const models = ['gpt-3.5-turbo', 'gpt-3.5-turbo-16k'];
         
-        return this.parseArticleContent(content, formData);
+        for (const model of models) {
+            try {
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        messages: [
+                            {
+                                role: 'system',
+                                content: this.getSystemPrompt()
+                            },
+                            {
+                                role: 'user',
+                                content: prompt
+                            }
+                        ],
+                        max_tokens: this.getMaxTokens(formData.length),
+                        temperature: 0.7,
+                        top_p: 1,
+                        frequency_penalty: 0.1,
+                        presence_penalty: 0.1
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const content = data.choices[0].message.content;
+                    return this.parseArticleContent(content, formData);
+                } else {
+                    const errorData = await response.json().catch(() => ({}));
+                    if (response.status === 400 && errorData.error?.message?.includes('model')) {
+                        // Continuar con el siguiente modelo
+                        continue;
+                    } else {
+                        throw new Error(this.getErrorMessage(response.status, errorData));
+                    }
+                }
+            } catch (error) {
+                if (model === models[models.length - 1]) {
+                    // Es el último modelo, lanzar el error
+                    throw error;
+                }
+                // Continuar con el siguiente modelo
+                continue;
+            }
+        }
+        
+        throw new Error('No se pudo conectar con ningún modelo de OpenAI disponible');
     }
 
     getSystemPrompt() {
@@ -273,10 +298,10 @@ Responde solo con el contenido del artículo, sin explicaciones adicionales.`;
 
     getMaxTokens(length) {
         switch(length) {
-            case 'corto': return 800;
-            case 'medio': return 1500;
-            case 'largo': return 2500;
-            default: return 1500;
+            case 'corto': return 600;
+            case 'medio': return 1200;
+            case 'largo': return 2000;
+            default: return 1200;
         }
     }
 
@@ -288,6 +313,11 @@ Responde solo con el contenido del artículo, sin explicaciones adicionales.`;
                 return 'Límite de solicitudes excedido. Intenta de nuevo en unos minutos.';
             case 500:
                 return 'Error interno del servidor de OpenAI. Intenta de nuevo.';
+            case 400:
+                if (errorData.error?.message?.includes('model') || errorData.error?.message?.includes('gpt-4')) {
+                    return 'Modelo no disponible. Cambiando a GPT-3.5-turbo automáticamente.';
+                }
+                return errorData.error?.message || 'Error en la solicitud';
             default:
                 return errorData.error?.message || `Error ${status}: ${errorData.error?.type || 'Desconocido'}`;
         }
