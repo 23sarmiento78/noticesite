@@ -482,8 +482,11 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       } catch (error) {
         console.error(`✗ Error al obtener noticias de ${feed.title}:`, error);
-        // Inicializar como array vacío en caso de error
-        allItems[feed.containerId] = [];
+        // Usar contenido de ejemplo como fallback
+        const ejemploItems = generarContenidoEjemplo(feed.title, feed.fuente);
+        allItems[feed.containerId] = ejemploItems;
+        actualizarPaginacion(feed.containerId);
+        console.log(`🔄 Usando contenido de ejemplo para: ${feed.title}`);
       }
     }
     // Guardar copia para búsqueda
