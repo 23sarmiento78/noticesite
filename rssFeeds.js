@@ -86,13 +86,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // El País España feeds
     {
       title: "El País Portada España",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+      url: "https://api.allorigins.win/get?url=https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
       containerId: "elpais-portada-container",
       fuente: "El País",
     },
     {
       title: "El País Internacional",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/internacional",
+      url: "https://api.allorigins.win/get?url=https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/internacional",
       containerId: "elpais-internacional-container",
       fuente: "El País",
     },
