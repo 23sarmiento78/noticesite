@@ -344,8 +344,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function actualizarPaginacion(containerId) {
-    const startIndex = (currentPage[containerId] - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+    // Definir límites por sección para mejor experiencia visual
+    let maxItems = itemsPerPage;
+    if (
+      containerId.includes("elpais") ||
+      containerId.includes("bbc") ||
+      containerId.includes("lanacion") ||
+      containerId.includes("eltiempo")
+    ) {
+      maxItems = 6; // Mostrar menos para fuentes internacionales
+    }
+
+    const startIndex = (currentPage[containerId] - 1) * maxItems;
+    const endIndex = startIndex + maxItems;
     const itemsToShow = allItems[containerId].slice(startIndex, endIndex);
     mostrarNoticiasEnCartas(itemsToShow, containerId);
 
