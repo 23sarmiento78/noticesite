@@ -370,6 +370,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "El gobierno argentino presenta un paquete de medidas económicas para impulsar el crecimiento...",
           link: "https://lanacion.com.ar/ejemplo1",
           pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=600&fit=crop",
+          },
         },
         {
           title: "Buenos Aires: obras de infraestructura en progreso",
@@ -377,6 +380,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "La ciudad avanza con importantes proyectos de modernización urbana...",
           link: "https://lanacion.com.ar/ejemplo2",
           pubDate: new Date(Date.now() - 1800000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1554188248-986adbb73be4?w=800&h=600&fit=crop",
+          },
         },
       ],
       "El Tiempo Colombia": [
