@@ -627,38 +627,58 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         let response;
-        if (feed.url.startsWith("/rss/")) {
-          // Usar nuestro propio endpoint RSS
-          response = await fetch(feed.url);
-        } else if (feed.url.includes("api.allorigins.win")) {
-          // Para feeds usando allorigins
-          response = await fetch(feed.url);
-        } else {
-          // Para otros feeds, usar allorigins como fallback
-          response = await fetch(
-            `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`,
-          );
-        }
-
-        if (!response.ok) {
-          throw new Error(
-            `Error en la respuesta del servidor: ${response.status}`,
-          );
-        }
-
         let parsedFeed;
-        if (feed.url.startsWith("/rss/")) {
-          // Nuestro endpoint devuelve JSON directamente
-          const data = await response.json();
-          parsedFeed = data;
-        } else if (feed.url.includes("api.allorigins.win")) {
-          // AllOrigins devuelve JSON con contents
-          const data = await response.json();
-          parsedFeed = await parser.parseString(data.contents);
-        } else {
-          // Feeds XML directos
-          const xmlText = await response.text();
-          parsedFeed = await parser.parseString(xmlText);
+        let useProxy = feed.url.includes("api.allorigins.win");
+
+        try {
+          if (feed.url.startsWith("/rss/")) {
+            // Usar nuestro propio endpoint RSS
+            response = await fetch(feed.url);
+            if (!response.ok) {
+              throw new Error(
+                `Error en la respuesta del servidor: ${response.status}`,
+              );
+            }
+            const data = await response.json();
+            parsedFeed = data;
+          } else if (useProxy) {
+            // Para feeds usando allorigins
+            response = await fetch(feed.url);
+            if (!response.ok) {
+              throw new Error(
+                `Error en la respuesta del servidor: ${response.status}`,
+              );
+            }
+            const data = await response.json();
+            parsedFeed = await parser.parseString(data.contents);
+          } else {
+            // Intentar fetch directo primero
+            try {
+              response = await fetch(feed.url);
+              if (!response.ok) {
+                throw new Error(
+                  `Error en la respuesta del servidor: ${response.status}`,
+                );
+              }
+              const xmlText = await response.text();
+              parsedFeed = await parser.parseString(xmlText);
+            } catch (directError) {
+              console.log(
+                `⚠️ Fetch directo falló para ${feed.title}, intentando con proxy CORS...`,
+              );
+              // Fallback a proxy CORS
+              const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`;
+              response = await fetch(proxyUrl);
+              if (!response.ok) {
+                throw new Error(`Error en proxy CORS: ${response.status}`);
+              }
+              const data = await response.json();
+              parsedFeed = await parser.parseString(data.contents);
+              console.log(`✓ Proxy CORS exitoso para ${feed.title}`);
+            }
+          }
+        } catch (fetchError) {
+          throw fetchError;
         }
 
         allItems[feed.containerId] = parsedFeed.items || [];
