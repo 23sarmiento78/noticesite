@@ -234,18 +234,52 @@ document.addEventListener("DOMContentLoaded", function () {
       const imagenNoticia = obtenerImagenNoticia(item);
       const col = document.createElement("div");
       col.classList.add("col");
+      // Buscar fuente del feed
+      let fuente = "Fuente";
+      for (const feed of rssFeeds) {
+        for (const [cid, arr] of Object.entries(allItems)) {
+          if (arr.includes(item)) {
+            const feedMatch = rssFeeds.find((f) => f.containerId === cid);
+            if (feedMatch) {
+              fuente = feedMatch.fuente || feedMatch.title;
+            }
+            break;
+          }
+        }
+      }
+
       col.innerHTML = `
-                <div class="card h-100 shadow-lg" itemscope itemtype="http://schema.org/NewsArticle">
-                    <span class="badge bg-primary mb-2" style="position:absolute;top:10px;left:10px;z-index:2;">${categoria}</span>
-                    <meta itemprop="datePublished" content="${item.pubDate}" />
-                    <img src="${imagenNoticia}" class="card-img-top" alt="${item.title}" loading="lazy" itemprop="image">
-                    <div class="card-body">
-                        <h5 itemprop="headline">${item.title}</h5>
-                        <p class="card-text" itemprop="description">${item.description}</p>
-                        <a href="${item.link}" class="btn btn-primary" itemprop="url" target="_blank">Leer más</a>
-                        <p class="card-text"><small>Publicado: ${new Date(item.pubDate).toLocaleTimeString()}</small></p>
+                <article class="card h-100 featured-news-card" itemscope itemtype="http://schema.org/NewsArticle" style="border: none; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(191,160,70,0.2); transition: all 0.3s ease; background: linear-gradient(145deg, #1a1a1a 0%, #222 100%);">
+                    <div class="position-relative">
+                        <img src="${imagenNoticia}" class="card-img-top featured-image" alt="${item.title}" loading="lazy" itemprop="image" style="height: 250px; object-fit: cover; transition: transform 0.4s ease;">
+                        <div class="overlay-gradient" style="position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); pointer-events: none;"></div>
+                        <span class="badge featured-badge" style="position: absolute; top: 15px; left: 15px; background: linear-gradient(45deg, #bfa046, #d4b564); color: #111; font-weight: 700; padding: 8px 15px; border-radius: 25px; font-size: 0.8rem; box-shadow: 0 4px 15px rgba(191,160,70,0.4);">⭐ DESTACADA</span>
+                        <span class="badge source-badge" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.95); color: #111; font-weight: 600; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem;">${fuente}</span>
+                        <span class="badge category-badge-featured" style="position: absolute; bottom: 15px; left: 15px; background: rgba(191,160,70,0.9); color: #111; font-weight: 600; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem;">${categoria}</span>
                     </div>
-                </div>
+                    <div class="card-body d-flex flex-column" style="padding: 2rem;">
+                        <h4 class="card-title featured-headline" itemprop="headline" style="color: #bfa046; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; font-size: 1.3rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${item.title}</h4>
+                        <p class="card-text featured-description flex-grow-1" itemprop="description" style="color: #ddd; line-height: 1.6; font-size: 1rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 1.5rem;">${item.description}</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <small class="featured-date" style="color: #bfa046; font-weight: 500;">
+                                    <i class="bi bi-calendar"></i> ${new Date(
+                                      item.pubDate,
+                                    ).toLocaleDateString("es-ES", {
+                                      day: "numeric",
+                                      month: "long",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                    })}
+                                </small>
+                            </div>
+                            <a href="${item.link}" class="btn btn-warning w-100" itemprop="url" target="_blank" style="background: linear-gradient(45deg, #bfa046, #d4b564); border: none; color: #111; font-weight: 700; padding: 12px; border-radius: 8px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(191,160,70,0.3);">
+                                <i class="bi bi-newspaper"></i> Leer noticia completa
+                            </a>
+                        </div>
+                    </div>
+                    <meta itemprop="datePublished" content="${item.pubDate}" />
+                </article>
             `;
       container.appendChild(col);
     });
