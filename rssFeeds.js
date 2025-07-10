@@ -369,8 +369,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         allItems[feed.containerId] = parsedFeed.items || [];
         actualizarPaginacion(feed.containerId);
+        console.log(
+          `✓ Cargado feed: ${feed.title} (${parsedFeed.items?.length || 0} noticias)`,
+        );
       } catch (error) {
-        console.error(`Error al obtener noticias de ${feed.title}:`, error);
+        console.error(`✗ Error al obtener noticias de ${feed.title}:`, error);
         // Inicializar como array vacío en caso de error
         allItems[feed.containerId] = [];
       }
