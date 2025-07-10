@@ -78,6 +78,7 @@ app.get("/rss/:url", async (req, res) => {
 // Función para publicar tweets periódicamente
 async function publicarTweetsPeriodicamente() {
   const feeds = [
+    // Clarín Argentina
     {
       title: "Espectáculos",
       url: "https://www.clarin.com/rss/espectaculos/",
@@ -103,52 +104,100 @@ async function publicarTweetsPeriodicamente() {
       hashtags: "#Tecnología #Innovación #Tech",
     },
     {
-      title: "buena-vida",
-      url: "https://www.clarin.com/rss/buena-vida/",
-      containerId: "buena-vida-news-container",
-      hashtags: "#BuenaVida #Salud #Bienestar",
-    },
-    {
-      title: "tecnologia",
-      url: "https://www.clarin.com/rss/tecnologia/",
-      containerId: "categoria4-news-container",
-      hashtags: "#Tecnología #Innovación #Tech",
-    },
-    {
-      title: "politica",
+      title: "Política",
       url: "https://www.clarin.com/rss/politica/",
       containerId: "categoria5-news-container",
       hashtags: "#Política #NoticiasPolíticas #ActualidadPolítica",
     },
     {
-      title: "cultura",
+      title: "Cultura",
       url: "https://www.clarin.com/rss/cultura/",
       containerId: "categoria6-news-container",
       hashtags: "#Cultura #Arte #EventosCulturales",
     },
     {
-      title: "mundo",
+      title: "Internacional",
       url: "https://www.clarin.com/rss/mundo/",
       containerId: "categoria7-news-container",
-      hashtags: "#Mundo #NoticiasMundiales #Internacional",
+      hashtags: "#Internacional #NoticiasMundiales",
     },
     {
       title: "Autos",
       url: "https://www.clarin.com/rss/autos/",
-      containerId: "categoria8--news-container",
+      containerId: "categoria8-news-container",
       hashtags: "#Autos #Vehículos #Motor",
     },
+    // El País España
     {
-      title: "viajes",
-      url: "https://www.clarin.com/rss/viajes/",
-      containerId: "categoria9-news-container",
-      hashtags: "#Viajes #Turismo #Destinos",
+      title: "El País Portada",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+      containerId: "elpais-portada-container",
+      hashtags: "#España #Noticias #ElPaís",
     },
     {
-      title: "internacional",
-      url: "https://www.clarin.com/rss/internacional/",
-      containerId: "categoria10-news-container",
-      hashtags: "#Internacional #NoticiasInternacionales #Mundo",
+      title: "El País Internacional",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/internacional",
+      containerId: "elpais-internacional-container",
+      hashtags: "#Internacional #España #Mundo",
+    },
+    {
+      title: "El País Economía",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/economia",
+      containerId: "elpais-economia-container",
+      hashtags: "#Economía #España #Finanzas",
+    },
+    {
+      title: "El País Deportes",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/deportes",
+      containerId: "elpais-deportes-container",
+      hashtags: "#Deportes #España #Fútbol",
+    },
+    {
+      title: "El País Tecnología",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/tecnologia",
+      containerId: "elpais-tech-container",
+      hashtags: "#Tecnología #España #Innovación",
+    },
+    {
+      title: "El País Cultura",
+      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/cultura",
+      containerId: "elpais-cultura-container",
+      hashtags: "#Cultura #España #Arte",
+    },
+    // La Nación Argentina
+    {
+      title: "La Nación",
+      url: "https://www.lanacion.com.ar/rss",
+      containerId: "lanacion-container",
+      hashtags: "#Argentina #LaNación #Noticias",
+    },
+    // El Tiempo Colombia
+    {
+      title: "El Tiempo Colombia",
+      url: "https://www.eltiempo.com/rss",
+      containerId: "eltiempo-container",
+      hashtags: "#Colombia #ElTiempo #Noticias",
+    },
+    // BBC Mundo
+    {
+      title: "BBC Mundo",
+      url: "https://feeds.bbci.co.uk/mundo/rss.xml",
+      containerId: "bbc-mundo-container",
+      hashtags: "#BBCMundo #Internacional #Noticias",
+    },
+    // CNN en Español
+    {
+      title: "CNN Español",
+      url: "http://cnnespanol.cnn.com/rss/",
+      containerId: "cnn-espanol-container",
+      hashtags: "#CNNEspañol #Internacional #Noticias",
+    },
+    // Buenos Aires Ciudad
+    {
+      title: "Buenos Aires Ciudad",
+      url: "https://www.buenosaires.gob.ar/rss",
+      containerId: "ba-ciudad-container",
+      hashtags: "#BuenosAires #Argentina #Ciudad",
     },
   ];
 
