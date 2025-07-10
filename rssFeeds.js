@@ -452,6 +452,28 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         },
       ],
+      "El País Portada España": [
+        {
+          title: "España: nuevas políticas económicas anunciadas",
+          description:
+            "El gobierno español presenta un paquete de medidas económicas para impulsar el crecimiento...",
+          link: "https://elpais.com/espana/ejemplo1",
+          pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Madrid: obras de infraestructura en progreso",
+          description:
+            "La capital avanza con importantes proyectos de modernización urbana...",
+          link: "https://elpais.com/espana/ejemplo2",
+          pubDate: new Date(Date.now() - 1800000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1554188248-986adbb73be4?w=800&h=600&fit=crop",
+          },
+        },
+      ],
       "El País Internacional": [
         {
           title: "Europa: acuerdos comerciales estratégicos",
@@ -471,6 +493,28 @@ document.addEventListener("DOMContentLoaded", function () {
           pubDate: new Date(Date.now() - 1800000).toISOString(),
           enclosure: {
             url: "https://images.unsplash.com/photo-1526711657229-e7e080ed7aa1?w=800&h=600&fit=crop",
+          },
+        },
+      ],
+      "El País Lo Más Visto": [
+        {
+          title: "Las noticias más leídas de la semana en España",
+          description:
+            "Resumen de los temas que más han captado la atención de los lectores españoles...",
+          link: "https://elpais.com/mas-visto/ejemplo1",
+          pubDate: new Date().toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=600&fit=crop",
+          },
+        },
+        {
+          title: "Trending: política y sociedad en España",
+          description:
+            "Los temas más comentados en redes sociales y medios de comunicación...",
+          link: "https://elpais.com/mas-visto/ejemplo2",
+          pubDate: new Date(Date.now() - 3600000).toISOString(),
+          enclosure: {
+            url: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&h=600&fit=crop",
           },
         },
       ],
