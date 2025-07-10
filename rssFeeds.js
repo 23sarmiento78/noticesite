@@ -50,56 +50,57 @@ document.addEventListener("DOMContentLoaded", function () {
       containerId: "categoria8-news-container",
       fuente: "Clarín",
     },
-    // El País España
+    // BBC Mundo (usando allorigins para evitar CORS)
+    {
+      title: "BBC Mundo",
+      url: "https://api.allorigins.win/get?url=http%3A%2F%2Ffeeds.bbci.co.uk%2Fmundo%2Frss.xml",
+      containerId: "bbc-mundo-container",
+      fuente: "BBC",
+    },
+    // La Nación Argentina usando nuestro endpoint
+    {
+      title: "La Nación Argentina",
+      url: "/rss/http%3A%2F%2Fwww.lanacion.com.ar%2Frss%2Fportada",
+      containerId: "lanacion-container",
+      fuente: "La Nación",
+    },
+    // El Tiempo Colombia usando nuestro endpoint
+    {
+      title: "El Tiempo Colombia",
+      url: "/rss/https%3A%2F%2Fwww.eltiempo.com%2Frss%2Fcolombia.xml",
+      containerId: "eltiempo-container",
+      fuente: "El Tiempo",
+    },
+    // El País España usando allorigins
     {
       title: "El País Internacional",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/internacional",
+      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Finternacional",
       containerId: "elpais-internacional-container",
       fuente: "El País",
     },
     {
       title: "El País Economía",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/economia",
+      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Feconomia",
       containerId: "elpais-economia-container",
       fuente: "El País",
     },
     {
       title: "El País Deportes",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/deportes",
+      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Fdeportes",
       containerId: "elpais-deportes-container",
       fuente: "El País",
     },
     {
       title: "El País Tecnología",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/tecnologia",
+      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Ftecnologia",
       containerId: "elpais-tech-container",
       fuente: "El País",
     },
     {
       title: "El País Cultura",
-      url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/cultura",
+      url: "https://api.allorigins.win/get?url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Fcultura",
       containerId: "elpais-cultura-container",
       fuente: "El País",
-    },
-    // BBC Mundo
-    {
-      title: "BBC Mundo",
-      url: "https://feeds.bbci.co.uk/mundo/rss.xml",
-      containerId: "bbc-mundo-container",
-      fuente: "BBC",
-    },
-    // Alternativas usando nuestro propio endpoint RSS
-    {
-      title: "La Nación Argentina",
-      url: "/rss/https%3A%2F%2Fwww.lanacion.com.ar%2Frss",
-      containerId: "lanacion-container",
-      fuente: "La Nación",
-    },
-    {
-      title: "El Tiempo Colombia",
-      url: "/rss/https%3A%2F%2Fwww.eltiempo.com%2Frss",
-      containerId: "eltiempo-container",
-      fuente: "El Tiempo",
     },
   ];
   const itemsPerPage = 12;
