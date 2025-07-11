@@ -115,6 +115,8 @@ h6 {
   border-radius: var(--border-radius);
   transition: var(--transition);
   font-size: 1rem;
+  position: relative;
+  z-index: 100;
 }
 
 #buscador-global:focus {
@@ -130,6 +132,7 @@ h6 {
   box-shadow: var(--shadow-medium);
   max-height: 400px;
   overflow-y: auto;
+  z-index: 101;
 }
 
 #buscador-resultados .list-group-item {
@@ -1100,7 +1103,7 @@ footer .contact-info {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: 5;
   width: 100%;
   pointer-events: none;
 }
@@ -1185,7 +1188,7 @@ footer .contact-info {
 /* Responsive para categorías flotantes */
 @media (max-width: 768px) {
   .floating-categories {
-    top: 65%;
+    top: 75%;
     padding: 0 1rem;
   }
   
@@ -1209,7 +1212,7 @@ footer .contact-info {
 
 @media (max-width: 576px) {
   .floating-categories {
-    top: 70%;
+    top: 80%;
     padding: 0 0.5rem;
   }
   
@@ -1245,7 +1248,7 @@ footer .contact-info {
 
 @media (max-width: 480px) {
   .floating-categories {
-    top: 75%;
+    top: 85%;
   }
   
   .category-pills {
@@ -1287,6 +1290,32 @@ footer .contact-info {
 /* News Sections */
 .news-section {
   margin-bottom: 3rem;
+}
+
+/* Mejorar espaciado general */
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.main-banner {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+/* Ajustar márgenes del buscador */
+.container.mt-3 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem;
+}
+
+/* Ajustar márgenes de las secciones de noticias */
+.container.mt-4 {
+  margin-top: 2rem !important;
+}
+
+.container.mt-5 {
+  margin-top: 3rem !important;
 }
 
 .subsection-title {
@@ -1851,6 +1880,24 @@ footer .contact-info {
   .weather-card { padding: 1rem; }
   .opinion-item { padding: 1rem; }
   .header-logo { height: 50px; }
+  
+  /* Ajustar márgenes en tablet */
+  .container.mt-3 {
+    margin-top: 1rem !important;
+    margin-bottom: 0.75rem;
+  }
+  
+  .container.mt-4 {
+    margin-top: 1.5rem !important;
+  }
+  
+  .container.mt-5 {
+    margin-top: 2rem !important;
+  }
+  
+  .news-section {
+    margin-bottom: 2rem;
+  }
 }
 @media (max-width: 576px) {
   .breaking-news-header, .breaking-news-content { padding: 0.5rem; }
@@ -1859,4 +1906,31 @@ footer .contact-info {
   .credibility-badge { padding: 1rem 0.5rem; }
   .header-logo { height: 40px; }
   .source-logo { height: 25px; }
+  
+  /* Ajustar márgenes en móvil */
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .container.mt-3 {
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  .container.mt-4 {
+    margin-top: 1rem !important;
+  }
+  
+  .container.mt-5 {
+    margin-top: 1.5rem !important;
+  }
+  
+  .news-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .main-banner {
+    margin-bottom: 1rem;
+  }
 }
