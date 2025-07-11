@@ -21,55 +21,65 @@
     <meta property="og:type" content="website" />
   </head>
   <body>
-    <header class="main-header py-5">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-8">
-            <h1 class="display-3 font-weight-bold mb-2">
-              <i class="bi bi-lightning-fill icono-dorado"></i>HGARUNA LO ÚLTIMO
-            </h1>
-            <p class="lead mb-0">
-              Las noticias más recientes en un solo lugar • Actualizado 24/7
-            </p>
-            <div class="mt-2">
-              <span class="badge bg-primary me-2">Actualidad</span>
-              <span class="badge bg-success me-2">Política</span>
-              <span class="badge bg-info me-2">Internacional</span>
-              <span class="badge bg-warning text-dark">Más noticias</span>
+    <!-- Header moderno y limpio -->
+    <header class="modern-header">
+      <div class="header-top">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <div class="header-info">
+                <div class="date-time">
+                  <i class="bi bi-calendar3"></i>
+                  <span id="fecha-actual"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="header-actions">
+                <div class="credibility-badges">
+                  <span class="credibility-badge">
+                    <i class="bi bi-shield-check"></i>
+                    Verificado
+                  </span>
+                  <span class="credibility-badge">
+                    <i class="bi bi-clock"></i>
+                    24/7
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-md-4 text-md-end">
-            <div class="fecha-hora">
-              <i class="bi bi-clock"></i> <span id="fecha-actual"></span>
+        </div>
+      </div>
+      
+      <div class="header-main">
+        <div class="container">
+          <div class="header-content">
+            <div class="logo-section">
+              <img src="assets/img/logo3.png" alt="HGARUNA NEWS" class="main-logo" />
+              <div class="brand-info">
+                <h1 class="brand-title">
+                  <i class="bi bi-lightning-fill"></i> HGARUNA LO ÚLTIMO
+                </h1>
+                <p class="brand-subtitle">Las noticias más recientes en un solo lugar</p>
+              </div>
             </div>
-            <div class="clima-widget mt-2">
-              <i class="bi bi-geo-alt"></i> Buenos Aires
+            <div class="header-stats">
+              <div class="stat-item">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Fuentes</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Actualizado</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </header>
-    <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="assets/img/logo3.png" style="width: 80px; height: auto" alt="Logo de HGARUNA" />
-          <span>HGARUNA</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Inicio |</a></li>
-            <li class="nav-item"><a class="nav-link" href="deportes.html">Deportes |</a></li>
-            <li class="nav-item"><a class="nav-link" href="tecnologia.html">Tecnología |</a></li>
-            <li class="nav-item"><a class="nav-link" href="cultura.html">Cultura |</a></li>
-            <li class="nav-item"><a class="nav-link" href="autos.html">Motores |</a></li>
-            <li class="nav-item"><a class="nav-link" href="ultimo.html">Lo Último |</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <!-- El menú de navegación se cargará aquí -->
+    <div id="nav-placeholder"></div>
     <!-- Buscador Global debajo de los links -->
     <div class="container mt-2">
       <form class="d-flex position-relative w-100 justify-content-center">
@@ -79,19 +89,48 @@
     </div>
     <div class="container main-banner">
       <div id="carousel-inner-news" style="min-height: 500px"></div>
-      <!-- Botones debajo del carrusel -->
-      <div id="main-carousel-buttons" class="row justify-content-center mt-3">
-        <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a href="autos.html" class="btn btn-dark w-100" style="background-image: url('assets/img/botonauto.jpg'); background-size: cover; background-position: center;">Motores</a>
-        </div>
-        <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a href="tecnologia.html" class="btn btn-dark w-100" style="background-image: url('assets/img/botontecnologia.jpg'); background-size: cover; background-position: center;">Tecnología</a>
-        </div>
-        <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a href="deportes.html" class="btn btn-dark w-100" style="background-image: url('assets/img/botonfutbol.jpg'); background-size: cover; background-position: center;">Fútbol</a>
-        </div>
-        <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a href="cultura.html" class="btn btn-dark w-100" style="background-image: url('assets/img/botoncultura.jpg'); background-size: cover; background-position: center;">Cultura</a>
+    </div>
+
+    <!-- Categorías de Navegación -->
+    <div class="container mt-4">
+      <div class="category-navigation">
+        <div class="category-grid">
+          <a href="index.html" class="category-card category-home">
+            <div class="category-icon">
+              <i class="bi bi-house-fill"></i>
+            </div>
+            <div class="category-info">
+              <h3>Inicio</h3>
+              <p>Noticias generales y destacadas</p>
+            </div>
+          </a>
+          <a href="deportes.html" class="category-card category-deportes">
+            <div class="category-icon">
+              <i class="bi bi-trophy-fill"></i>
+            </div>
+            <div class="category-info">
+              <h3>Deportes</h3>
+              <p>Fútbol, NBA, Fórmula 1 y más</p>
+            </div>
+          </a>
+          <a href="tecnologia.html" class="category-card category-tecnologia">
+            <div class="category-icon">
+              <i class="bi bi-cpu-fill"></i>
+            </div>
+            <div class="category-info">
+              <h3>Tecnología</h3>
+              <p>Innovación, gadgets y startups</p>
+            </div>
+          </a>
+          <a href="cultura.html" class="category-card category-cultura">
+            <div class="category-icon">
+              <i class="bi bi-book-half"></i>
+            </div>
+            <div class="category-info">
+              <h3>Cultura</h3>
+              <p>Cine, música y arte</p>
+            </div>
+          </a>
         </div>
       </div>
     </div>

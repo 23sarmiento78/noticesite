@@ -63,14 +63,14 @@ h6 {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.date-time, .weather-mini {
+.date-time {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-weight: 500;
 }
 
-.date-time i, .weather-mini i {
+.date-time i {
   color: var(--accent-color);
   font-size: 1rem;
 }
@@ -652,10 +652,7 @@ footer a:hover {
   font-size: 1rem;
 }
 
-.clima-widget {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
+
 
 /* Estilos específicos del footer */
 footer .footer-col img {
@@ -1511,65 +1508,7 @@ footer .contact-info {
   50% { opacity: 0.5; }
 }
 
-/* Weather Widget */
-.weather-card {
-  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  color: white;
-  box-shadow: var(--shadow-medium);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
 
-.weather-mini {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-}
-.weather-main {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-.weather-icon img {
-  width: 60px;
-  height: 60px;
-  filter: brightness(0) invert(1);
-}
-.weather-info { flex: 1; }
-.weather-temp {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-.weather-desc {
-  font-size: 1rem;
-  opacity: 0.9;
-  margin-bottom: 0.5rem;
-}
-.weather-location {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-.weather-details {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.weather-detail {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  opacity: 0.9;
-}
 
 /* Trending Topics */
 .trending-list {
@@ -1980,7 +1919,6 @@ footer .contact-info {
   }
   
   .breaking-news-header, .breaking-news-content { padding: 0.75rem; }
-  .weather-card { padding: 1rem; }
   .opinion-item { padding: 1rem; }
   .header-logo { height: 50px; }
   
@@ -2061,7 +1999,6 @@ footer .contact-info {
   }
   
   .breaking-news-header, .breaking-news-content { padding: 0.5rem; }
-  .weather-card { padding: 0.5rem; }
   .opinion-item { padding: 0.5rem; }
   .credibility-badge { padding: 1rem 0.5rem; }
   .header-logo { height: 40px; }

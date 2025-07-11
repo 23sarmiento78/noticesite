@@ -60,11 +60,6 @@
                   <i class="bi bi-calendar3"></i>
                   <span id="fecha-actual"></span>
                 </div>
-                <div class="weather-mini" id="weather-widget">
-                  <i class="bi bi-geo-alt"></i>
-                  <span id="clima-ciudad">Buenos Aires</span>
-                  <span id="clima-temp">--°C</span>
-                </div>
               </div>
             </div>
             <div class="col-md-6">
@@ -318,7 +313,6 @@
     <script src="assets/js/banner-manager.js"></script>
     <script src="assets/js/rss-manager.js"></script>
     <script src="assets/js/search-manager.js"></script>
-    <script src="assets/js/weather-manager.js"></script>
     <script src="assets/js/breaking-news-manager.js"></script>
     <script src="assets/js/trending-manager.js"></script>
     <script src="assets/js/seo-optimizer.js"></script>
@@ -333,7 +327,6 @@
         console.log('BannerManager:', typeof BannerManager);
         console.log('RSSManager:', typeof RSSManager);
         console.log('SearchManager:', typeof SearchManager);
-        console.log('WeatherManager:', typeof WeatherManager);
         console.log('BreakingNewsManager:', typeof BreakingNewsManager);
         console.log('TrendingManager:', typeof TrendingManager);
         
@@ -385,35 +378,28 @@
               await new Promise(resolve => setTimeout(resolve, 300));
             }
             
-            // 4. Weather Manager
-            if (typeof WeatherManager !== 'undefined') {
-              console.log('🌤️ Iniciando WeatherManager...');
-              new WeatherManager();
-              await new Promise(resolve => setTimeout(resolve, 300));
-            }
-            
-            // 5. Breaking News Manager
+            // 4. Breaking News Manager
             if (typeof BreakingNewsManager !== 'undefined') {
               console.log('⚡ Iniciando BreakingNewsManager...');
               new BreakingNewsManager();
               await new Promise(resolve => setTimeout(resolve, 300));
             }
             
-            // 6. Trending Manager
+            // 5. Trending Manager
             if (typeof TrendingManager !== 'undefined') {
               console.log('📈 Iniciando TrendingManager...');
               new TrendingManager();
               await new Promise(resolve => setTimeout(resolve, 300));
             }
             
-            // 8. SEO Optimizer
+            // 6. SEO Optimizer
             if (typeof SEOOptimizer !== 'undefined') {
               console.log('🔧 Iniciando SEOOptimizer...');
               new SEOOptimizer();
               await new Promise(resolve => setTimeout(resolve, 200));
             }
             
-            // 9. Analytics Manager
+            // 7. Analytics Manager
             if (typeof AnalyticsManager !== 'undefined') {
               console.log('📊 Iniciando AnalyticsManager...');
               new AnalyticsManager();
