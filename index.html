@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noticias - Todo en Uno</title>
+    <title>HGARUNA NEWS - Tu Periódico Digital</title>
     <meta
       name="description"
-      content="Mantente informado con las últimas noticias"
+      content="HGARUNA NEWS - Tu fuente confiable de noticias internacionales. Últimas noticias de deportes, tecnología, cultura y más. Actualizado 24/7"
     />
     <meta
       name="keywords"
-      content="noticias, deportes, tecnología, cultura, fútbol, autos, cine"
+      content="noticias, deportes, tecnología, cultura, fútbol, autos, cine, periódico digital, HGARUNA"
     />
-    <meta name="author" content="HGARUNA" />
+    <meta name="author" content="HGARUNA NEWS" />
     <link rel="canonical" href="https://es.hgaruna.org/index.html" />
     <link rel="icon" href="assets/img/logo3.png" type="image/png" />
     <link
@@ -31,10 +31,10 @@
     />
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Noticias - Todo en Uno" />
+    <meta property="og:title" content="HGARUNA NEWS - Tu Periódico Digital" />
     <meta
       property="og:description"
-      content="Mantente informado con las últimas noticias de todos los temas, incluyendo deportes, tecnología, cultura y más."
+      content="Tu fuente confiable de noticias internacionales. Últimas noticias de deportes, tecnología, cultura y más. Actualizado 24/7"
     />
     <meta
       property="og:image"
@@ -49,17 +49,23 @@
   </head>
 
   <body>
-    <header class="main-header py-5">
+    <!-- Header profesional de periódico -->
+    <header class="main-header py-4">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-8">
-            <h1 class="display-3 font-weight-bold mb-2">
-              <i class="bi bi-newspaper icono-dorado"></i>HGARUNA NEWS
-            </h1>
-            <p class="lead mb-0">
-              Tu fuente confiable de noticias internacionales • Actualizado 24/7
-            </p>
-            <div class="mt-2">
+            <div class="d-flex align-items-center mb-2">
+              <img src="assets/img/logo3.png" alt="HGARUNA NEWS" class="header-logo me-3" />
+              <div>
+                <h1 class="display-4 font-weight-bold mb-1">
+                  HGARUNA NEWS
+                </h1>
+                <p class="lead mb-0">
+                  Tu Periódico Digital • Información Confiable • Actualizado 24/7
+                </p>
+              </div>
+            </div>
+            <div class="header-badges">
               <span class="badge bg-primary me-2">España</span>
               <span class="badge bg-success me-2">Argentina</span>
               <span class="badge bg-info me-2">Colombia</span>
@@ -67,13 +73,37 @@
             </div>
           </div>
           <div class="col-md-4 text-md-end">
-            <div class="fecha-hora">
+            <div class="fecha-hora mb-2">
               <i class="bi bi-clock"></i> <span id="fecha-actual"></span>
             </div>
-            <div class="clima-widget mt-2">
-              <i class="bi bi-geo-alt"></i> Buenos Aires
+            <div class="clima-widget" id="clima-widget">
+              <i class="bi bi-geo-alt"></i> <span id="clima-ciudad">Buenos Aires</span>
+              <span id="clima-temp">--°C</span>
             </div>
           </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Credibilidad Periodística Banner -->
+    <div class="credibility-banner">
+      <div class="container">
+        <div class="credibility-content">
+          <div class="credibility-item">
+            <i class="bi bi-shield-check text-success"></i>
+            <span>Información Verificada</span>
+          </div>
+          <div class="credibility-item">
+            <i class="bi bi-clock text-primary"></i>
+            <span>Actualizado 24/7</span>
+          </div>
+          <div class="credibility-item">
+            <i class="bi bi-globe text-info"></i>
+            <span>5+ Fuentes Confiables</span>
+          </div>
+        </div>
+      </div>
+    </div>
         </div>
       </div>
     </header>
@@ -81,14 +111,14 @@
     <!-- El menú de navegación se cargará aquí -->
     <div id="nav-placeholder"></div>
 
-    <!-- Buscador Global debajo de los links -->
-    <div class="container mt-2">
+    <!-- Buscador Global -->
+    <div class="container mt-3">
       <form class="d-flex position-relative w-100 justify-content-center">
         <input
           id="buscador-global"
           type="text"
-          class="form-control form-control-sm w-50"
-          placeholder="Buscar noticias..."
+          class="form-control form-control-lg w-50"
+          placeholder="🔍 Buscar noticias, temas, fuentes..."
         />
         <div
           id="buscador-resultados"
@@ -98,298 +128,260 @@
       </form>
     </div>
 
+    <!-- Banner Principal -->
     <div class="container main-banner">
       <div id="carousel-inner-news" style="min-height: 500px"></div>
     </div>
-    <!-- Noticias Destacadas -->
-    <div class="container mt-5">
-      <h2 class="section-title text-center mb-4">Noticias Destacadas</h2>
-      <div id="destacadas-news-row" class="row row-cols-1 row-cols-md-3 g-4">
-        <!-- Las noticias destacadas se insertarán aquí por JS -->
-      </div>
-    </div>
 
-    <!-- Sección El País España -->
-    <div class="container mt-5">
+    <!-- Sección de Últimas Noticias en Tiempo Real -->
+    <div class="container mt-4">
       <div class="row">
         <div class="col-12">
-          <h2 class="section-title text-center mb-4">
-            <img
-              src="https://ep01.epimg.net/iconos/v1.x/v1.0/promos/elpais_marca_corporativa.png"
-              alt="El País"
-              style="height: 30px; margin-right: 10px"
-            />
-            El País España
-          </h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Portada España</h3>
-          <div id="elpais-portada-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Internacional</h3>
-          <div id="elpais-internacional-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Lo Más Visto</h3>
-          <div id="elpais-populares-container">
-            <div class="row row-cols-1 g-3"></div>
+          <div class="breaking-news-container">
+            <div class="breaking-news-header">
+              <i class="bi bi-lightning-charge-fill text-danger"></i>
+              <span class="breaking-text">ÚLTIMAS NOTICIAS</span>
+              <div class="breaking-indicator"></div>
+            </div>
+            <div class="breaking-news-content" id="breaking-news-content">
+              <!-- Las últimas noticias se cargarán aquí -->
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Sección BBC -->
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="section-title text-center mb-4">
-            <i class="bi bi-globe-americas"></i> BBC News
-          </h2>
-        </div>
+    <!-- Trending Topics Flotante -->
+    <div class="trending-float">
+      <div class="trending-float-toggle" id="trending-toggle">
+        <i class="bi bi-trending-up"></i>
+        <span>Trending</span>
       </div>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">World News</h3>
-          <div id="bbc-mundo-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
+      <div class="trending-float-content" id="trending-float-content">
+        <div class="trending-float-header">
+          <h4><i class="bi bi-trending-up text-primary"></i> Trending Topics</h4>
+          <button class="trending-float-close" id="trending-close">
+            <i class="bi bi-x"></i>
+          </button>
         </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Technology</h3>
-          <div id="bbc-tech-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Sport</h3>
-          <div id="bbc-sport-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
+        <div class="trending-topics" id="trending-topics">
+          <!-- Los trending topics se cargarán aquí -->
         </div>
       </div>
     </div>
 
-    <!-- Sección Clarín Argentina -->
+    <!-- Contenido Principal del Periódico -->
     <div class="container mt-5">
       <div class="row">
         <div class="col-12">
-          <h2 class="section-title text-center mb-4">
-            <i class="bi bi-flag"></i> Clarín Argentina
-          </h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <h3 class="subsection-title">Política</h3>
-          <div id="categoria5-news-container">
-            <div class="row row-cols-1 row-cols-md-2 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <h3 class="subsection-title">Internacional</h3>
-          <div id="categoria7-news-container">
-            <div class="row row-cols-1 row-cols-md-2 g-3"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Tecnología</h3>
-          <div id="tecnologia-news-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Cultura</h3>
-          <div id="categoria6-news-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Autos</h3>
-          <div id="categoria8-news-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
+          <!-- Noticias Destacadas -->
+          <section class="news-section">
+            <h2 class="section-title">
+              <i class="bi bi-star-fill text-warning"></i>
+              Noticias Destacadas
+            </h2>
+            <div id="destacadas-news-row" class="row row-cols-1 row-cols-md-3 g-4">
+              <!-- Las noticias destacadas se insertarán aquí por JS -->
+            </div>
+          </section>
+
+          <!-- Sección El País España -->
+          <section class="news-section mt-5">
+            <h2 class="section-title">
+              <img
+                src="https://ep01.epimg.net/iconos/v1.x/v1.0/promos/elpais_marca_corporativa.png"
+                alt="El País"
+                class="source-logo"
+              />
+              El País España
+            </h2>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <h3 class="subsection-title">Portada España</h3>
+                <div id="elpais-portada-container">
+                  <div class="row row-cols-1 g-3"></div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <h3 class="subsection-title">Internacional</h3>
+                <div id="elpais-internacional-container">
+                  <div class="row row-cols-1 g-3"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Sección BBC -->
+          <section class="news-section mt-5">
+            <h2 class="section-title">
+              <i class="bi bi-globe-americas"></i> BBC News
+            </h2>
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <h3 class="subsection-title">World News</h3>
+                <div id="bbc-mundo-container">
+                  <div class="row row-cols-1 g-3"></div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <h3 class="subsection-title">Technology</h3>
+                <div id="bbc-tech-container">
+                  <div class="row row-cols-1 g-3"></div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <h3 class="subsection-title">Sport</h3>
+                <div id="bbc-sport-container">
+                  <div class="row row-cols-1 g-3"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Sección Clarín Argentina -->
+          <section class="news-section mt-5">
+            <h2 class="section-title">
+              <i class="bi bi-flag"></i> Clarín Argentina
+            </h2>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <h3 class="subsection-title">Política</h3>
+                <div id="categoria5-news-container">
+                  <div class="row row-cols-1 row-cols-md-2 g-3"></div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <h3 class="subsection-title">Internacional</h3>
+                <div id="categoria7-news-container">
+                  <div class="row row-cols-1 row-cols-md-2 g-3"></div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
 
-    <!-- Sección La Nación Argentina -->
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="section-title text-center mb-4">
-            <i class="bi bi-newspaper"></i> La Nación Argentina
-          </h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div id="lanacion-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sección El Tiempo Colombia -->
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="section-title text-center mb-4">
-            <i class="bi bi-geo-alt"></i> El Tiempo Colombia
-          </h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Colombia General</h3>
-          <div id="eltiempo-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Bogotá</h3>
-          <div id="eltiempo-bogota-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Medellín</h3>
-          <div id="eltiempo-medellin-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Cali</h3>
-          <div id="eltiempo-cali-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Barranquilla</h3>
-          <div id="eltiempo-barranquilla-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Mundo</h3>
-          <div id="eltiempo-mundo-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Latinoamérica</h3>
-          <div id="eltiempo-latinoamerica-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Tecnósfera</h3>
-          <div id="eltiempo-tecnosfera-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="subsection-title">Economía</h3>
-          <div id="eltiempo-economia-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <h3 class="subsection-title">Cultura</h3>
-          <div id="eltiempo-cultura-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <h3 class="subsection-title">Entretenimiento</h3>
-          <div id="eltiempo-entretenimiento-container">
-            <div class="row row-cols-1 g-3"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Banner de servicio de creación de sitios web -->
-    <section class="banner-servicio">
-      <div class="banner-servicio-decoration-1"></div>
-      <div class="banner-servicio-decoration-2"></div>
-      <div class="banner-servicio-content">
-        <h2>
-          <i class="bi bi-rocket-takeoff"></i>
-          ¿Necesitas tu propio sitio web?
-        </h2>
-        <p>
-          Creamos sitios web profesionales y personalizados para tu negocio.<br />
-          <strong>Diseño moderno • Responsive • SEO Optimizado</strong><br />
-          Visita <a href="https://service.hgaruna.org" target="_blank">service.hgaruna.org</a>
-        </p>
-        <div class="row justify-content-center mb-3">
-          <div class="col-md-3 col-6 text-center mb-2">
-            <i class="bi bi-palette"></i>
-            <p>Diseño Único</p>
-          </div>
-          <div class="col-md-3 col-6 text-center mb-2">
-            <i class="bi bi-phone"></i>
-            <p>Responsive</p>
-          </div>
-          <div class="col-md-3 col-6 text-center mb-2">
-            <i class="bi bi-speedometer2"></i>
-            <p>Optimizado</p>
-          </div>
-          <div class="col-md-3 col-6 text-center mb-2">
-            <i class="bi bi-headset"></i>
-            <p>Soporte 24/7</p>
-          </div>
-        </div>
-        <a
-          href="https://service.hgaruna.org"
-          target="_blank"
-          class="btn btn-lg btn-primary"
-        >
-          <i class="bi bi-arrow-right-circle-fill"></i>
-          Solicitar Presupuesto Gratis
-        </a>
-      </div>
-    </section>
-
-    <!-- El footer se cargará aquí -->
+    <!-- Footer se cargará aquí -->
     <div id="footer-placeholder"></div>
 
-    <script id="mcjs">
-      !(function (c, h, i, m, p) {
-        ((m = c.createElement(h)),
-          (p = c.getElementsByTagName(h)[0]),
-          (m.async = 1),
-          (m.src = i),
-          p.parentNode.insertBefore(m, p));
-      })(
-        document,
-        "script",
-        "https://chimpstatic.com/mcjs-connected/js/users/ed049ded8509e4d6db0392a08/08fdfccfe4f042b0cea044918.js",
-      );
-    </script>
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Cargador de componentes -->
     <script src="assets/js/component-loader.js"></script>
-    <!-- Sistema RSS Real -->
     <script src="assets/js/rss-config.js"></script>
-    <script src="assets/js/rss-manager.js"></script>
     <script src="assets/js/banner-manager.js"></script>
+    <script src="assets/js/rss-manager.js"></script>
     <script src="assets/js/search-manager.js"></script>
+    <script src="assets/js/weather-manager.js"></script>
+    <script src="assets/js/breaking-news-manager.js"></script>
+    <script src="assets/js/trending-manager.js"></script>
+    <script src="assets/js/seo-optimizer.js"></script>
+    <script src="assets/js/analytics-manager.js"></script>
+
+    <script>
+      // Inicialización de managers después de que se carguen los componentes
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 DOM cargado, iniciando managers...');
+        
+        // Verificar que los managers estén disponibles
+        console.log('BannerManager:', typeof BannerManager);
+        console.log('RSSManager:', typeof RSSManager);
+        console.log('SearchManager:', typeof SearchManager);
+        console.log('WeatherManager:', typeof WeatherManager);
+        console.log('BreakingNewsManager:', typeof BreakingNewsManager);
+        console.log('TrendingManager:', typeof TrendingManager);
+        
+        // Configurar Trending Topics Flotante
+        const trendingToggle = document.getElementById('trending-toggle');
+        const trendingContent = document.getElementById('trending-float-content');
+        const trendingClose = document.getElementById('trending-close');
+        
+        if (trendingToggle && trendingContent) {
+          trendingToggle.addEventListener('click', () => {
+            trendingContent.classList.toggle('active');
+          });
+          
+          if (trendingClose) {
+            trendingClose.addEventListener('click', () => {
+              trendingContent.classList.remove('active');
+            });
+          }
+          
+          // Cerrar al hacer clic fuera
+          document.addEventListener('click', (e) => {
+            if (!trendingToggle.contains(e.target) && !trendingContent.contains(e.target)) {
+              trendingContent.classList.remove('active');
+            }
+          });
+        }
+        
+        // Inicializar managers uno por uno con delays
+        const initManagers = async () => {
+          try {
+            // 1. Banner Manager (primero)
+            if (typeof BannerManager !== 'undefined') {
+              console.log('🎬 Iniciando BannerManager...');
+              new BannerManager();
+              await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            // 2. RSS Manager (segundo)
+            if (typeof RSSManager !== 'undefined') {
+              console.log('📰 Iniciando RSSManager...');
+              new RSSManager();
+              await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            // 3. Search Manager
+            if (typeof SearchManager !== 'undefined') {
+              console.log('🔍 Iniciando SearchManager...');
+              new SearchManager();
+              await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            
+            // 4. Weather Manager
+            if (typeof WeatherManager !== 'undefined') {
+              console.log('🌤️ Iniciando WeatherManager...');
+              new WeatherManager();
+              await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            
+            // 5. Breaking News Manager
+            if (typeof BreakingNewsManager !== 'undefined') {
+              console.log('⚡ Iniciando BreakingNewsManager...');
+              new BreakingNewsManager();
+              await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            
+            // 6. Trending Manager
+            if (typeof TrendingManager !== 'undefined') {
+              console.log('📈 Iniciando TrendingManager...');
+              new TrendingManager();
+              await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            
+            // 8. SEO Optimizer
+            if (typeof SEOOptimizer !== 'undefined') {
+              console.log('🔧 Iniciando SEOOptimizer...');
+              new SEOOptimizer();
+              await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            // 9. Analytics Manager
+            if (typeof AnalyticsManager !== 'undefined') {
+              console.log('📊 Iniciando AnalyticsManager...');
+              new AnalyticsManager();
+            }
+            
+            console.log('✅ Todos los managers inicializados correctamente');
+          } catch (error) {
+            console.error('❌ Error inicializando managers:', error);
+          }
+        };
+        
+        // Iniciar después de un delay para asegurar que los componentes se carguen
+        setTimeout(initManagers, 1500);
+      });
+    </script>
   </body>
 </html>
