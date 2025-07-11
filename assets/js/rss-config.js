@@ -119,6 +119,14 @@ const RSS_CONFIG = {
       fuente: 'Clarín',
       categoria: 'Cine'
     },
+    {
+      id: 'clarin-tecnologia-alt',
+      title: 'Clarín Tecnología (Alternativo)',
+      url: 'https://www.clarin.com/rss/tecnologia/',
+      containerId: 'categoria4-news-container',
+      fuente: 'Clarín',
+      categoria: 'Tecnología'
+    },
 
     // La Nación Colombia
     {
@@ -218,6 +226,14 @@ const RSS_CONFIG = {
       containerId: 'eltiempo-entretenimiento-container',
       fuente: 'El Tiempo',
       categoria: 'Entretenimiento'
+    },
+    {
+      id: 'clarin-viajes',
+      title: 'Clarín Viajes',
+      url: 'https://www.clarin.com/rss/viajes/',
+      containerId: 'categoria9-news-container',
+      fuente: 'Clarín',
+      categoria: 'Viajes'
     }
   ],
 
