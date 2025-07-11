@@ -49,61 +49,63 @@
   </head>
 
   <body>
-    <!-- Header profesional de periódico -->
-    <header class="main-header py-4">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-8">
-            <div class="d-flex align-items-center mb-2">
-              <img src="assets/img/logo3.png" alt="HGARUNA NEWS" class="header-logo me-3" />
-              <div>
-                <h1 class="display-4 font-weight-bold mb-1">
-                  HGARUNA NEWS
-                </h1>
-                <p class="lead mb-0">
-                  Tu Periódico Digital • Información Confiable • Actualizado 24/7
-                </p>
+    <!-- Header moderno y limpio -->
+    <header class="modern-header">
+      <div class="header-top">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <div class="header-info">
+                <div class="date-time">
+                  <i class="bi bi-calendar3"></i>
+                  <span id="fecha-actual"></span>
+                </div>
+                <div class="weather-mini" id="weather-widget">
+                  <i class="bi bi-geo-alt"></i>
+                  <span id="clima-ciudad">Buenos Aires</span>
+                  <span id="clima-temp">--°C</span>
+                </div>
               </div>
             </div>
-            <div class="header-badges">
-              <span class="badge bg-primary me-2">España</span>
-              <span class="badge bg-success me-2">Argentina</span>
-              <span class="badge bg-info me-2">Colombia</span>
-              <span class="badge bg-warning text-dark">Internacional</span>
-            </div>
-          </div>
-          <div class="col-md-4 text-md-end">
-            <div class="fecha-hora mb-2">
-              <i class="bi bi-clock"></i> <span id="fecha-actual"></span>
-            </div>
-            <div class="clima-widget" id="clima-widget">
-              <i class="bi bi-geo-alt"></i> <span id="clima-ciudad">Buenos Aires</span>
-              <span id="clima-temp">--°C</span>
+            <div class="col-md-6">
+              <div class="header-actions">
+                <div class="credibility-badges">
+                  <span class="credibility-badge">
+                    <i class="bi bi-shield-check"></i>
+                    Verificado
+                  </span>
+                  <span class="credibility-badge">
+                    <i class="bi bi-clock"></i>
+                    24/7
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </header>
-
-    <!-- Credibilidad Periodística Banner -->
-    <div class="credibility-banner">
-      <div class="container">
-        <div class="credibility-content">
-          <div class="credibility-item">
-            <i class="bi bi-shield-check text-success"></i>
-            <span>Información Verificada</span>
+      
+      <div class="header-main">
+        <div class="container">
+          <div class="header-content">
+            <div class="logo-section">
+              <img src="assets/img/logo3.png" alt="HGARUNA NEWS" class="main-logo" />
+              <div class="brand-info">
+                <h1 class="brand-title">HGARUNA NEWS</h1>
+                <p class="brand-subtitle">Tu Periódico Digital</p>
+              </div>
+            </div>
+            <div class="header-stats">
+              <div class="stat-item">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Fuentes</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Actualizado</span>
+              </div>
+            </div>
           </div>
-          <div class="credibility-item">
-            <i class="bi bi-clock text-primary"></i>
-            <span>Actualizado 24/7</span>
-          </div>
-          <div class="credibility-item">
-            <i class="bi bi-globe text-info"></i>
-            <span>5+ Fuentes Confiables</span>
-          </div>
-        </div>
-      </div>
-    </div>
         </div>
       </div>
     </header>
@@ -131,6 +133,50 @@
     <!-- Banner Principal -->
     <div class="container main-banner">
       <div id="carousel-inner-news" style="min-height: 500px"></div>
+    </div>
+
+    <!-- Categorías de Navegación -->
+    <div class="container mt-4">
+      <div class="category-navigation">
+        <div class="category-grid">
+          <a href="deportes.html" class="category-card category-deportes">
+            <div class="category-icon">
+              <i class="bi bi-trophy-fill"></i>
+            </div>
+            <div class="category-info">
+              <h3>Deportes</h3>
+              <p>Fútbol, NBA, Fórmula 1 y más</p>
+            </div>
+          </a>
+          <a href="tecnologia.html" class="category-card category-tecnologia">
+            <div class="category-icon">
+              <i class="bi bi-cpu-fill"></i>
+            </div>
+            <div class="category-info">
+              <h3>Tecnología</h3>
+              <p>Innovación, gadgets y startups</p>
+            </div>
+          </a>
+          <a href="cultura.html" class="category-card category-cultura">
+            <div class="category-icon">
+              <i class="bi bi-book-half"></i>
+            </div>
+            <div class="category-info">
+              <h3>Cultura</h3>
+              <p>Cine, música y arte</p>
+            </div>
+          </a>
+          <a href="autos.html" class="category-card category-autos">
+            <div class="category-icon">
+              <i class="bi bi-gear-fill"></i>
+            </div>
+            <div class="category-info">
+              <h3>Motores</h3>
+              <p>Autos, motos y competición</p>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- Sección de Últimas Noticias en Tiempo Real -->

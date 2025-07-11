@@ -491,9 +491,6 @@ class BannerManager {
     carousel.innerHTML += controls;
     container.appendChild(carousel);
 
-    // Agregar categorías flotantes al banner
-    this.addFloatingCategories(container);
-
     // Inicializar el carrusel de Bootstrap
     if (typeof bootstrap !== 'undefined') {
       new bootstrap.Carousel(carousel, {
@@ -527,34 +524,7 @@ class BannerManager {
     // El autoplay ahora se maneja por Bootstrap Carousel
   }
 
-  addFloatingCategories(container) {
-    const floatingCategories = document.createElement('div');
-    floatingCategories.className = 'floating-categories';
-    floatingCategories.innerHTML = `
-      <div class="container">
-        <div class="category-pills">
-          <a href="deportes.html" class="category-pill category-pill-deportes">
-            <i class="bi bi-trophy-fill"></i>
-            <span>Deportes</span>
-          </a>
-          <a href="tecnologia.html" class="category-pill category-pill-tecnologia">
-            <i class="bi bi-cpu-fill"></i>
-            <span>Tecnología</span>
-          </a>
-          <a href="cultura.html" class="category-pill category-pill-cultura">
-            <i class="bi bi-book-half"></i>
-            <span>Cultura</span>
-          </a>
-          <a href="autos.html" class="category-pill category-pill-autos">
-            <i class="bi bi-gear-fill"></i>
-            <span>Motores</span>
-          </a>
-        </div>
-      </div>
-    `;
-    
-    container.appendChild(floatingCategories);
-  }
+
 
   setupControls() {
     // Los controles ahora se manejan por Bootstrap Carousel
