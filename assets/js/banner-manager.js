@@ -9,19 +9,30 @@ class BannerManager {
 
   async init() {
     console.log('🎬 Iniciando Banner Manager...');
-    
+    this.renderPlaceholderBanner();
     try {
       // Intentar cargar contenido real del banner
       await this.loadBannerContent();
       this.startAutoPlay();
       this.setupControls();
-      
     } catch (error) {
       console.error('Error en Banner Manager:', error);
       this.loadFallbackBanner();
       this.startAutoPlay();
       this.setupControls();
     }
+  }
+
+  renderPlaceholderBanner() {
+    const container = document.getElementById('carousel-inner-news');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="banner-skeleton">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>`;
   }
 
   async loadBannerContent() {
@@ -199,18 +210,13 @@ class BannerManager {
       
       carouselItem.innerHTML = `
         <div class="position-relative">
-          <img src="${slide.imageUrl}" class="d-block w-100" alt="${slide.title}" 
-               style="height: 500px; object-fit: cover; filter: brightness(0.7);">
-          <div class="carousel-caption d-none d-md-block" 
-               style="background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #bfa046; font-weight: 700; margin-bottom: 15px;">${slide.title}</h2>
-            <p style="color: #fff; font-size: 1.1rem; margin-bottom: 20px;">${slide.description}</p>
+          <img src="${slide.imageUrl}" class="d-block w-100" alt="${slide.title}">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>${slide.title}</h2>
+            <p>${slide.description}</p>
             <div class="d-flex justify-content-between align-items-center">
-              <small style="color: #ccc;">
-                <i class="bi bi-newspaper"></i> ${slide.source}
-              </small>
-              <a href="${slide.link}" class="btn btn-warning" target="_blank" 
-                 style="background: #bfa046; border: none; font-weight: 600;">
+              <small><i class="bi bi-newspaper"></i> ${slide.source}</small>
+              <a href="${slide.link}" class="btn btn-primary" target="_blank">
                 <i class="bi bi-arrow-right"></i> Leer más
               </a>
             </div>

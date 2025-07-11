@@ -9,6 +9,7 @@ class RSSManager {
 
   async init() {
     // Cargar el parser RSS dinámicamente
+    this.renderAllPlaceholders();
     await this.loadRSSParser();
     this.startLoading();
   }
@@ -274,27 +275,84 @@ class RSSManager {
   }
 
   async startLoading() {
-    console.log('🔄 Iniciando carga de noticias...');
-    
-    // Cargar feeds secuencialmente para evitar sobrecarga
+    console.log('🔄 Iniciando carga de noticias en paralelo...');
     const feeds = RSS_CONFIG.feeds;
-    
-    for (let i = 0; i < feeds.length; i++) {
-      const feed = feeds[i];
-      try {
-        console.log(`🔄 Cargando ${feed.title} (${i + 1}/${feeds.length})`);
-        const result = await this.fetchFeed(feed);
-        this.renderFeed(result);
-        
-        // Pequeña pausa entre feeds
-        await this.delay(500);
-      } catch (error) {
-        console.error(`Error procesando ${feed.title}:`, error);
-      }
-    }
-    
+
+    const feedPromises = feeds.map(feed =>
+      this.fetchFeed(feed)
+        .then(result => {
+          this.renderFeed(result);
+        })
+        .catch(error => {
+          console.error(`❌ Falló la carga para ${feed.title}:`, error);
+          this.renderError(feed.containerId);
+        })
+    );
+
+    // Esperar a que todos los feeds terminen (exitosos o fallidos)
+    await Promise.allSettled(feedPromises);
+
     // Cargar noticias destacadas después de que todos los feeds estén listos
     this.loadDestacadas();
+  }
+
+  renderAllPlaceholders() {
+    const feeds = RSS_CONFIG.feeds;
+    feeds.forEach(feed => {
+      const container = document.getElementById(feed.containerId);
+      if (container) {
+        const rowContainer = container.querySelector('.row');
+        if (rowContainer) {
+          rowContainer.innerHTML = this.getPlaceholderHTML(6); // Mostrar 6 placeholders
+        }
+      }
+    });
+  }
+
+  getPlaceholderHTML(count = 1) {
+    let placeholderHTML = '';
+    for (let i = 0; i < count; i++) {
+      placeholderHTML += `
+        <div class="col">
+          <div class="card h-100 news-card is-loading">
+            <div class="skeleton card-img-top" style="height: 200px;"></div>
+            <div class="card-body">
+              <div class="skeleton" style="height: 24px; width: 80%; margin-bottom: 1rem;"></div>
+              <div class="skeleton" style="height: 16px; width: 100%; margin-bottom: 0.5rem;"></div>
+              <div class="skeleton" style="height: 16px; width: 90%; margin-bottom: 0.5rem;"></div>
+              <div class="skeleton" style="height: 16px; width: 60%; margin-bottom: 1rem;"></div>
+              <div class="skeleton" style="height: 38px; width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    return placeholderHTML;
+  }
+
+  renderError(containerId) {
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `<div class="col-12"><div class="alert alert-danger">No se pudieron cargar las noticias. Intente de nuevo más tarde.</div></div>`;
+    }
+  }
+
+  getBadgeClasses(type, value) {
+    let classes = `badge ${type}-badge`;
+    if (!value) return classes;
+
+    const normalizedValue = value.toLowerCase();
+
+    // Clase especial para "Internacional"
+    if (type === 'category' && normalizedValue.includes('internacional')) {
+        classes += ' category-international';
+    } 
+    // Clase especial para "El País"
+    else if (type === 'source' && normalizedValue.includes('el país')) {
+        classes += ' source-elpais';
+    }
+    
+    return classes;
   }
 
   renderFeed(feedData) {
@@ -332,26 +390,24 @@ class RSSManager {
       const col = document.createElement('div');
       col.classList.add('col');
       
+      const categoriaClass = this.getBadgeClasses('category', feedInfo.categoria);
+      const fuenteClass = this.getBadgeClasses('source', feedInfo.fuente);
       const imagenNoticia = this.getImageUrl(item);
       
       col.innerHTML = `
-        <article class="card h-100 news-card" itemscope itemtype="http://schema.org/NewsArticle" style="border: none; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+        <article class="card h-100 news-card" itemscope itemtype="http://schema.org/NewsArticle">
           <div class="position-relative">
-            <img src="${imagenNoticia}" class="card-img-top news-image" alt="${item.title}" loading="lazy" itemprop="image" style="height: 200px; object-fit: cover; transition: transform 0.3s ease;">
-            <div class="overlay-gradient" style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(transparent, rgba(0,0,0,0.7)); pointer-events: none;"></div>
-            <span class="badge category-badge" style="position: absolute; top: 12px; left: 12px; background: #bfa046; color: #111; font-weight: 600; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem;">${feedInfo.categoria}</span>
-            <span class="badge source-badge" style="position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); color: #111; font-weight: 500; padding: 4px 8px; border-radius: 15px; font-size: 0.7rem;">${feedInfo.fuente}</span>
+            <img src="${imagenNoticia}" class="card-img-top news-image" alt="${item.title}" loading="lazy" itemprop="image">
+            <div class="overlay-gradient"></div>
+            <span class="${categoriaClass}">${feedInfo.categoria}</span>
+            <span class="${fuenteClass}">${feedInfo.fuente}</span>
           </div>
-          <div class="card-body d-flex flex-column" style="padding: 1.5rem;">
-            <h5 class="card-title news-headline" itemprop="headline" style="color: #bfa046; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem; font-size: 1.1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${item.title}</h5>
-            <p class="card-text news-description flex-grow-1" itemprop="description" style="color: #ccc; line-height: 1.5; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 1rem;">${this.cleanDescription(item.description)}</p>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title news-headline" itemprop="headline">${item.title}</h5>
+            <p class="card-text news-description flex-grow-1" itemprop="description">${this.cleanDescription(item.description)}</p>
             <div class="mt-auto">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <small class="text-muted" style="color: #888 !important;">
-                  <i class="bi bi-clock"></i> ${this.formatDate(item.pubDate)}
-                </small>
-              </div>
-              <a href="${item.link}" class="btn btn-outline-warning btn-sm w-100" itemprop="url" target="_blank" style="border-color: #bfa046; color: #bfa046; font-weight: 600; transition: all 0.3s ease;">
+              <small class="text-muted d-block mb-2"><i class="bi bi-clock"></i> ${this.formatDate(item.pubDate)}</small>
+              <a href="${item.link}" class="btn btn-outline-primary btn-sm w-100" itemprop="url" target="_blank">
                 <i class="bi bi-arrow-right"></i> Leer completo
               </a>
             </div>
@@ -437,26 +493,24 @@ class RSSManager {
       const col = document.createElement('div');
       col.classList.add('col');
       
+      const categoriaClass = this.getBadgeClasses('category', item.feedInfo?.categoria || 'Destacada');
+      const fuenteClass = this.getBadgeClasses('source', item.feedInfo?.fuente || 'Fuente');
       const imagenNoticia = this.getImageUrl(item);
       
       col.innerHTML = `
-        <article class="card h-100 news-card" itemscope itemtype="http://schema.org/NewsArticle" style="border: none; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+        <article class="card h-100 news-card featured-news-card" itemscope itemtype="http://schema.org/NewsArticle">
           <div class="position-relative">
-            <img src="${imagenNoticia}" class="card-img-top news-image" alt="${item.title}" loading="lazy" itemprop="image" style="height: 200px; object-fit: cover; transition: transform 0.3s ease;">
-            <div class="overlay-gradient" style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(transparent, rgba(0,0,0,0.7)); pointer-events: none;"></div>
-            <span class="badge category-badge" style="position: absolute; top: 12px; left: 12px; background: #bfa046; color: #111; font-weight: 600; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem;">${item.feedInfo?.categoria || 'Destacada'}</span>
-            <span class="badge source-badge" style="position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); color: #111; font-weight: 500; padding: 4px 8px; border-radius: 15px; font-size: 0.7rem;">${item.feedInfo?.fuente || 'Fuente'}</span>
+            <img src="${imagenNoticia}" class="card-img-top news-image" alt="${item.title}" loading="lazy" itemprop="image">
+            <div class="overlay-gradient"></div>
+            <span class="${categoriaClass}">${item.feedInfo?.categoria || 'Destacada'}</span>
+            <span class="${fuenteClass}">${item.feedInfo?.fuente || 'Fuente'}</span>
           </div>
-          <div class="card-body d-flex flex-column" style="padding: 1.5rem;">
-            <h5 class="card-title news-headline" itemprop="headline" style="color: #bfa046; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem; font-size: 1.1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${item.title}</h5>
-            <p class="card-text news-description flex-grow-1" itemprop="description" style="color: #ccc; line-height: 1.5; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 1rem;">${this.cleanDescription(item.description)}</p>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title news-headline" itemprop="headline">${item.title}</h5>
+            <p class="card-text news-description flex-grow-1" itemprop="description">${this.cleanDescription(item.description)}</p>
             <div class="mt-auto">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <small class="text-muted" style="color: #888 !important;">
-                  <i class="bi bi-clock"></i> ${this.formatDate(item.pubDate)}
-                </small>
-              </div>
-              <a href="${item.link}" class="btn btn-outline-warning btn-sm w-100" itemprop="url" target="_blank" style="border-color: #bfa046; color: #bfa046; font-weight: 600; transition: all 0.3s ease;">
+              <small class="text-muted d-block mb-2"><i class="bi bi-clock"></i> ${this.formatDate(item.pubDate)}</small>
+              <a href="${item.link}" class="btn btn-primary btn-sm w-100" itemprop="url" target="_blank">
                 <i class="bi bi-arrow-right"></i> Leer completo
               </a>
             </div>

@@ -20,6 +20,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="assets/css/skeleton.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap"
       rel="stylesheet"
@@ -77,51 +78,9 @@
       </div>
     </header>
 
-    <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img
-            src="assets/img/logo3.png"
-            style="width: 80px; height: auto"
-            alt="Logo de HGARUNA"
-          />
-          <span>HGARUNA</span>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Inicio |</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="deportes.html">Deportes |</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tecnologia.html">Tecnología |</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="cultura.html">Cultura |</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="autos.html">Motores |</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="ultimo.html">Lo Último |</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <!-- El menú de navegación se cargará aquí -->
+    <div id="nav-placeholder"></div>
+
     <!-- Buscador Global debajo de los links -->
     <div class="container mt-2">
       <form class="d-flex position-relative w-100 justify-content-center">
@@ -142,70 +101,25 @@
     <div class="container main-banner">
       <div id="carousel-inner-news" style="min-height: 500px"></div>
       <!-- Botones debajo del carrusel -->
-      <div id="main-carousel-buttons" class="row justify-content-center mt-3">
+      <div id="main-carousel-buttons" class="row g-2 justify-content-center mt-3">
         <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a
-            href="autos.html"
-            class="btn btn-dark w-100"
-            style="
-              background-image: url(&quot;assets/img/botonauto.jpg&quot;);
-              background-size: cover;
-              background-position: center;
-            "
-            >Motores</a
-          >
+          <a href="autos.html" class="btn btn-category-motores w-100">Motores</a>
         </div>
         <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a
-            href="tecnologia.html"
-            class="btn btn-dark w-100"
-            style="
-              background-image: url(&quot;assets/img/botontecnologia.jpg&quot;);
-              background-size: cover;
-              background-position: center;
-            "
-            >Tecnología</a
-          >
+          <a href="tecnologia.html" class="btn btn-category-tecnologia w-100">Tecnología</a>
         </div>
         <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a
-            href="deportes.html"
-            class="btn btn-dark w-100"
-            style="
-              background-image: url(&quot;assets/img/botonfutbol.jpg&quot;);
-              background-size: cover;
-              background-position: center;
-            "
-            >Fútbol</a
-          >
+          <a href="deportes.html" class="btn btn-category-futbol w-100">Fútbol</a>
         </div>
         <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a
-            href="cultura.html"
-            class="btn btn-dark w-100"
-            style="
-              background-image: url(&quot;assets/img/botoncultura.jpg&quot;);
-              background-size: cover;
-              background-position: center;
-            "
-            >Cultura</a
-          >
+          <a href="cultura.html" class="btn btn-category-cultura w-100">Cultura</a>
         </div>
       </div>
     </div>
     <!-- Noticias Destacadas -->
     <div class="container mt-5">
-      <h2
-        class="news-title text-center mb-4"
-        style="font-size: 2.5rem; font-weight: 800; color: #bfa046"
-      >
-        Noticias Destacadas
-      </h2>
-      <div
-        id="destacadas-news-row"
-        style="color: #fff"
-        class="row row-cols-1 row-cols-md-3 g-4"
-      >
+      <h2 class="section-title text-center mb-4">Noticias Destacadas</h2>
+      <div id="destacadas-news-row" class="row row-cols-1 row-cols-md-3 g-4">
         <!-- Las noticias destacadas se insertarán aquí por JS -->
       </div>
     </div>
@@ -214,10 +128,7 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-12">
-          <h2
-            class="news-title text-center mb-4"
-            style="font-size: 2rem; font-weight: 700; color: #bfa046"
-          >
+          <h2 class="section-title text-center mb-4">
             <img
               src="https://ep01.epimg.net/iconos/v1.x/v1.0/promos/elpais_marca_corporativa.png"
               alt="El País"
@@ -229,25 +140,19 @@
       </div>
       <div class="row">
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Portada España
-          </h3>
+          <h3 class="subsection-title">Portada España</h3>
           <div id="elpais-portada-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Internacional
-          </h3>
+          <h3 class="subsection-title">Internacional</h3>
           <div id="elpais-internacional-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Lo Más Visto
-          </h3>
+          <h3 class="subsection-title">Lo Más Visto</h3>
           <div id="elpais-populares-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
@@ -259,34 +164,26 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-12">
-          <h2
-            class="news-title text-center mb-4"
-            style="font-size: 2rem; font-weight: 700; color: #bfa046"
-          >
-            <i class="bi bi-globe-americas" style="margin-right: 10px"></i>
-            BBC News
+          <h2 class="section-title text-center mb-4">
+            <i class="bi bi-globe-americas"></i> BBC News
           </h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            World News
-          </h3>
+          <h3 class="subsection-title">World News</h3>
           <div id="bbc-mundo-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Technology
-          </h3>
+          <h3 class="subsection-title">Technology</h3>
           <div id="bbc-tech-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">Sport</h3>
+          <h3 class="subsection-title">Sport</h3>
           <div id="bbc-sport-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
@@ -298,28 +195,20 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-12">
-          <h2
-            class="news-title text-center mb-4"
-            style="font-size: 2rem; font-weight: 700; color: #bfa046"
-          >
-            <i class="bi bi-flag" style="margin-right: 10px"></i>
-            Clarín Argentina
+          <h2 class="section-title text-center mb-4">
+            <i class="bi bi-flag"></i> Clarín Argentina
           </h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Política
-          </h3>
+          <h3 class="subsection-title">Política</h3>
           <div id="categoria5-news-container">
             <div class="row row-cols-1 row-cols-md-2 g-3"></div>
           </div>
         </div>
         <div class="col-md-6 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Internacional
-          </h3>
+          <h3 class="subsection-title">Internacional</h3>
           <div id="categoria7-news-container">
             <div class="row row-cols-1 row-cols-md-2 g-3"></div>
           </div>
@@ -327,23 +216,19 @@
       </div>
       <div class="row">
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Tecnología
-          </h3>
+          <h3 class="subsection-title">Tecnología</h3>
           <div id="tecnologia-news-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Cultura
-          </h3>
+          <h3 class="subsection-title">Cultura</h3>
           <div id="categoria6-news-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">Autos</h3>
+          <h3 class="subsection-title">Autos</h3>
           <div id="categoria8-news-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
@@ -355,12 +240,8 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-12">
-          <h2
-            class="news-title text-center mb-4"
-            style="font-size: 2rem; font-weight: 700; color: #bfa046"
-          >
-            <i class="bi bi-newspaper" style="margin-right: 10px"></i>
-            La Nación Argentina
+          <h2 class="section-title text-center mb-4">
+            <i class="bi bi-newspaper"></i> La Nación Argentina
           </h2>
         </div>
       </div>
@@ -377,36 +258,26 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-12">
-          <h2
-            class="news-title text-center mb-4"
-            style="font-size: 2rem; font-weight: 700; color: #bfa046"
-          >
-            <i class="bi bi-geo-alt" style="margin-right: 10px"></i>
-            El Tiempo Colombia
+          <h2 class="section-title text-center mb-4">
+            <i class="bi bi-geo-alt"></i> El Tiempo Colombia
           </h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Colombia General
-          </h3>
+          <h3 class="subsection-title">Colombia General</h3>
           <div id="eltiempo-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Bogotá
-          </h3>
+          <h3 class="subsection-title">Bogotá</h3>
           <div id="eltiempo-bogota-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Medellín
-          </h3>
+          <h3 class="subsection-title">Medellín</h3>
           <div id="eltiempo-medellin-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
@@ -414,25 +285,19 @@
       </div>
       <div class="row">
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Cali
-          </h3>
+          <h3 class="subsection-title">Cali</h3>
           <div id="eltiempo-cali-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Barranquilla
-          </h3>
+          <h3 class="subsection-title">Barranquilla</h3>
           <div id="eltiempo-barranquilla-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Mundo
-          </h3>
+          <h3 class="subsection-title">Mundo</h3>
           <div id="eltiempo-mundo-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
@@ -440,25 +305,19 @@
       </div>
       <div class="row">
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Latinoamérica
-          </h3>
+          <h3 class="subsection-title">Latinoamérica</h3>
           <div id="eltiempo-latinoamerica-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Tecnósfera
-          </h3>
+          <h3 class="subsection-title">Tecnósfera</h3>
           <div id="eltiempo-tecnosfera-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Economía
-          </h3>
+          <h3 class="subsection-title">Economía</h3>
           <div id="eltiempo-economia-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
@@ -466,17 +325,13 @@
       </div>
       <div class="row">
         <div class="col-md-6 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Cultura
-          </h3>
+          <h3 class="subsection-title">Cultura</h3>
           <div id="eltiempo-cultura-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
         </div>
         <div class="col-md-6 mb-4">
-          <h3 class="mb-3" style="color: #bfa046; font-size: 1.3rem">
-            Entretenimiento
-          </h3>
+          <h3 class="subsection-title">Entretenimiento</h3>
           <div id="eltiempo-entretenimiento-container">
             <div class="row row-cols-1 g-3"></div>
           </div>
@@ -485,272 +340,51 @@
     </div>
 
     <!-- Banner de servicio de creación de sitios web -->
-    <section
-      class="banner-servicio"
-      style="
-        background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-        border: 2px solid #bfa046;
-        border-radius: 20px;
-        padding: 3rem 2rem;
-        margin: 3rem auto;
-        text-align: center;
-        max-width: 800px;
-        box-shadow: 0 12px 40px rgba(191, 160, 70, 0.2);
-        position: relative;
-        overflow: hidden;
-      "
-    >
-      <div
-        style="
-          position: absolute;
-          top: -50px;
-          right: -50px;
-          width: 100px;
-          height: 100px;
-          background: radial-gradient(
-            circle,
-            rgba(191, 160, 70, 0.1) 0%,
-            transparent 70%
-          );
-          border-radius: 50%;
-        "
-      ></div>
-      <div
-        style="
-          position: absolute;
-          bottom: -50px;
-          left: -50px;
-          width: 120px;
-          height: 120px;
-          background: radial-gradient(
-            circle,
-            rgba(191, 160, 70, 0.1) 0%,
-            transparent 70%
-          );
-          border-radius: 50%;
-        "
-      ></div>
-      <div style="position: relative; z-index: 2">
-        <h2
-          style="
-            color: #bfa046;
-            margin-bottom: 1.5rem;
-            font-size: 2.2rem;
-            font-weight: 800;
-          "
-        >
-          <i
-            class="bi bi-rocket-takeoff icono-dorado"
-            style="font-size: 2rem; margin-right: 15px"
-          ></i>
+    <section class="banner-servicio">
+      <div class="banner-servicio-decoration-1"></div>
+      <div class="banner-servicio-decoration-2"></div>
+      <div class="banner-servicio-content">
+        <h2>
+          <i class="bi bi-rocket-takeoff"></i>
           ¿Necesitas tu propio sitio web?
         </h2>
         <p>
           Creamos sitios web profesionales y personalizados para tu negocio.<br />
           <strong>Diseño moderno • Responsive • SEO Optimizado</strong><br />
-          Visita
-          <a
-            href="https://service.hgaruna.org"
-            target="_blank"
-            class="text-primary fw-bold text-decoration-none"
-            >service.hgaruna.org</a
-          >
+          Visita <a href="https://service.hgaruna.org" target="_blank">service.hgaruna.org</a>
         </p>
         <div class="row justify-content-center mb-3">
           <div class="col-md-3 col-6 text-center mb-2">
-            <i
-              class="bi bi-palette"
-              style="font-size: 2rem; color: #bfa046"
-            ></i>
-            <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem">
-              Diseño Único
-            </p>
+            <i class="bi bi-palette"></i>
+            <p>Diseño Único</p>
           </div>
           <div class="col-md-3 col-6 text-center mb-2">
-            <i class="bi bi-phone" style="font-size: 2rem; color: #bfa046"></i>
-            <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem">
-              Responsive
-            </p>
+            <i class="bi bi-phone"></i>
+            <p>Responsive</p>
           </div>
           <div class="col-md-3 col-6 text-center mb-2">
-            <i
-              class="bi bi-speedometer2"
-              style="font-size: 2rem; color: #bfa046"
-            ></i>
-            <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem">
-              Optimizado
-            </p>
+            <i class="bi bi-speedometer2"></i>
+            <p>Optimizado</p>
           </div>
           <div class="col-md-3 col-6 text-center mb-2">
-            <i
-              class="bi bi-headset"
-              style="font-size: 2rem; color: #bfa046"
-            ></i>
-            <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem">
-              Soporte 24/7
-            </p>
+            <i class="bi bi-headset"></i>
+            <p>Soporte 24/7</p>
           </div>
         </div>
         <a
           href="https://service.hgaruna.org"
           target="_blank"
-          class="btn"
-          style="
-            background: linear-gradient(45deg, #bfa046, #d4b564);
-            color: #111;
-            font-weight: 700;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 12px;
-            padding: 15px 40px;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(191, 160, 70, 0.3);
-            text-decoration: none;
-            display: inline-block;
-          "
+          class="btn btn-lg btn-primary"
         >
-          <i
-            class="bi bi-arrow-right-circle-fill"
-            style="margin-right: 8px"
-          ></i>
+          <i class="bi bi-arrow-right-circle-fill"></i>
           Solicitar Presupuesto Gratis
         </a>
       </div>
     </section>
 
-    <footer
-      class="footer text-white py-5"
-      style="background: #111; color: #fff; border-top: 2px solid #bfa046"
-    >
-      <div class="container">
-        <div class="row text-left justify-content-between align-items-start">
-          <div
-            class="col-md-4 col-sm-12 mb-4 footer-col d-flex align-items-center"
-          >
-            <img
-              src="assets/img/logo3.png"
-              style="
-                width: 60px;
-                height: auto;
-                margin-right: 15px;
-                filter: drop-shadow(0 0 10px #fff8);
-              "
-              alt="Logo de HGARUNA"
-            />
-            <div>
-              <span
-                style="
-                  font-size: 24px;
-                  font-family: &quot;Poppins-Medium&quot;, sans-serif;
-                  color: #fff;
-                  font-weight: bold;
-                "
-                >HGARUNA</span
-              >
-              <p class="mb-1">
-                <a href="#" class="text-decoration-none text-white footer-link"
-                  >Declaración de Accesibilidad</a
-                >
-              </p>
-              <p class="mb-1">
-                <a
-                  href="politica_privacidad.html"
-                  class="text-decoration-none text-white footer-link"
-                  >Política de Privacidad</a
-                >
-              </p>
-              <p
-                class="mb-0"
-                style="color: #bbb; margin-top: 10px; font-size: 14px"
-              >
-                &copy; 2024 HGARUNA. Todos los derechos reservados.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-3 footer-col">
-            <h5 class="text-white">Enlaces Rápidos</h5>
-            <ul class="list-unstyled">
-              <li style="margin-bottom: 10px">
-                <a
-                  href="index.html"
-                  class="text-decoration-none text-white footer-link"
-                  >Inicio</a
-                >
-              </li>
-              <li style="margin-bottom: 10px">
-                <a
-                  href="deportes.html"
-                  class="text-decoration-none text-white footer-link"
-                  >Deportes</a
-                >
-              </li>
-              <li style="margin-bottom: 10px">
-                <a
-                  href="autos.html"
-                  class="text-decoration-none text-white footer-link"
-                  >Motores</a
-                >
-              </li>
-              <li style="margin-bottom: 10px">
-                <a
-                  href="tecnologia.html"
-                  class="text-decoration-none text-white footer-link"
-                  >Tecnología</a
-                >
-              </li>
-              <li style="margin-bottom: 10px">
-                <a
-                  href="cine.html"
-                  class="text-decoration-none text-white footer-link"
-                  >Cine</a
-                >
-              </li>
-              <li style="margin-bottom: 10px">
-                <a
-                  href="cultura.html"
-                  class="text-decoration-none text-white footer-link"
-                  >Cultura</a
-                >
-              </li>
-              <li style="margin-bottom: 10px">
-                <a
-                  href="politica_privacidad.html"
-                  class="text-decoration-none text-white footer-link"
-                  >Política de Privacidad</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-3 footer-col">
-            <h5 class="text-white">Contacto</h5>
-            <p class="mb-1" style="color: #bbb">
-              Email:
-              <a
-                href="mailto:23sarmiento@gmail.com"
-                class="text-decoration-none text-white footer-link"
-                >23sarmiento@gmail.com</a
-              >
-            </p>
-            <p class="mb-1" style="color: #bbb">Tel: +54 3541-237972</p>
-            <div class="mt-3">
-              <a
-                href="https://wa.me/543541237972"
-                target="_blank"
-                class="btn btn-outline-light btn-sm me-2"
-                title="WhatsApp"
-                ><i class="bi bi-whatsapp"></i> WhatsApp</a
-              >
-              <a
-                href="mailto:23sarmiento@gmail.com"
-                class="btn btn-outline-light btn-sm"
-                title="Email"
-                ><i class="bi bi-envelope"></i> Email</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <!-- El footer se cargará aquí -->
+    <div id="footer-placeholder"></div>
+
     <script id="mcjs">
       !(function (c, h, i, m, p) {
         ((m = c.createElement(h)),
@@ -765,58 +399,12 @@
       );
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Cargador de componentes -->
+    <script src="assets/js/component-loader.js"></script>
     <!-- Sistema RSS Real -->
     <script src="assets/js/rss-config.js"></script>
     <script src="assets/js/rss-manager.js"></script>
     <script src="assets/js/banner-manager.js"></script>
     <script src="assets/js/search-manager.js"></script>
-    <!-- Scripts adicionales -->
-    <script src="assets/js/seo-optimizer.js"></script>
-    <script src="assets/js/analytics-config.js"></script>
-    <script src="assets/js/analytics-manager.js"></script>
-    <script src="assets/js/fallback-content.js"></script>
-    <script>
-      // Actualizar fecha y hora con optimizaciones de rendimiento
-      let dateElement = null;
-      let lastMinute = -1;
-
-      function actualizarFecha() {
-        // Optimización: solo buscar el elemento una vez
-        if (!dateElement) {
-          dateElement = document.getElementById("fecha-actual");
-          if (!dateElement) return; // Elemento no encontrado
-        }
-
-        const ahora = new Date();
-        const currentMinute = ahora.getMinutes();
-
-        // Optimización: solo actualizar si realmente cambi�� el minuto
-        if (currentMinute === lastMinute) return;
-        lastMinute = currentMinute;
-
-        // Usar requestAnimationFrame para evitar forced reflow
-        requestAnimationFrame(() => {
-          const opciones = {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          };
-          dateElement.textContent = ahora.toLocaleDateString("es-ES", opciones);
-        });
-      }
-
-      // Inicializar cuando el DOM esté completamente cargado
-      if (document.readyState === "complete") {
-        actualizarFecha();
-      } else {
-        document.addEventListener("DOMContentLoaded", actualizarFecha);
-      }
-
-      // Configurar interval más eficiente
-      setInterval(actualizarFecha, 60000); // Actualizar cada minuto
-    </script>
   </body>
 </html>
