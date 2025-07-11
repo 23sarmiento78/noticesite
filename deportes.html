@@ -57,34 +57,118 @@
     <div class="container mt-2">
       <form class="d-flex position-relative w-100 justify-content-center">
         <input id="buscador-global" type="text" class="form-control form-control-sm w-50" placeholder="Buscar noticias..." />
-        <div id="buscador-resultados" class="list-group position-absolute w-50 mt-1"></div>
+        <div id="buscador-resultados" class="list-group position-absolute w-50 mt-1" style="z-index: 10; display: none"></div>
       </form>
     </div>
     <div class="container main-banner">
       <div id="carousel-inner-news" style="min-height: 500px"></div>
-      <!-- Botones debajo del carrusel -->
-      <div id="main-carousel-buttons" class="row g-2 justify-content-center mt-3">
-        <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a href="autos.html" class="btn btn-category-motores w-100">Motores</a>
-        </div>
-        <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a href="tecnologia.html" class="btn btn-category-tecnologia w-100">Tecnología</a>
-        </div>
-        <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a href="deportes.html" class="btn btn-category-futbol w-100">Fútbol</a>
-        </div>
-        <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
-          <a href="cultura.html" class="btn btn-category-cultura w-100">Cultura</a>
-        </div>
-      </div>
     </div>
-    <!-- Noticias de Deportes -->
+
+    <!-- Noticias Destacadas de Deportes -->
     <div class="container mt-5">
-      <h2 class="section-title text-center mb-4">Últimas Noticias de Deportes</h2>
-      <div id="categoria3-news-container" class="row row-cols-1 row-cols-md-3 g-4">
-        <!-- Las noticias de deportes se insertarán aquí por JS -->
+      <h2 class="section-title text-center mb-4">Noticias Destacadas de Deportes</h2>
+      <div id="destacadas-news-row" class="row row-cols-1 row-cols-md-3 g-4">
+        <!-- Las noticias destacadas se insertarán aquí por JS -->
       </div>
     </div>
+
+    <!-- Sección BBC Sport -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="section-title text-center mb-4">
+            <i class="bi bi-globe-americas"></i> BBC Sport
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div id="bbc-sport-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección Clarín Deportes -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="section-title text-center mb-4">
+            <i class="bi bi-flag"></i> Clarín Deportes
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div id="categoria3-news-container">
+            <div class="row row-cols-1 row-cols-md-2 g-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección El Tiempo Deportes -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="section-title text-center mb-4">
+            <i class="bi bi-geo-alt"></i> El Tiempo Deportes
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div id="eltiempo-deportes-container">
+            <div class="row row-cols-1 g-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner de servicio de creación de sitios web -->
+    <section class="banner-servicio">
+      <div class="banner-servicio-decoration-1"></div>
+      <div class="banner-servicio-decoration-2"></div>
+      <div class="banner-servicio-content">
+        <h2>
+          <i class="bi bi-rocket-takeoff"></i>
+          ¿Necesitas tu propio sitio web?
+        </h2>
+        <p>
+          Creamos sitios web profesionales y personalizados para tu negocio.<br />
+          <strong>Diseño moderno • Responsive • SEO Optimizado</strong><br />
+          Visita <a href="https://service.hgaruna.org" target="_blank">service.hgaruna.org</a>
+        </p>
+        <div class="row justify-content-center mb-3">
+          <div class="col-md-3 col-6 text-center mb-2">
+            <i class="bi bi-palette"></i>
+            <p>Diseño Único</p>
+          </div>
+          <div class="col-md-3 col-6 text-center mb-2">
+            <i class="bi bi-phone"></i>
+            <p>Responsive</p>
+          </div>
+          <div class="col-md-3 col-6 text-center mb-2">
+            <i class="bi bi-speedometer2"></i>
+            <p>Optimizado</p>
+          </div>
+          <div class="col-md-3 col-6 text-center mb-2">
+            <i class="bi bi-headset"></i>
+            <p>Soporte 24/7</p>
+          </div>
+        </div>
+        <a
+          href="https://service.hgaruna.org"
+          target="_blank"
+          class="btn btn-lg btn-primary"
+        >
+          <i class="bi bi-arrow-right-circle-fill"></i>
+          Solicitar Presupuesto Gratis
+        </a>
+      </div>
+    </section>
+
     <!-- El footer se cargará aquí -->
     <div id="footer-placeholder"></div>
 

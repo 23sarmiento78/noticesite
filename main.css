@@ -585,3 +585,645 @@ footer .list-unstyled li {
 footer .contact-info {
   color: #bbb;
 }
+
+/* Banner profesional de periódico digital */
+.banner-placeholder {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-skeleton-content {
+  width: 100%;
+  max-width: 800px;
+}
+
+.skeleton-image {
+  height: 300px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.skeleton-text {
+  text-align: left;
+}
+
+.skeleton-title {
+  height: 32px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+
+.skeleton-description {
+  height: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.skeleton-meta {
+  height: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  width: 40%;
+}
+
+/* Banner principal */
+#mainBannerCarousel {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.banner-slide {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+}
+
+.banner-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.banner-slide:hover .banner-image {
+  transform: scale(1.05);
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 1;
+}
+
+.banner-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    transparent 100%
+  );
+}
+
+.banner-badges {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.banner-category-badge {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.banner-source-badge {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  backdrop-filter: blur(10px);
+}
+
+.banner-text {
+  color: white;
+}
+
+.banner-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.banner-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.banner-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.banner-btn {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.banner-btn:hover::before {
+  left: 100%;
+}
+
+.banner-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.banner-meta {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+/* Controles del banner */
+.banner-control {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  margin: 0 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.banner-control:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.banner-control .carousel-control-prev-icon,
+.banner-control .carousel-control-next-icon {
+  filter: invert(1);
+  width: 30px;
+  height: 30px;
+}
+
+.banner-indicators {
+  bottom: 2rem;
+}
+
+.banner-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  margin: 0 0.3rem;
+  transition: all 0.3s ease;
+}
+
+.banner-indicators button.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: scale(1.2);
+}
+
+/* Responsive para el banner */
+@media (max-width: 768px) {
+  .banner-slide {
+    height: 450px;
+  }
+  
+  .banner-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .banner-title {
+    font-size: 1.8rem;
+  }
+  
+  .banner-description {
+    font-size: 1rem;
+  }
+  
+  .banner-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .banner-btn {
+    text-align: center;
+  }
+  
+  .banner-control {
+    width: 50px;
+    height: 50px;
+    margin: 0 1rem;
+  }
+  
+  .banner-control .carousel-control-prev-icon,
+  .banner-control .carousel-control-next-icon {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-slide {
+    height: 400px;
+  }
+  
+  .banner-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .banner-title {
+    font-size: 1.5rem;
+  }
+  
+  .banner-description {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .banner-badges {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .banner-category-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .banner-source-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* Animaciones para el banner */
+@keyframes bannerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel-item.active .banner-content {
+  animation: bannerFadeIn 0.8s ease-out;
+}
+
+/* Efectos especiales */
+.banner-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Mejoras para el placeholder */
+.banner-placeholder {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px dashed #dee2e6;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Navbar moderno */
+.navbar-modern {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-modern .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.navbar-modern .navbar-brand img {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-modern .brand-text {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-modern .nav-link {
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  margin: 0 0.25rem;
+}
+
+.navbar-modern .nav-link:hover {
+  color: var(--primary-color);
+  background: rgba(0, 123, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar-modern .nav-link-home {
+  color: var(--primary-color);
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.navbar-modern .nav-link-special {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  margin-left: 1rem;
+}
+
+.navbar-modern .nav-link-special:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+  color: white;
+}
+
+/* Categorías en el navbar */
+.category-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.category-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.category-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.category-link:hover::before {
+  left: 100%;
+}
+
+.category-deportes:hover {
+  background: linear-gradient(45deg, #dc3545, #fd7e14);
+  color: white;
+}
+
+.category-tecnologia:hover {
+  background: linear-gradient(45deg, #007bff, #6f42c1);
+  color: white;
+}
+
+.category-cultura:hover {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: white;
+}
+
+.category-autos:hover {
+  background: linear-gradient(45deg, #6c757d, #495057);
+  color: white;
+}
+
+/* Categorías flotantes sobre el banner */
+.floating-categories {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 100%;
+  pointer-events: none;
+}
+
+.category-pills {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  pointer-events: auto;
+}
+
+.category-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.category-pill:hover::before {
+  left: 100%;
+}
+
+.category-pill:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  color: white;
+  text-decoration: none;
+}
+
+.category-pill i {
+  font-size: 1.1rem;
+}
+
+/* Colores específicos para cada categoría */
+.category-pill-deportes:hover {
+  background: linear-gradient(45deg, #dc3545, #fd7e14);
+  border-color: #dc3545;
+}
+
+.category-pill-tecnologia:hover {
+  background: linear-gradient(45deg, #007bff, #6f42c1);
+  border-color: #007bff;
+}
+
+.category-pill-cultura:hover {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  border-color: #28a745;
+}
+
+.category-pill-autos:hover {
+  background: linear-gradient(45deg, #6c757d, #495057);
+  border-color: #6c757d;
+}
+
+/* Responsive para categorías flotantes */
+@media (max-width: 768px) {
+  .floating-categories {
+    top: 60%;
+  }
+  
+  .category-pills {
+    gap: 0.5rem;
+  }
+  
+  .category-pill {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .category-pill i {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .category-pills {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .category-pill {
+    width: 200px;
+    justify-content: center;
+  }
+  
+  .navbar-modern .navbar-nav {
+    text-align: center;
+  }
+  
+  .category-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Ocultar los botones básicos del banner */
+#main-carousel-buttons {
+  display: none !important;
+}

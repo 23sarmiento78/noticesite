@@ -462,18 +462,69 @@ class RSSManager {
     }
   }
 
+  getCurrentPageCategory() {
+    const currentPath = window.location.pathname;
+    const pageName = currentPath.split('/').pop().replace('.html', '');
+    
+    const categoryMap = {
+      'deportes': ['Deportes', 'Sport'],
+      'tecnologia': ['Tecnología', 'Tech'],
+      'cultura': ['Cultura', 'Espectáculos', 'Cine', 'Entretenimiento'],
+      'autos': ['Autos', 'Viajes'],
+      'index': ['General']
+    };
+    
+    return categoryMap[pageName] || ['General'];
+  }
+
   loadDestacadas() {
-    // Recopilar noticias destacadas de todos los feeds
+    const currentCategories = this.getCurrentPageCategory();
+    
+    // Recopilar noticias destacadas de feeds específicos de la categoría actual
     const allItems = [];
     
     this.cache.forEach((cached, feedId) => {
       if (cached.data && cached.data.items) {
-        allItems.push(...cached.data.items.map(item => ({
-          ...item,
-          feedInfo: cached.data.feedInfo
-        })));
+        // Filtrar por categoría si no estamos en la página principal
+        if (currentCategories.includes('General')) {
+          // En la página principal, mostrar noticias de todas las categorías
+          allItems.push(...cached.data.items.map(item => ({
+            ...item,
+            feedInfo: cached.data.feedInfo
+          })));
+        } else {
+          // En páginas específicas, mostrar solo noticias de las categorías relacionadas
+          if (currentCategories.includes(cached.data.feedInfo.categoria)) {
+            allItems.push(...cached.data.items.map(item => ({
+              ...item,
+              feedInfo: cached.data.feedInfo
+            })));
+          }
+        }
       }
     });
+    
+    // Si no hay suficientes noticias de la categoría específica, agregar algunas relacionadas
+    if (allItems.length < 3 && !currentCategories.includes('General')) {
+      this.cache.forEach((cached, feedId) => {
+        if (cached.data && cached.data.items && allItems.length < 6) {
+          // Verificar si el feed está relacionado con la categoría actual
+          const isRelated = currentCategories.some(category => 
+            cached.data.feedInfo.categoria.toLowerCase().includes(category.toLowerCase()) ||
+            cached.data.feedInfo.fuente.toLowerCase().includes(category.toLowerCase())
+          );
+          
+          if (isRelated) {
+            const remainingSlots = 6 - allItems.length;
+            const itemsToAdd = cached.data.items.slice(0, remainingSlots).map(item => ({
+              ...item,
+              feedInfo: cached.data.feedInfo
+            }));
+            allItems.push(...itemsToAdd);
+          }
+        }
+      });
+    }
     
     // Ordenar por fecha y tomar las más recientes
     const destacadas = allItems

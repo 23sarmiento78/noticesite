@@ -228,6 +228,14 @@ const RSS_CONFIG = {
       categoria: 'Entretenimiento'
     },
     {
+      id: 'eltiempo-deportes',
+      title: 'El Tiempo Deportes',
+      url: 'https://www.eltiempo.com/rss/deportes.xml',
+      containerId: 'eltiempo-deportes-container',
+      fuente: 'El Tiempo',
+      categoria: 'Deportes'
+    },
+    {
       id: 'clarin-viajes',
       title: 'Clarín Viajes',
       url: 'https://www.clarin.com/rss/viajes/',

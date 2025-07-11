@@ -1,25 +1,27 @@
-// Sistema de banner para el carrusel principal
+// Sistema de banner profesional para periódico digital
 class BannerManager {
   constructor() {
     this.currentSlide = 0;
     this.slides = [];
     this.autoPlayInterval = null;
+    this.isLoading = true;
     this.init();
   }
 
   async init() {
-    console.log('🎬 Iniciando Banner Manager...');
+    console.log('🎬 Iniciando Banner Manager Profesional...');
     this.renderPlaceholderBanner();
     try {
-      // Intentar cargar contenido real del banner
       await this.loadBannerContent();
       this.startAutoPlay();
       this.setupControls();
+      this.isLoading = false;
     } catch (error) {
       console.error('Error en Banner Manager:', error);
       this.loadFallbackBanner();
       this.startAutoPlay();
       this.setupControls();
+      this.isLoading = false;
     }
   }
 
@@ -28,31 +30,22 @@ class BannerManager {
     if (!container) return;
 
     container.innerHTML = `
-      <div class="banner-skeleton">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Cargando...</span>
+      <div class="banner-placeholder">
+        <div class="banner-skeleton-content">
+          <div class="skeleton-image"></div>
+          <div class="skeleton-text">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-description"></div>
+            <div class="skeleton-meta"></div>
+          </div>
         </div>
       </div>`;
   }
 
   async loadBannerContent() {
     try {
-      // Cargar contenido del banner desde múltiples fuentes
-      const bannerFeeds = [
-        {
-          url: 'https://feeds.bbci.co.uk/news/technology/rss.xml',
-          title: 'BBC Technology'
-        },
-        {
-          url: 'https://elpais.com/rss/elpais/portada.xml',
-          title: 'El País'
-        },
-        {
-          url: 'https://elpais.com/rss/internacional/portada.xml',
-          title: 'El País Internacional'
-        }
-      ];
-
+      // Cargar contenido del banner desde múltiples fuentes con categorías específicas
+      const bannerFeeds = this.getBannerFeedsByPage();
       const allItems = [];
 
       for (const feed of bannerFeeds) {
@@ -91,7 +84,7 @@ class BannerManager {
           const parser = new DOMParser();
           const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
           
-          const items = Array.from(xmlDoc.querySelectorAll('item')).slice(0, 5).map(item => {
+          const items = Array.from(xmlDoc.querySelectorAll('item')).slice(0, 8).map(item => {
             const title = item.querySelector('title')?.textContent || 'Sin título';
             const description = item.querySelector('description')?.textContent || '';
             const link = item.querySelector('link')?.textContent || '#';
@@ -109,8 +102,10 @@ class BannerManager {
               description: this.cleanDescription(description),
               link,
               pubDate,
-              imageUrl: imageUrl || this.getDefaultImage(),
-              source: feed.title
+              imageUrl: imageUrl || this.getDefaultImage(feed.category),
+              source: feed.title,
+              category: feed.category,
+              priority: feed.priority || 1
             };
           });
 
@@ -120,16 +115,144 @@ class BannerManager {
         }
       }
 
-      // Ordenar por fecha y tomar las más recientes
+      // Ordenar por prioridad y fecha, tomar las mejores
       this.slides = allItems
-        .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate))
-        .slice(0, 5);
+        .sort((a, b) => {
+          // Primero por prioridad, luego por fecha
+          if (a.priority !== b.priority) {
+            return b.priority - a.priority;
+          }
+          return new Date(b.pubDate) - new Date(a.pubDate);
+        })
+        .slice(0, 6);
 
       this.renderBanner();
     } catch (error) {
       console.error('Error cargando contenido del banner:', error);
       this.loadFallbackBanner();
     }
+  }
+
+  getBannerFeedsByPage() {
+    const currentPath = window.location.pathname;
+    const pageName = currentPath.split('/').pop().replace('.html', '');
+    
+    const feedsByPage = {
+      'deportes': [
+        {
+          url: 'https://feeds.bbci.co.uk/sport/rss.xml',
+          title: 'BBC Sport',
+          category: 'Deportes',
+          priority: 3
+        },
+        {
+          url: 'https://www.clarin.com/rss/deportes/',
+          title: 'Clarín Deportes',
+          category: 'Deportes',
+          priority: 2
+        },
+        {
+          url: 'https://www.eltiempo.com/rss/deportes.xml',
+          title: 'El Tiempo Deportes',
+          category: 'Deportes',
+          priority: 1
+        }
+      ],
+      'tecnologia': [
+        {
+          url: 'https://feeds.bbci.co.uk/news/technology/rss.xml',
+          title: 'BBC Technology',
+          category: 'Tecnología',
+          priority: 3
+        },
+        {
+          url: 'https://www.clarin.com/rss/tecnologia/',
+          title: 'Clarín Tecnología',
+          category: 'Tecnología',
+          priority: 2
+        },
+        {
+          url: 'https://www.eltiempo.com/rss/tecnosfera.xml',
+          title: 'El Tiempo Tecnósfera',
+          category: 'Tecnología',
+          priority: 1
+        }
+      ],
+      'cultura': [
+        {
+          url: 'https://www.clarin.com/rss/cultura/',
+          title: 'Clarín Cultura',
+          category: 'Cultura',
+          priority: 3
+        },
+        {
+          url: 'https://www.clarin.com/rss/espectaculos/',
+          title: 'Clarín Espectáculos',
+          category: 'Cultura',
+          priority: 2
+        },
+        {
+          url: 'https://www.eltiempo.com/rss/cultura.xml',
+          title: 'El Tiempo Cultura',
+          category: 'Cultura',
+          priority: 1
+        }
+      ],
+      'autos': [
+        {
+          url: 'https://www.clarin.com/rss/autos/',
+          title: 'Clarín Autos',
+          category: 'Autos',
+          priority: 3
+        },
+        {
+          url: 'https://www.clarin.com/rss/viajes/',
+          title: 'Clarín Viajes',
+          category: 'Autos',
+          priority: 2
+        },
+        {
+          url: 'https://www.eltiempo.com/rss/economia.xml',
+          title: 'El Tiempo Economía',
+          category: 'Autos',
+          priority: 1
+        }
+      ],
+      'index': [
+        {
+          url: 'https://feeds.bbci.co.uk/news/world/rss.xml',
+          title: 'BBC World News',
+          category: 'Internacional',
+          priority: 3
+        },
+        {
+          url: 'https://elpais.com/rss/elpais/portada.xml',
+          title: 'El País Portada',
+          category: 'España',
+          priority: 3
+        },
+        {
+          url: 'https://www.clarin.com/rss/politica/',
+          title: 'Clarín Política',
+          category: 'Política',
+          priority: 2
+        },
+        {
+          url: 'https://feeds.bbci.co.uk/news/technology/rss.xml',
+          title: 'BBC Technology',
+          category: 'Tecnología',
+          priority: 2
+        },
+        {
+          url: 'https://feeds.bbci.co.uk/sport/rss.xml',
+          title: 'BBC Sport',
+          category: 'Deportes',
+          priority: 2
+        }
+      ]
+    };
+    
+    return feedsByPage[pageName] || feedsByPage['index'];
   }
 
   cleanDescription(description) {
@@ -139,62 +262,154 @@ class BannerManager {
     const cleanText = description.replace(/<[^>]*>/g, '');
     
     // Limitar longitud
-    if (cleanText.length > 100) {
-      return cleanText.substring(0, 100) + '...';
+    if (cleanText.length > 120) {
+      return cleanText.substring(0, 120) + '...';
     }
     
     return cleanText;
   }
 
-  getDefaultImage() {
-    const defaultImages = [
-      'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1495020683877-95802f6f647a?w=1200&h=600&fit=crop'
-    ];
+  getDefaultImage(category) {
+    const defaultImages = {
+      'Deportes': [
+        'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=600&fit=crop'
+      ],
+      'Tecnología': [
+        'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1200&h=600&fit=crop'
+      ],
+      'Cultura': [
+        'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1200&h=600&fit=crop'
+      ],
+      'Autos': [
+        'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1200&h=600&fit=crop'
+      ],
+      'default': [
+        'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1495020683877-95802f6f647a?w=1200&h=600&fit=crop'
+      ]
+    };
     
-    return defaultImages[Math.floor(Math.random() * defaultImages.length)];
+    const images = defaultImages[category] || defaultImages['default'];
+    return images[Math.floor(Math.random() * images.length)];
   }
 
   loadFallbackBanner() {
-    this.slides = [
-      {
-        title: 'Inteligencia Artificial revoluciona el sector tecnológico',
-        description: 'Las empresas líderes presentan innovaciones revolucionarias en IA que cambiarán el futuro de la tecnología.',
-        link: 'https://elpais.com/tecnologia/',
-        imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=600&fit=crop',
-        source: 'El País'
-      },
-      {
-        title: 'Fútbol: Nuevas transferencias en la ventana de mercado',
-        description: 'Los equipos europeos se preparan para la próxima temporada con importantes fichajes millonarios.',
-        link: 'https://elpais.com/deportes/',
-        imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&h=600&fit=crop',
-        source: 'El País'
-      },
-      {
-        title: 'Crisis económica global: Análisis de expertos',
-        description: 'Los economistas analizan las tendencias del mercado internacional y sus implicaciones.',
-        link: 'https://elpais.com/economia/',
-        imageUrl: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&h=600&fit=crop',
-        source: 'El País'
-      },
-      {
-        title: 'Cumbre mundial sobre cambio climático',
-        description: 'Los líderes mundiales se reúnen para discutir medidas contra el calentamiento global.',
-        link: 'https://elpais.com/internacional/',
-        imageUrl: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop',
-        source: 'El País'
-      },
-      {
-        title: 'Apple presenta nuevos productos innovadores',
-        description: 'La empresa tecnológica revela sus últimas innovaciones en el evento anual.',
-        link: 'https://www.bbc.com/news/technology',
-        imageUrl: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=1200&h=600&fit=crop',
-        source: 'BBC'
-      }
-    ];
+    const currentPath = window.location.pathname;
+    const pageName = currentPath.split('/').pop().replace('.html', '');
     
+    const fallbackContent = {
+      'deportes': [
+        {
+          title: 'Fútbol: Nuevas transferencias millonarias en Europa',
+          description: 'Los equipos europeos se preparan para la próxima temporada con fichajes récord que superan los 200 millones de euros.',
+          link: 'https://elpais.com/deportes/',
+          imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&h=600&fit=crop',
+          source: 'El País',
+          category: 'Deportes',
+          priority: 3
+        },
+        {
+          title: 'NBA: Playoffs con emocionantes finales',
+          description: 'Las series de playoffs de la NBA llegan a su punto más álgido con partidos que definen el camino al campeonato.',
+          link: 'https://www.bbc.com/sport/basketball',
+          imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1200&h=600&fit=crop',
+          source: 'BBC Sport',
+          category: 'Deportes',
+          priority: 2
+        }
+      ],
+      'tecnologia': [
+        {
+          title: 'Inteligencia Artificial revoluciona el sector tecnológico',
+          description: 'Las empresas líderes presentan innovaciones revolucionarias en IA que cambiarán el futuro de la tecnología y la sociedad.',
+          link: 'https://elpais.com/tecnologia/',
+          imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=600&fit=crop',
+          source: 'El País',
+          category: 'Tecnología',
+          priority: 3
+        },
+        {
+          title: 'Apple presenta nuevos productos innovadores',
+          description: 'La empresa tecnológica revela sus últimas innovaciones en el evento anual con características revolucionarias.',
+          link: 'https://www.bbc.com/news/technology',
+          imageUrl: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=1200&h=600&fit=crop',
+          source: 'BBC',
+          category: 'Tecnología',
+          priority: 2
+        }
+      ],
+      'cultura': [
+        {
+          title: 'Festival de Cannes: Las películas más esperadas',
+          description: 'El prestigioso festival de cine presenta las producciones más innovadoras y polémicas de la temporada.',
+          link: 'https://elpais.com/cultura/',
+          imageUrl: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1200&h=600&fit=crop',
+          source: 'El País',
+          category: 'Cultura',
+          priority: 3
+        },
+        {
+          title: 'Exposición de arte contemporáneo en Madrid',
+          description: 'Los mejores artistas contemporáneos presentan sus obras más impactantes en una muestra sin precedentes.',
+          link: 'https://www.clarin.com/cultura/',
+          imageUrl: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&h=600&fit=crop',
+          source: 'Clarín',
+          category: 'Cultura',
+          priority: 2
+        }
+      ],
+      'autos': [
+        {
+          title: 'Tesla presenta su nuevo modelo revolucionario',
+          description: 'La empresa de Elon Musk revela su vehículo más avanzado con tecnología de conducción autónoma de nivel 5.',
+          link: 'https://www.clarin.com/autos/',
+          imageUrl: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&h=600&fit=crop',
+          source: 'Clarín',
+          category: 'Autos',
+          priority: 3
+        },
+        {
+          title: 'Fórmula 1: Nueva temporada con cambios radicales',
+          description: 'Los equipos de F1 presentan sus monoplazas con las nuevas regulaciones técnicas que prometen carreras más emocionantes.',
+          link: 'https://www.bbc.com/sport/formula1',
+          imageUrl: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&h=600&fit=crop',
+          source: 'BBC Sport',
+          category: 'Autos',
+          priority: 2
+        }
+      ],
+      'index': [
+        {
+          title: 'Crisis económica global: Análisis de expertos',
+          description: 'Los economistas analizan las tendencias del mercado internacional y sus implicaciones para el futuro económico mundial.',
+          link: 'https://elpais.com/economia/',
+          imageUrl: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&h=600&fit=crop',
+          source: 'El País',
+          category: 'Economía',
+          priority: 3
+        },
+        {
+          title: 'Cumbre mundial sobre cambio climático',
+          description: 'Los líderes mundiales se reúnen para discutir medidas urgentes contra el calentamiento global y sus consecuencias.',
+          link: 'https://elpais.com/internacional/',
+          imageUrl: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop',
+          source: 'El País',
+          category: 'Internacional',
+          priority: 3
+        }
+      ]
+    };
+    
+    this.slides = fallbackContent[pageName] || fallbackContent['index'];
     this.renderBanner();
   }
 
@@ -204,134 +419,162 @@ class BannerManager {
 
     container.innerHTML = '';
 
+    // Crear el carrusel principal con Bootstrap
+    const carousel = document.createElement('div');
+    carousel.className = 'carousel slide';
+    carousel.id = 'mainBannerCarousel';
+    carousel.setAttribute('data-bs-ride', 'carousel');
+    carousel.setAttribute('data-bs-interval', '5000');
+
+    // Contenido del carrusel
+    const carouselInner = document.createElement('div');
+    carouselInner.className = 'carousel-inner';
+
     this.slides.forEach((slide, index) => {
       const carouselItem = document.createElement('div');
       carouselItem.className = `carousel-item ${index === 0 ? 'active' : ''}`;
       
       carouselItem.innerHTML = `
-        <div class="position-relative">
-          <img src="${slide.imageUrl}" class="d-block w-100" alt="${slide.title}">
-          <div class="carousel-caption d-none d-md-block">
-            <h2>${slide.title}</h2>
-            <p>${slide.description}</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <small><i class="bi bi-newspaper"></i> ${slide.source}</small>
-              <a href="${slide.link}" class="btn btn-primary" target="_blank">
-                <i class="bi bi-arrow-right"></i> Leer más
-              </a>
+        <div class="banner-slide">
+          <div class="banner-image-container">
+            <img src="${slide.imageUrl}" class="banner-image" alt="${slide.title}" loading="${index === 0 ? 'eager' : 'lazy'}">
+            <div class="banner-overlay"></div>
+          </div>
+          <div class="banner-content">
+            <div class="banner-badges">
+              <span class="banner-category-badge">${slide.category}</span>
+              <span class="banner-source-badge">
+                <i class="bi bi-newspaper"></i> ${slide.source}
+              </span>
+            </div>
+            <div class="banner-text">
+              <h1 class="banner-title">${slide.title}</h1>
+              <p class="banner-description">${slide.description}</p>
+              <div class="banner-actions">
+                <a href="${slide.link}" class="btn btn-primary btn-lg banner-btn" target="_blank">
+                  <i class="bi bi-arrow-right"></i> Leer completo
+                </a>
+                <div class="banner-meta">
+                  <small class="text-light">
+                    <i class="bi bi-clock"></i> ${this.formatDate(slide.pubDate)}
+                  </small>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       `;
       
-      container.appendChild(carouselItem);
+      carouselInner.appendChild(carouselItem);
     });
 
-    // Agregar controles del carrusel
-    this.addCarouselControls();
+    carousel.appendChild(carouselInner);
+
+    // Controles del carrusel
+    const controls = `
+      <button class="carousel-control-prev banner-control" type="button" data-bs-target="#mainBannerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next banner-control" type="button" data-bs-target="#mainBannerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+      <div class="carousel-indicators banner-indicators">
+        ${this.slides.map((_, index) => `
+          <button type="button" data-bs-target="#mainBannerCarousel" data-bs-slide-to="${index}" 
+                  class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></button>
+        `).join('')}
+      </div>
+    `;
+
+    carousel.innerHTML += controls;
+    container.appendChild(carousel);
+
+    // Agregar categorías flotantes al banner
+    this.addFloatingCategories(container);
+
+    // Inicializar el carrusel de Bootstrap
+    if (typeof bootstrap !== 'undefined') {
+      new bootstrap.Carousel(carousel, {
+        interval: 5000,
+        wrap: true,
+        keyboard: true,
+        pause: 'hover'
+      });
+    }
   }
 
-  addCarouselControls() {
-    const container = document.getElementById('carousel-inner-news');
-    if (!container) return;
-
-    // Botones de navegación
-    const prevButton = document.createElement('button');
-    prevButton.className = 'carousel-control-prev';
-    prevButton.type = 'button';
-    prevButton.setAttribute('data-bs-target', '#carousel-inner-news');
-    prevButton.setAttribute('data-bs-slide', 'prev');
-    prevButton.innerHTML = `
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    `;
-
-    const nextButton = document.createElement('button');
-    nextButton.className = 'carousel-control-next';
-    nextButton.type = 'button';
-    nextButton.setAttribute('data-bs-target', '#carousel-inner-news');
-    nextButton.setAttribute('data-bs-slide', 'next');
-    nextButton.innerHTML = `
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Siguiente</span>
-    `;
-
-    container.appendChild(prevButton);
-    container.appendChild(nextButton);
-
-    // Indicadores
-    const indicatorsContainer = document.createElement('div');
-    indicatorsContainer.className = 'carousel-indicators';
-    indicatorsContainer.setAttribute('data-bs-target', '#carousel-inner-news');
-
-    this.slides.forEach((_, index) => {
-      const indicator = document.createElement('button');
-      indicator.type = 'button';
-      indicator.setAttribute('data-bs-target', '#carousel-inner-news');
-      indicator.setAttribute('data-bs-slide-to', index);
-      indicator.className = index === 0 ? 'active' : '';
-      indicator.setAttribute('aria-label', `Slide ${index + 1}`);
-      
-      indicatorsContainer.appendChild(indicator);
-    });
-
-    container.appendChild(indicatorsContainer);
+  formatDate(dateString) {
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch (error) {
+      return 'Hace poco';
+    }
   }
 
   startAutoPlay() {
-    this.autoPlayInterval = setInterval(() => {
-      this.nextSlide();
-    }, 5000); // Cambiar cada 5 segundos
+    // El autoplay ahora se maneja por Bootstrap Carousel
   }
 
   stopAutoPlay() {
-    if (this.autoPlayInterval) {
-      clearInterval(this.autoPlayInterval);
-      this.autoPlayInterval = null;
-    }
+    // El autoplay ahora se maneja por Bootstrap Carousel
   }
 
-  nextSlide() {
-    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-    this.showSlide(this.currentSlide);
-  }
-
-  prevSlide() {
-    this.currentSlide = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
-    this.showSlide(this.currentSlide);
-  }
-
-  showSlide(index) {
-    const items = document.querySelectorAll('#carousel-inner-news .carousel-item');
-    const indicators = document.querySelectorAll('#carousel-inner-news .carousel-indicators button');
+  addFloatingCategories(container) {
+    const floatingCategories = document.createElement('div');
+    floatingCategories.className = 'floating-categories';
+    floatingCategories.innerHTML = `
+      <div class="container">
+        <div class="category-pills">
+          <a href="deportes.html" class="category-pill category-pill-deportes">
+            <i class="bi bi-trophy-fill"></i>
+            <span>Deportes</span>
+          </a>
+          <a href="tecnologia.html" class="category-pill category-pill-tecnologia">
+            <i class="bi bi-cpu-fill"></i>
+            <span>Tecnología</span>
+          </a>
+          <a href="cultura.html" class="category-pill category-pill-cultura">
+            <i class="bi bi-book-half"></i>
+            <span>Cultura</span>
+          </a>
+          <a href="autos.html" class="category-pill category-pill-autos">
+            <i class="bi bi-gear-fill"></i>
+            <span>Motores</span>
+          </a>
+        </div>
+      </div>
+    `;
     
-    items.forEach((item, i) => {
-      item.classList.toggle('active', i === index);
-    });
-    
-    indicators.forEach((indicator, i) => {
-      indicator.classList.toggle('active', i === index);
-    });
-    
-    this.currentSlide = index;
+    container.appendChild(floatingCategories);
   }
 
   setupControls() {
-    // Pausar autoplay al hacer hover
-    const carousel = document.getElementById('carousel-inner-news');
+    // Los controles ahora se manejan por Bootstrap Carousel
+    const carousel = document.getElementById('mainBannerCarousel');
     if (carousel) {
-      carousel.addEventListener('mouseenter', () => this.stopAutoPlay());
-      carousel.addEventListener('mouseleave', () => this.startAutoPlay());
+      // Pausar en hover
+      carousel.addEventListener('mouseenter', () => {
+        if (typeof bootstrap !== 'undefined') {
+          const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+          if (bsCarousel) bsCarousel.pause();
+        }
+      });
+      
+      carousel.addEventListener('mouseleave', () => {
+        if (typeof bootstrap !== 'undefined') {
+          const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+          if (bsCarousel) bsCarousel.cycle();
+        }
+      });
     }
-
-    // Controles de teclado
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        this.prevSlide();
-      } else if (e.key === 'ArrowRight') {
-        this.nextSlide();
-      }
-    });
   }
 }
 
