@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postbuild": "node indexnow.js"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",

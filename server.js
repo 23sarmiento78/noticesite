@@ -231,6 +231,44 @@ async function publicarTweetsPeriodicamente() {
 // Ejecutar la función cada 5 minutos (300000 milisegundos)
 setInterval(publicarTweetsPeriodicamente, 300000);
 
+// --- INICIO: Watcher IndexNow ---
+const fs = require('fs');
+const path = require('path');
+const { sendToIndexNow } = require('./indexnow');
+
+/**
+ * Extrae URLs de un archivo sitemap XML simple
+ * @param {string} xmlPath
+ * @returns {string[]} Array de URLs
+ */
+function extractUrlsFromSitemap(xmlPath) {
+  try {
+    const xml = fs.readFileSync(xmlPath, 'utf8');
+    // Extrae <loc>URL</loc>
+    const urls = Array.from(xml.matchAll(/<loc>([^<]+)<\/loc>/g)).map(m => m[1]);
+    return urls;
+  } catch (err) {
+    console.error(`[IndexNow] Error leyendo ${xmlPath}:`, err);
+    return [];
+  }
+}
+
+function watchAndIndex(xmlFile) {
+  const absPath = path.resolve(__dirname, xmlFile);
+  fs.watchFile(absPath, { interval: 2000 }, (curr, prev) => {
+    if (curr.mtime !== prev.mtime) {
+      console.log(`[IndexNow] Detectado cambio en ${xmlFile}. Enviando URLs a IndexNow...`);
+      const urls = extractUrlsFromSitemap(absPath);
+      sendToIndexNow(urls);
+    }
+  });
+  console.log(`[IndexNow] Vigilando cambios en ${xmlFile}`);
+}
+
+watchAndIndex('sitemap.xml');
+watchAndIndex('sistemapGNRAL.xml');
+// --- FIN: Watcher IndexNow ---
+
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
