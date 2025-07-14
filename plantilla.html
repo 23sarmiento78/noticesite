@@ -1,23 +1,328 @@
+// Importamos la librería 'xml2js' para parsear y construir XML.
+// Pipedream la instalará automáticamente si no está.
+import { parseStringPromise, Builder } from 'xml2js';
 
+export default defineComponent({
+  async run({ steps, $ }) {
+    // --- CONFIGURACIÓN REQUERIDA: ¡YA ACTUALIZADA CON TUS DATOS! ---
+    const NETLIFY_BASE_URL = "https://es.hgaruna.org";
+    const ARTICLES_SUBFOLDER = "articulos/"; // Asegúrate de que esta subcarpeta exista o sea ""
+    // --- FIN DE CONFIGURACIÓN ---
+
+    // ====================================================================
+    // PARTE 1: GENERACIÓN DEL ARTÍCULO HTML
+    // ====================================================================
+
+    // Log completo para depuración
+    console.log("DEBUG: steps.generate_content_from_text:", steps.generate_content_from_text);
+    console.log("DEBUG: steps.gemini_step:", steps.gemini_step);
+
+    // Intenta varias rutas posibles para la salida de Gemini
+    let geminiRawOutput = 
+      steps.gemini_step?.gemini_response ||
+      steps.generate_content_from_text?.choices?.[0]?.message?.content ||
+      steps.generate_content_from_text?.choices?.[0]?.text ||
+      steps.generate_content_from_text?.$return_value ||
+      steps.generate_content_from_text?.content ||
+      '';
+    geminiRawOutput = String(geminiRawOutput);
+
+    // Si la salida de Gemini es inválida o vacía, salimos
+    if (geminiRawOutput.trim() === '') {
+      console.error("La salida de Gemini es inválida o vacía. Deteniendo el flujo.");
+      $.flow.exit("No se pudo obtener contenido válido de Gemini.");
+      return;
+    }
+
+    let articleData = {};
+
+    // --- MEJORADA: DETECCIÓN Y PARSEO DE JSON ---
+    try {
+      // Intentamos parsear la salida de Gemini como JSON
+      const geminiParsedContent = JSON.parse(geminiRawOutput);
+
+      // Validar que geminiParsedContent sea un objeto y contenga las claves esperadas
+      if (typeof geminiParsedContent === 'object' && geminiParsedContent !== null) {
+        // Aseguramos que 'articleData' tenga los campos esperados del prompt de Gemini
+        articleData = {
+          titulo: geminiParsedContent.titulo || "Título Generado por IA",
+          resumen: geminiParsedContent.resumen || "Resumen no disponible.",
+          slug: geminiParsedContent.slug || "", // Inicializamos slug como string vacío para generar si no existe
+          keywords: geminiParsedContent.keywords || [],
+          fuente: geminiParsedContent.fuente || "Fuente no disponible",
+          articulo_completo: geminiParsedContent.articulo_completo || "Contenido no disponible."
+        };
+        console.log("✅ JSON de Gemini parseado correctamente.");
+      } else {
+        console.warn("⚠️ Gemini output fue JSON válido, pero la estructura no es la esperada. Usando fallback.");
+        articleData = {
+          titulo: "Artículo Generado (Fallback JSON)",
+          resumen: "Contenido inesperado de Gemini.",
+          slug: "",
+          keywords: [],
+          fuente: "N/A",
+          articulo_completo: geminiRawOutput
+        };
+      }
+    } catch (e) {
+      console.error("❌ Error al parsear el JSON de Gemini. Intentando extraer contenido del texto crudo:", e.message);
+      // Si falla el parseo completo, intentamos buscar un JSON incrustado o usar el texto crudo.
+      const jsonMatch = geminiRawOutput.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        try {
+          const extractedJson = JSON.parse(jsonMatch[0]);
+          // Si encontramos un JSON, intentamos obtener los campos de ahí
+          articleData = {
+            titulo: extractedJson.titulo || "Artículo Generado (JSON Embebido)",
+            resumen: extractedJson.resumen || "Resumen no disponible.",
+            slug: extractedJson.slug || "",
+            keywords: extractedJson.keywords || [],
+            fuente: extractedJson.fuente || "Fuente no disponible",
+            articulo_completo: extractedJson.articulo_completo || extractedJson.content || geminiRawOutput // content como fallback para el cuerpo
+          };
+          console.log("✅ Contenido extraído del JSON embebido en el texto.");
+        } catch (jsonError) {
+          console.error("❌ Error al parsear JSON extraído del texto:", jsonError.message);
+          // Si incluso el JSON embebido falla, usamos el texto completo como contenido.
+          articleData = {
+            titulo: "Artículo Generado (Fallback Crudo)",
+            resumen: "Error en formato de salida de Gemini. Texto crudo utilizado.",
+            slug: "",
+            keywords: [],
+            fuente: "N/A",
+            articulo_completo: geminiRawOutput
+          };
+        }
+      } else {
+        // Si no hay JSON en absoluto, usar el texto crudo como contenido principal
+        articleData = {
+          titulo: "Artículo Generado (Texto Crudo)",
+          resumen: "Contenido directo de Gemini, sin formato JSON.",
+          slug: "",
+          keywords: [],
+          fuente: "N/A",
+          articulo_completo: geminiRawOutput
+        };
+      }
+    }
+
+    // Usar los datos obtenidos para construir el artículo
+    let tituloArticulo = articleData.titulo;
+    const subtituloArticulo = articleData.resumen; // Usamos el resumen de Gemini como subtítulo/descripción corta
+
+    // --- VALIDACIÓN DE TÍTULO ÚNICO Y PERIODÍSTICO ---
+    const TITULOS_INVALIDOS = [
+      "Artículo Generado (Texto Crudo)",
+      "Artículo Generado (Fallback Crudo)",
+      "Artículo Generado (Fallback JSON)",
+      "Título Generado por IA",
+      "Artículo de Noticias",
+      "Título no disponible",
+      "Artículo generado por IA"
+    ];
+    if (
+      !tituloArticulo ||
+      TITULOS_INVALIDOS.includes(tituloArticulo.trim()) ||
+      tituloArticulo.length < 10
+    ) {
+      // Genera un título alternativo usando la fecha y una palabra clave del contenido
+      const fecha = new Date().toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' });
+      let palabraClave = "Noticia";
+      if (Array.isArray(articleData.keywords) && articleData.keywords.length > 0) {
+        palabraClave = articleData.keywords[0][0].toUpperCase() + articleData.keywords[0].slice(1);
+      } else if (typeof articleData.keywords === 'string' && articleData.keywords.length > 0) {
+        palabraClave = articleData.keywords.split(',')[0].trim();
+      }
+      tituloArticulo = `Actualidad sobre ${palabraClave} - ${fecha}`;
+      console.warn("⚠️ Título genérico detectado. Se generó uno alternativo:", tituloArticulo);
+    }
+    
+    // --- MEJORADO: PROCESAMIENTO DEL CONTENIDO ---
+    let contenidoArticulo = articleData.articulo_completo || "Contenido no disponible.";
+    
+    // Log para debugging del contenido
+    console.log("DEBUG: Tipo de contenidoArticulo:", typeof contenidoArticulo);
+    console.log("DEBUG: ContenidoArticulo (primeros 200 chars):", String(contenidoArticulo).substring(0, 200));
+    
+    // Convertir a string si no lo es
+    if (typeof contenidoArticulo !== 'string') {
+      console.warn("⚠️ contenidoArticulo no es string, convirtiendo...");
+      contenidoArticulo = String(contenidoArticulo);
+    }
+    
+    // Verificar si el contenido es válido
+    if (!contenidoArticulo || contenidoArticulo.trim() === '' || contenidoArticulo === '[object Object]') {
+      console.error("❌ Contenido inválido detectado:", contenidoArticulo);
+      contenidoArticulo = "Lo sentimos, el contenido del artículo no se pudo procesar correctamente. Por favor, inténtalo de nuevo más tarde.";
+    }
+
+    // --- LÓGICA PARA LIMPIAR Y FORMATEAR CONTENIDO HTML ---
+    // Si el contenido aún tiene escapes de JSON, los eliminamos y convertimos a párrafos
+    contenidoArticulo = contenidoArticulo
+      .replace(/\\n/g, '\n') // Reemplaza \\n por \n
+      .replace(/\"/g, '"') // Reemplaza \" por "
+      .replace(/\\\\/g, '\\') // Reemplaza \\\\ por \\
+      .replace(/\n\n/g, '</p><p>') // Dos saltos de línea para nuevos párrafos
+      .replace(/\n/g, '<br>'); // Un solo salto de línea para <br>
+
+    // Asegurarse de que el contenido esté dentro de etiquetas <p> si no lo está
+    if (!contenidoArticulo.trim().startsWith('<') && contenidoArticulo.trim() !== '') {
+      contenidoArticulo = '<p>' + contenidoArticulo + '</p>';
+    } else if (contenidoArticulo.trim() === '') {
+      contenidoArticulo = '<p>Contenido del artículo no disponible.</p>';
+    }
+    
+    // Log final del contenido procesado
+    console.log("DEBUG: Contenido final procesado (primeros 300 chars):", contenidoArticulo.substring(0, 300));
+
+    // --- FUNCIÓN PARA CREAR EL SLUG ACORTADO ---
+    const createSlug = (text) => {
+      if (!text || typeof text !== 'string') {
+        console.log("DEBUG: createSlug recibió valor inválido:", text);
+        return 'articulo-generado-ia';
+      }
+      
+      const slug = text
+        .toString()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '')
+        .replace(/--+/g, '-')
+        .substring(0, 50); // Limita la longitud del slug
+      
+      // Si después de procesar queda vacío, usar fallback
+      if (!slug || slug.trim() === '') {
+        console.log("DEBUG: createSlug resultó en string vacío, usando fallback");
+        return 'articulo-generado-ia';
+      }
+      
+      console.log("DEBUG: createSlug generó:", slug);
+      return slug;
+    };
+
+    // --- FUNCIÓN PARA ACORTAR TÍTULO (para meta tags) ---
+    const shortenTitle = (title, maxLength = 60) => {
+      if (!title || title.length <= maxLength) return title;
+      return title.substring(0, maxLength).trim() + '...';
+    };
+
+    // --- FUNCIÓN PARA GENERAR META DESCRIPCIÓN ---
+    const generateMetaDescription = (content, maxLength = 160) => {
+      const cleanContent = content.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+      if (cleanContent.length <= maxLength) return cleanContent;
+      return cleanContent.substring(0, maxLength).trim() + '...';
+    };
+
+    // --- FUNCIÓN PARA EXTRAER PALABRAS CLAVE ---
+    // Usamos las keywords de Gemini si las proporciona, si no, generamos de contenido
+    const extractKeywords = (title, content, geminiKeywords) => {
+      if (geminiKeywords && Array.isArray(geminiKeywords) && geminiKeywords.length > 0) {
+        return geminiKeywords.join(', ');
+      }
+      const allText = (title + ' ' + content).toLowerCase();
+      const words = allText.replace(/[^\w\s]/g, '').split(/\s+/);
+      const wordCount = {};
+
+      words.forEach(word => {
+        if (word.length > 3) {
+          wordCount[word] = (wordCount[word] || 0) + 1;
+        }
+      });
+
+      const keywords = Object.entries(wordCount)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 10)
+        .map(([word]) => word);
+
+      return keywords.join(', ');
+    };
+
+    // --- FUNCIÓN PARA ESCAPAR CADENAS PARA JAVASCRIPT DENTRO DE HTML ---
+    const jsEscape = (str) => {
+      return str
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '\\"')
+        .replace(/`/g, '\\`');
+    };
+
+    const hoy = new Date();
+    const fechaFormateada = hoy.toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Logs de depuración para el nombre del archivo
+    console.log("DEBUG: articleData.slug:", articleData.slug);
+    console.log("DEBUG: tituloArticulo:", tituloArticulo);
+    
+    // Si siempre generamos el slug a partir del título final validado
+    let articleSlug = createSlug(tituloArticulo);
+    if (!articleSlug || articleSlug === 'articulo-generado-ia') {
+      // Si el slug sigue siendo genérico, añade un sufijo único
+      const fecha = new Date().toISOString().slice(0,10).replace(/-/g, '');
+      articleSlug = `noticia-${fecha}`;
+      console.warn("⚠️ Slug genérico detectado. Se generó uno alternativo:", articleSlug);
+    }
+    
+    console.log("DEBUG: articleSlug final:", articleSlug);
+    
+    const year = hoy.getFullYear();
+    const month = String(hoy.getMonth() + 1).padStart(2, '0');
+    const day = String(hoy.getDate()).padStart(2, '0');
+    const nombreArchivo = `${articleSlug}-${year}-${month}-${day}.html`;
+    
+    console.log("DEBUG: nombreArchivo final:", nombreArchivo);
+    
+    // Validación final del nombre del archivo
+    if (!nombreArchivo || nombreArchivo.includes('undefined') || nombreArchivo.trim() === '') {
+      console.error("❌ ERROR: Nombre de archivo inválido generado:", nombreArchivo);
+      const fallbackFileName = `articulo-generado-ia-${year}-${month}-${day}.html`;
+      console.log("✅ Usando nombre de archivo de respaldo:", fallbackFileName);
+      nombreArchivo = fallbackFileName;
+    }
+    
+    const finalArticleUrl = `${NETLIFY_BASE_URL}/${ARTICLES_SUBFOLDER}${nombreArchivo}`;
+
+    // Generar meta tags
+    const metaTitle = shortenTitle(tituloArticulo, 60);
+    const metaDescription = generateMetaDescription(subtituloArticulo); // Usamos el resumen de Gemini
+    const metaKeywords = extractKeywords(tituloArticulo, contenidoArticulo, articleData.keywords); // Usamos las keywords de Gemini si existen
+
+    // --- Obtener la URL de la imagen del paso 'code2' ---
+    // <-- IMPORTANTE: Asegúrate que 'code2' es el nombre correcto del paso RSS
+    // y que el exportado sea 'article_image_url'.
+    // Añadimos un fallback más claro para depuración.
+    const articleImageUrl = steps.code2?.article_image_url || 'https://placehold.co/800x450/cccccc/333333?text=Imagen+por+Defecto';
+    console.log("DEBUG: articleImageUrl recibido de code2:", articleImageUrl);
+
+    // Log para debugging
+    console.log("📝 Título final HTML:", tituloArticulo);
+    console.log("📝 Subtítulo/Resumen final HTML:", subtituloArticulo);
+    console.log("📝 URL del Artículo Final:", finalArticleUrl);
+    console.log("📝 Contenido final HTML (primeros 500 chars):", contenidoArticulo.substring(0, 500));
+    console.log("📝 URL de la imagen del artículo:", articleImageUrl); // Nuevo log para la imagen
+
+    const htmlFinal = `
     <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artículo Generado (Texto Crudo)</title>
-    <meta name="description" content="Contenido directo de Gemini, sin formato JSON.">
-    <meta name="keywords" content="artculo, generado, texto, crudo, pobject, objectp">
+    <title>${metaTitle}</title>
+    <meta name="description" content="${metaDescription}">
+    <meta name="keywords" content="${metaKeywords}">
     <meta name="author" content="HGARUNA News">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Artículo Generado (Texto Crudo)">
-    <meta property="og:description" content="Contenido directo de Gemini, sin formato JSON.">
+    <meta property="og:title" content="${metaTitle}">
+    <meta property="og:description" content="${metaDescription}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://es.hgaruna.org/articulos/articulo-generado-texto-crudo-2025-07-14.html">
-    <meta property="og:image" content="https://www.clarin.com/img/2025/07/13/OIuNPfpAN_1200x630__1.jpg">
+    <meta property="og:url" content="${finalArticleUrl}">
+    <meta property="og:image" content="${articleImageUrl}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Artículo Generado (Texto Crudo)">
-    <meta name="twitter:description" content="Contenido directo de Gemini, sin formato JSON.">
-    <meta name="twitter:image" content="https://www.clarin.com/img/2025/07/13/OIuNPfpAN_1200x630__1.jpg">
+    <meta name="twitter:title" content="${metaTitle}">
+    <meta name="twitter:description" content="${metaDescription}">
+    <meta name="twitter:image" content="${articleImageUrl}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../main.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -514,17 +819,17 @@
     <div class="static-container">
         <div class="static-header">
             <h1 class="static-title">
-                <i class="bi bi-newspaper"></i> Artículo Generado (Texto Crudo)
+                <i class="bi bi-newspaper"></i> ${tituloArticulo}
             </h1>
             <p class="static-subtitle">
-                <i class="bi bi-calendar3"></i> 14 de julio de 2025
+                <i class="bi bi-calendar3"></i> ${fechaFormateada}
             </p>
             <div class="static-badges">
                 <span class="static-badge">
                     <i class="bi bi-robot"></i> Generado por IA
                 </span>
                 <span class="static-badge">
-                    <i class="bi bi-clock"></i> 14/7/2025, 05:13 a. m.
+                    <i class="bi bi-clock"></i> ${hoy.toLocaleDateString('es-AR', { hour: '2-digit', minute: '2-digit' })}
                 </span>
                 <span class="static-badge">
                     <i class="bi bi-eye"></i> Lectura Inteligente
@@ -532,7 +837,7 @@
             </div>
         </div>
 
-        <img src="https://www.clarin.com/img/2025/07/13/OIuNPfpAN_1200x630__1.jpg" alt="Artículo Generado (Texto Crudo)" class="article-image">
+        ${articleImageUrl && articleImageUrl !== 'https://placehold.co/800x450/cccccc/333333?text=Imagen+por+Defecto' ? `<img src="${articleImageUrl}" alt="${tituloArticulo}" class="article-image">` : ''}
 
         <div class="static-divider"></div>
 
@@ -543,7 +848,7 @@
             </div>
 
             <div class="article-body">
-                <p>[object Object]</p>
+                ${contenidoArticulo}
             </div>
         </div>
 
@@ -604,7 +909,7 @@
         // Funciones de compartir
         function shareOnTwitter() {
             const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent('Artículo Generado (Texto Crudo)');
+            const text = encodeURIComponent('${jsEscape(metaTitle)}');
             window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + text, '_blank');
         }
 
@@ -615,8 +920,8 @@
 
         function shareOnLinkedIn() {
             const url = encodeURIComponent(window.location.href);
-            const title = encodeURIComponent('Artículo Generado (Texto Crudo)');
-            const summary = encodeURIComponent('Contenido directo de Gemini, sin formato JSON.');
+            const title = encodeURIComponent('${jsEscape(metaTitle)}');
+            const summary = encodeURIComponent('${jsEscape(metaDescription)}');
             window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url + '&title=' + title + '&summary=' + summary, '_blank');
         }
 
@@ -641,4 +946,14 @@
     </script>
 </body>
 </html>
-    
+    `;
+
+    // Exportamos el HTML final y los datos relevantes para los siguientes pasos
+    $.export("html_content", htmlFinal);
+    $.export("file_name", nombreArchivo);
+    $.export("article_final_url", finalArticleUrl); // La URL completa del artículo en Netlify
+    $.export("titulo_articulo_final", tituloArticulo);
+    $.export("meta_description_final", metaDescription);
+    $.export("article_image_url_final", articleImageUrl); // URL de la imagen que se usó en el HTML
+  },
+}); 

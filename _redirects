@@ -5,5 +5,8 @@
 # Redirección para archivos HTML en la raíz
 /*.html /:splat 200
 
+# Redirección específica para artículos sin carpeta articulos/
+/articulo-generado-texto-crudo-2025-07-14.html /articulos/articulo-generado-texto-crudo-2025-07-14.html 301
+
 # Regla de fallback para SPA (si tienes una aplicación de una sola página)
 /* /index.html 200 
