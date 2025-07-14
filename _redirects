@@ -1,0 +1,9 @@
+# Reglas de redirección para Netlify
+# Permitir acceso directo a archivos HTML en la carpeta articulos/
+/articulos/* /articulos/:splat 200
+
+# Redirección para archivos HTML en la raíz
+/*.html /:splat 200
+
+# Regla de fallback para SPA (si tienes una aplicación de una sola página)
+/* /index.html 200 

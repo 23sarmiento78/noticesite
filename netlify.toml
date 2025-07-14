@@ -3,4 +3,15 @@
   publish = "."
 
 [build.environment]
-  PYTHON_VERSION = "3.9" 
+  PYTHON_VERSION = "3.9"
+
+# Configuración para servir archivos estáticos
+[[headers]]
+  for = "/articulos/*"
+  [headers.values]
+    Content-Type = "text/html"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Content-Type = "text/html" 
