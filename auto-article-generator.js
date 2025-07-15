@@ -110,13 +110,21 @@ Actúa como un redactor SEO profesional y experto en marketing de contenidos. Tu
 
 El JSON DEBE contener las siguientes claves y seguir este formato EXACTAMENTE:
 {
-  "titulo": "string",
-  "resumen": "string",
-  "slug": "string",
-  "keywords": ["string", "string"],
-  "fuente": "string",
-  "articulo_completo": "string"
+  "titulo": "string",          // Titulo principal del artículo. Debe ser atractivo, incluir palabras clave relevantes y no exceder los 70 caracteres.
+  "resumen": "string",         // Descripción corta o subtítulo (meta-description). Debe ser una sinopsis concisa de 2 a 3 frases, optimizada para SEO (aprox. 150-160 caracteres).
+  "slug": "string",            // Versión amigable para URL del título. Minúsculas, sin espacios (guiones en su lugar), sin caracteres especiales, longitud máxima 50 caracteres.
+  "keywords": ["string", "string"], // Array de strings. Contiene entre 5 y 10 palabras clave y frases relevantes para el artículo, separadas por comas.
+  "fuente": "string",          // URL o nombre de la fuente original del artículo.
+  "articulo_completo": "string" // Contenido extenso del artículo. DEBE estar en formato HTML bien estructurado con etiquetas <p>, <h2>, <h3>, <ul>, <ol>, <blockquote>, etc. No incluyas <head>, <body>, <html> ni otros elementos de página completa. Solo el contenido del body. ASEGÚRATE DE QUE ESTE CAMPO SIEMPRE EXISTA Y CONTENGA EL TEXTO DEL ARTÍCULO. El artículo debe tener al menos 8000 palabras.
 }
+
+Criterios adicionales para la generación:
+- El 'titulo' debe ser llamativo y relevante al contenido original.
+- El 'resumen' debe ser persuasivo y contener las principales palabras clave del artículo.
+- Las 'keywords' deben ser una mezcla de palabras clave de cola corta y cola larga.
+- El 'articulo_completo' debe ser una reescritura o expansión del contenido original si es posible, aportando valor adicional y con formato HTML semántico. Si el contenido original es muy corto, expande la información de manera coherente.
+- Asegúrate de que el JSON resultante sea VÁLIDO y pueda ser parseado directamente.
+- El artículo debe tener al menos 8000 palabras.
 
 Aquí está el contenido del artículo a procesar:
 ---
@@ -125,6 +133,7 @@ Contenido Original:
 ${extractedArticleContent}
 Fuente Original: ${latestArticle.link || "https://www.clarin.com/"}
 ---
+
 Por favor, genera SÓLO el objeto JSON. No añadas texto introductorio ni explicaciones fuera del JSON.
 `;
   // --- 2. Llamar a Gemini API ---
@@ -158,15 +167,120 @@ Por favor, genera SÓLO el objeto JSON. No añadas texto introductorio ni explic
   const month = String(hoy.getMonth() + 1).padStart(2, '0');
   const day = String(hoy.getDate()).padStart(2, '0');
   const createSlug = (text) => {
-    return text.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-').substring(0, 50) || 'articulo-generado-ia';
+    if (!text || typeof text !== 'string') return 'articulo-generado-ia';
+    const slug = text
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .replace(/--+/g, '-')
+      .substring(0, 50);
+    return slug || 'articulo-generado-ia';
   };
   let articleSlug = articleData.slug || createSlug(articleData.titulo);
+  if (!articleSlug || articleSlug === 'articulo-generado-ia') {
+    const fecha = new Date().toISOString().slice(0,10).replace(/-/g, '');
+    articleSlug = `noticia-${fecha}`;
+  }
   const nombreArchivo = `${articleSlug}-${year}-${month}-${day}.html`;
   const finalArticleUrl = `${NETLIFY_BASE_URL}/articulos/${nombreArchivo}`;
   const metaTitle = articleData.titulo;
   const metaDescription = articleData.resumen;
   const metaKeywords = Array.isArray(articleData.keywords) ? articleData.keywords.join(', ') : '';
-  const htmlFinal = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n<meta charset=\"UTF-8\">\n<title>${metaTitle}</title>\n<meta name=\"description\" content=\"${metaDescription}\">\n<meta name=\"keywords\" content=\"${metaKeywords}\">\n<meta property=\"og:title\" content=\"${metaTitle}\">\n<meta property=\"og:description\" content=\"${metaDescription}\">\n<meta property=\"og:image\" content=\"${articleImageUrl}\">\n<meta property=\"og:url\" content=\"${finalArticleUrl}\">\n<link rel=\"stylesheet\" href=\"../main.css\" />\n</head>\n<body>\n<h1>${metaTitle}</h1>\n<p>${metaDescription}</p>\n${articleImageUrl ? `<img src=\"${articleImageUrl}\" alt=\"${metaTitle}\" style=\"max-width:100%;margin-bottom:20px;\">` : ''}\n${articleData.articulo_completo}\n</body>\n</html>`;
+  // Plantilla avanzada
+  const htmlFinal = `
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${metaTitle}</title>
+    <meta name="description" content="${metaDescription}">
+    <meta name="keywords" content="${metaKeywords}">
+    <meta name="author" content="HGARUNA News">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="${metaTitle}">
+    <meta property="og:description" content="${metaDescription}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="${finalArticleUrl}">
+    <meta property="og:image" content="${articleImageUrl}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${metaTitle}">
+    <meta name="twitter:description" content="${metaDescription}">
+    <meta name="twitter:image" content="${articleImageUrl}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <style>/* ... (aquí va el CSS de la plantilla avanzada, igual que en tu ejemplo) ... */</style>
+</head>
+<body>
+    <div class="reading-progress" id="readingProgress"></div>
+    <div class="static-container">
+        <div class="static-header">
+            <h1 class="static-title">
+                <i class="bi bi-newspaper"></i> ${metaTitle}
+            </h1>
+            <p class="static-subtitle">
+                <i class="bi bi-calendar3"></i> ${hoy.toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+            <div class="static-badges">
+                <span class="static-badge">
+                    <i class="bi bi-robot"></i> Generado por IA
+                </span>
+                <span class="static-badge">
+                    <i class="bi bi-clock"></i> ${hoy.toLocaleDateString('es-AR', { hour: '2-digit', minute: '2-digit' })}
+                </span>
+                <span class="static-badge">
+                    <i class="bi bi-eye"></i> Lectura Inteligente
+                </span>
+            </div>
+        </div>
+        ${articleImageUrl && articleImageUrl !== 'https://placehold.co/800x450/cccccc/333333?text=Imagen+No+Disponible' ? `<img src="${articleImageUrl}" alt="${metaTitle}" class="article-image">` : ''}
+        <div class="static-divider"></div>
+        <div class="static-content">
+            <div class="static-highlight">
+                <h3><i class="bi bi-lightbulb"></i> Análisis Inteligente</h3>
+                <p>Este contenido ha sido analizado y procesado por inteligencia artificial para proporcionar insights relevantes y contextualizados. Nuestro sistema de IA garantiza la precisión y relevancia de la información presentada.</p>
+            </div>
+            <div class="article-body">
+                ${articleData.articulo_completo}
+            </div>
+        </div>
+        <div class="static-divider"></div>
+        <div class="static-footer">
+            <p>
+                <i class="bi bi-gear-fill"></i> Generado automáticamente por IA con Gemini
+            </p>
+            <p>
+                <i class="bi bi-shield-check"></i> HGARUNA News - Tu Periódico Digital Inteligente
+            </p>
+            <p>
+                <i class="bi bi-heart"></i> Gracias por leer nuestro contenido
+            </p>
+        </div>
+    </div>
+    <div class="floating-share">
+        <button class="share-btn" onclick="shareOnTwitter()" title="Compartir en Twitter">
+            <i class="bi bi-twitter"></i>
+        </button>
+        <button class="share-btn" onclick="shareOnFacebook()" title="Compartir en Facebook">
+            <i class="bi bi-facebook"></i>
+        </button>
+        <button class="share-btn" onclick="shareOnLinkedIn()" title="Compartir en LinkedIn">
+            <i class="bi bi-linkedin"></i>
+        </button>
+    </div>
+    <button class="back-to-top" id="backToTop" title="Volver arriba">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    <script>/* ... (aquí va el JS de la plantilla avanzada, igual que en tu ejemplo) ... */</script>
+</body>
+</html>
+  `;
   // --- 5. Guardar el archivo HTML en articulos/ ---
   if (!fs.existsSync(ARTICLES_DIR)) {
     fs.mkdirSync(ARTICLES_DIR, { recursive: true });

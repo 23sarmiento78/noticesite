@@ -31,3 +31,10 @@ jobs:
           git add articulos/
           git commit -m "Artículo generado automáticamente" || echo "Sin cambios para commitear"
           git push 
+      - name: Forzar push para disparar update-articles-json
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add articulos/* || true
+          git commit --allow-empty -m "Trigger update-articles-json workflow"
+          git push 
