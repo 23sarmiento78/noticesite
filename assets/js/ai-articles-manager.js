@@ -115,6 +115,11 @@ class AIArticlesManager {
         if (jsonResponse.ok) {
           const jsonData = await jsonResponse.json();
           this.articles = jsonData.articles || [];
+          // Convertir el campo date a objeto Date
+          this.articles = this.articles.map(a => ({
+            ...a,
+            date: new Date(a.date)
+          }));
           console.log(`✅ ${this.articles.length} artículos cargados desde JSON`);
           
           // Ordenar por fecha (más recientes primero)
