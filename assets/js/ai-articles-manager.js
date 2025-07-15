@@ -109,7 +109,24 @@ class AIArticlesManager {
       
       console.log('📂 Cargando artículos de IA...');
       
-      // Obtener la lista de archivos HTML de la carpeta articulos
+      // Intentar cargar desde el archivo JSON primero (para Netlify)
+      try {
+        const jsonResponse = await fetch('/articulos-list.json');
+        if (jsonResponse.ok) {
+          const jsonData = await jsonResponse.json();
+          this.articles = jsonData.articles || [];
+          console.log(`✅ ${this.articles.length} artículos cargados desde JSON`);
+          
+          // Ordenar por fecha (más recientes primero)
+          this.articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+          
+          return;
+        }
+      } catch (jsonError) {
+        console.log('⚠️ No se pudo cargar JSON, intentando listar directorio...');
+      }
+      
+      // Fallback: Intentar listar el directorio (para servidor local)
       const response = await fetch('/articulos/');
       
       if (!response.ok) {
