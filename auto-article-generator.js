@@ -139,7 +139,7 @@ Por favor, genera SÓLO el objeto JSON. No añadas texto introductorio ni explic
   // --- 2. Llamar a Gemini API ---
   const { GoogleGenerativeAI } = await import('@google/generative-ai');
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   let geminiResponse = null;
   try {
     const result = await model.generateContent(prompt_for_gemini);
