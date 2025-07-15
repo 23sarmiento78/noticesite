@@ -1,49 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url>
-  <loc>https://es.hgaruna.org/index.html</loc>
-  <lastmod>2025-03-25T00:31:03+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://es.hgaruna.org/deportes.html</loc>
-  <lastmod>2025-03-25T00:31:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://es.hgaruna.org/tecnologia.html</loc>
-  <lastmod>2025-03-25T00:31:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://es.hgaruna.org/cultura.html</loc>
-  <lastmod>2025-03-25T00:31:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://es.hgaruna.org/autos.html</loc>
-  <lastmod>2025-03-25T00:31:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://es.hgaruna.org/ultimo.html</loc>
-  <lastmod>2025-03-25T00:31:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://es.hgaruna.org/politica_privacidad.html</loc>
-  <lastmod>2025-03-25T00:31:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
- <url>
+<?xml version='1.0' encoding='utf-8'?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://es.hgaruna.org/nigeria-rechaza-la-reubicacion-de-deport-2025-07-13.html</loc>
+    <lastmod>2025-07-13T06:28:12.477Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://es.hgaruna.org/tragedia-en-deir-al-balah-dos-hermanos-muertos-en-ataque-israeli-mientras-espera-2025-07-12.html</loc>
     <lastmod>2025-07-12T02:29:52.186Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://es.hgaruna.org/index.html</loc>
+    <lastmod>2025-03-25T00:31:03+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/deportes.html</loc>
+    <lastmod>2025-03-25T00:31:03+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/tecnologia.html</loc>
+    <lastmod>2025-03-25T00:31:03+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/cultura.html</loc>
+    <lastmod>2025-03-25T00:31:03+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/autos.html</loc>
+    <lastmod>2025-03-25T00:31:03+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/ultimo.html</loc>
+    <lastmod>2025-03-25T00:31:03+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/politica_privacidad.html</loc>
+    <lastmod>2025-03-25T00:31:03+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
 </urlset>

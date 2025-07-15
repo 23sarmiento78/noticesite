@@ -315,6 +315,8 @@
     <script src="assets/js/search-manager.js"></script>
     <script src="assets/js/breaking-news-manager.js"></script>
     <script src="assets/js/trending-manager.js"></script>
+    <script src="assets/js/ai-articles-manager.js"></script>
+    <!-- <script src="assets/js/ai-articles-auto-refresh.js"></script> -->
     <script src="assets/js/seo-optimizer.js"></script>
     <script src="assets/js/analytics-manager.js"></script>
 
@@ -392,14 +394,21 @@
               await new Promise(resolve => setTimeout(resolve, 300));
             }
             
-            // 6. SEO Optimizer
+            // 6. AI Articles Manager
+            if (typeof AIArticlesManager !== 'undefined') {
+              console.log('🤖 Iniciando AIArticlesManager...');
+              new AIArticlesManager();
+              await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            
+            // 7. SEO Optimizer
             if (typeof SEOOptimizer !== 'undefined') {
               console.log('🔧 Iniciando SEOOptimizer...');
               new SEOOptimizer();
               await new Promise(resolve => setTimeout(resolve, 200));
             }
             
-            // 7. Analytics Manager
+            // 8. Analytics Manager
             if (typeof AnalyticsManager !== 'undefined') {
               console.log('📊 Iniciando AnalyticsManager...');
               new AnalyticsManager();
