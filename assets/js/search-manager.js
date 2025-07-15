@@ -111,6 +111,27 @@ class SearchManager {
         });
       }
 
+      // Buscar en los artículos de IA (articulos-list.json)
+      try {
+        const aiRes = await fetch('/articulos-list.json');
+        if (aiRes.ok) {
+          const aiJson = await aiRes.json();
+          if (aiJson.articles && Array.isArray(aiJson.articles)) {
+            const aiItems = aiJson.articles.map(a => ({
+              title: a.title || 'Artículo IA',
+              description: a.description || '',
+              link: a.url || '#',
+              pubDate: a.date || '',
+              feedInfo: { title: 'Artículos IA' },
+              imageUrl: a.imageUrl || ''
+            }));
+            allItems.push(...aiItems);
+          }
+        }
+      } catch (e) {
+        // Si falla, simplemente no agrega los artículos IA
+      }
+
       // Si no hay items en cache, cargar algunos feeds básicos
       if (allItems.length === 0) {
         allItems = await this.loadBasicFeeds();

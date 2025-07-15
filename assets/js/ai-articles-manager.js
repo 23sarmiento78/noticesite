@@ -35,59 +35,64 @@ class AIArticlesManager {
     let existingSection = document.getElementById('ai-articles-section');
     
     if (!existingSection) {
-      // Crear la sección después de "Noticias Destacadas"
-      const destacadasSection = document.querySelector('.news-section');
+      // Crear la sección de IA
+      const newSection = document.createElement('section');
+      newSection.className = 'news-section mt-5';
+      newSection.id = 'ai-articles-section';
       
-      if (destacadasSection) {
-        const newSection = document.createElement('section');
-        newSection.className = 'news-section mt-5';
-        newSection.id = 'ai-articles-section';
+      newSection.innerHTML = `
+        <h2 class="section-title">
+          <i class="bi bi-robot text-primary"></i>
+          Artículos Generados por IA
+          <span class="ai-badge">
+            <i class="bi bi-lightning-charge"></i>
+            En Tiempo Real
+          </span>
+        </h2>
+        <p class="section-subtitle">
+          Contenido analizado y procesado por inteligencia artificial para brindarte insights únicos
+        </p>
         
-        newSection.innerHTML = `
-          <h2 class="section-title">
-            <i class="bi bi-robot text-primary"></i>
-            Artículos Generados por IA
-            <span class="ai-badge">
-              <i class="bi bi-lightning-charge"></i>
-              En Tiempo Real
-            </span>
-          </h2>
-          <p class="section-subtitle">
-            Contenido analizado y procesado por inteligencia artificial para brindarte insights únicos
-          </p>
-          
-          <!-- Loading spinner -->
-          <div id="ai-articles-loading" class="text-center py-4">
-            <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Cargando artículos...</span>
-            </div>
-            <p class="mt-2 text-muted">Cargando artículos generados por IA...</p>
+        <!-- Loading spinner -->
+        <div id="ai-articles-loading" class="text-center py-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando artículos...</span>
           </div>
-          
-          <!-- Container para las tarjetas -->
-          <div id="ai-articles-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" style="display: none;">
-            <!-- Las tarjetas se insertarán aquí -->
-          </div>
-          
-          <!-- Botón "Ver más" -->
-          <div id="ai-articles-load-more" class="text-center mt-4" style="display: none;">
-            <button class="btn btn-outline-primary btn-lg" id="load-more-articles">
-              <i class="bi bi-arrow-down-circle"></i>
-              Ver Más Artículos
-              <span class="articles-count"></span>
-            </button>
-          </div>
-          
-          <!-- Mensaje cuando no hay artículos -->
-          <div id="ai-articles-empty" class="text-center py-5" style="display: none;">
-            <i class="bi bi-robot display-1 text-muted"></i>
-            <h4 class="mt-3 text-muted">No hay artículos disponibles</h4>
-            <p class="text-muted">Los artículos generados por IA aparecerán aquí automáticamente.</p>
-          </div>
-        `;
+          <p class="mt-2 text-muted">Cargando artículos generados por IA...</p>
+        </div>
         
-        // Insertar después de la sección de noticias destacadas
-        destacadasSection.parentNode.insertBefore(newSection, destacadasSection.nextSibling);
+        <!-- Container para las tarjetas -->
+        <div id="ai-articles-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" style="display: none;">
+          <!-- Las tarjetas se insertarán aquí -->
+        </div>
+        
+        <!-- Botón "Ver más" -->
+        <div id="ai-articles-load-more" class="text-center mt-4" style="display: none;">
+          <button class="btn btn-outline-primary btn-lg" id="load-more-articles">
+            <i class="bi bi-arrow-down-circle"></i>
+            Ver Más Artículos
+            <span class="articles-count"></span>
+          </button>
+        </div>
+        
+        <!-- Mensaje cuando no hay artículos -->
+        <div id="ai-articles-empty" class="text-center py-5" style="display: none;">
+          <i class="bi bi-robot display-1 text-muted"></i>
+          <h4 class="mt-3 text-muted">No hay artículos disponibles</h4>
+          <p class="text-muted">Los artículos generados por IA aparecerán aquí automáticamente.</p>
+        </div>
+      `;
+      
+      // Insertar en el marcador si existe, si no, usar método anterior
+      const anchor = document.getElementById('ai-articles-anchor');
+      if (anchor) {
+        anchor.parentNode.insertBefore(newSection, anchor.nextSibling);
+      } else {
+        // Fallback: después de la sección de noticias destacadas
+        const destacadasSection = document.querySelector('.news-section');
+        if (destacadasSection) {
+          destacadasSection.parentNode.insertBefore(newSection, destacadasSection.nextSibling);
+        }
       }
     }
     

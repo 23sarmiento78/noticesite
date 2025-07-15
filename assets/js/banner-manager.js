@@ -62,9 +62,20 @@ class BannerManager {
           for (const proxy of proxies) {
             try {
               console.log(`🔄 Banner: Intentando ${feed.title} con ${proxy}`);
-              
               const proxyResponse = await fetch(`${proxy}${encodeURIComponent(feed.url)}`);
-              const data = await proxyResponse.json();
+              if (!proxyResponse.ok) {
+                const errorText = await proxyResponse.text();
+                console.warn(`⚠️ Banner: Proxy falló para ${feed.title} - HTTP Status: ${proxyResponse.status}, Response Body: ${errorText}`);
+                continue;
+              }
+              let data;
+              try {
+                data = await proxyResponse.json();
+              } catch (jsonError) {
+                const errorText = await proxyResponse.text();
+                console.warn(`⚠️ Banner: Proxy falló para ${feed.title} - No es JSON. Respuesta: ${errorText}`);
+                continue;
+              }
               xmlContent = data.contents || data.data || data;
               
               if (xmlContent) {
