@@ -35,21 +35,35 @@ try {
 
   // Crear array de artículos
   const articles = htmlFiles.map(fileName => {
+    const filePath = path.join(articulosDir, fileName);
+    let imageUrl = "https://placehold.co/800x450/667eea/ffffff?text=Artículo+IA";
+
+    try {
+      const htmlContent = fs.readFileSync(filePath, 'utf8');
+      // Buscar og:image
+      const ogImageMatch = htmlContent.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i);
+      if (ogImageMatch && ogImageMatch[1]) {
+        imageUrl = ogImageMatch[1];
+      }
+    } catch (e) {
+      // Si hay error leyendo el archivo, se usa la imagen por defecto
+    }
+
     const dateMatch = fileName.match(/(\d{4})-(\d{2})-(\d{2})/);
     const date = dateMatch ? `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}` : new Date().toISOString().split('T')[0];
-    
+
     // Generar título desde el nombre del archivo
     const title = fileName
       .replace(/\.html$/, '')
       .replace(/-/g, ' ')
       .replace(/\b\w/g, l => l.toUpperCase());
-    
+
     return {
       fileName: fileName,
       title: title,
       description: "Artículo analizado y procesado por inteligencia artificial.",
-      imageUrl: "https://placehold.co/800x450/667eea/ffffff?text=Artículo+IA",
-      url: `https://es.hgaruna.org/articulos/${fileName}`,
+      imageUrl: imageUrl,
+      url: `/articulos/${fileName}`,
       date: date,
       isAI: true
     };
