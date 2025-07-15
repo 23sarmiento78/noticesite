@@ -143,7 +143,11 @@ Por favor, genera SÓLO el objeto JSON. No añadas texto introductorio ni explic
   // --- 3. Parsear respuesta de Gemini ---
   let articleData = {};
   try {
-    articleData = JSON.parse(geminiResponse);
+    // Limpieza de bloques markdown si existen
+    let cleanGeminiResponse = geminiResponse
+      .replace(/```json\s*/gi, '') // quita ```json al inicio
+      .replace(/```/g, '');         // quita ``` al final
+    articleData = JSON.parse(cleanGeminiResponse);
   } catch (e) {
     console.error('❌ Error al parsear JSON de Gemini:', e.message);
     process.exit(1);
