@@ -83,6 +83,47 @@ try {
   console.log('📋 Artículos:', articles.map(a => a.title));
   console.log('📁 Archivo guardado: articulos-list.json');
 
+  // --- Generar sitemap XML ---
+  const baseUrl = 'https://es.hgaruna.org';
+  const mainPages = [
+    'index.html',
+    'deportes.html',
+    'tecnologia.html',
+    'cultura.html',
+    'autos.html',
+    'ultimo.html',
+    'politica_derechos_autor.html',
+    'politica_privacidad.html'
+  ];
+
+  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  // Páginas principales
+  mainPages.forEach(page => {
+    sitemap += `  <url>\n`;
+    sitemap += `    <loc>${baseUrl}/${page}</loc>\n`;
+    sitemap += `    <changefreq>weekly</changefreq>\n`;
+    sitemap += `    <priority>1.0</priority>\n`;
+    sitemap += `  </url>\n`;
+  });
+
+  // Artículos
+  articles.forEach(article => {
+    sitemap += `  <url>\n`;
+    sitemap += `    <loc>${baseUrl}/articulos/${article.fileName}</loc>\n`;
+    sitemap += `    <lastmod>${article.date}</lastmod>\n`;
+    sitemap += `    <changefreq>monthly</changefreq>\n`;
+    sitemap += `    <priority>0.8</priority>\n`;
+    sitemap += `  </url>\n`;
+  });
+
+  sitemap += `</urlset>\n`;
+
+  // Escribir sitemap
+  fs.writeFileSync('./sistemapGNRAL.xml', sitemap);
+  console.log(`✅ Sitemap actualizado con ${articles.length} artículos y ${mainPages.length} páginas principales`);
+
 } catch (error) {
   console.error('❌ Error al actualizar la lista de artículos:', error);
   process.exit(1);
