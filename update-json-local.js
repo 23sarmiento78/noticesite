@@ -124,6 +124,47 @@ try {
   fs.writeFileSync('./sistemapGNRAL.xml', sitemap);
   console.log(`✅ Sitemap actualizado con ${articles.length} artículos y ${mainPages.length} páginas principales`);
 
+  // --- Generar news-sitemap.xml para Google News y Bing News ---
+  const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+  const now = new Date();
+  const newsArticles = articles.filter(article => {
+    const pubDate = new Date(article.date);
+    return now - pubDate <= TWO_DAYS_MS;
+  });
+
+  let newsSitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  newsSitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n`;
+
+  newsArticles.forEach(article => {
+    // Extraer título real del HTML si es posible
+    let realTitle = article.title;
+    try {
+      const htmlContent = fs.readFileSync(path.join(articulosDir, article.fileName), 'utf8');
+      const titleMatch = htmlContent.match(/<title>([^<]+)<\/title>/i);
+      if (titleMatch && titleMatch[1]) {
+        realTitle = titleMatch[1];
+      }
+    } catch (e) {}
+    // Fecha en formato ISO completo
+    const pubDate = new Date(article.date);
+    const pubDateIso = pubDate.toISOString();
+    newsSitemap += `  <url>\n`;
+    newsSitemap += `    <loc>${baseUrl}/articulos/${article.fileName}</loc>\n`;
+    newsSitemap += `    <news:news>\n`;
+    newsSitemap += `      <news:publication>\n`;
+    newsSitemap += `        <news:name>HGARUNA News</news:name>\n`;
+    newsSitemap += `        <news:language>es</news:language>\n`;
+    newsSitemap += `      </news:publication>\n`;
+    newsSitemap += `      <news:publication_date>${pubDateIso}</news:publication_date>\n`;
+    newsSitemap += `      <news:title>${realTitle}</news:title>\n`;
+    newsSitemap += `    </news:news>\n`;
+    newsSitemap += `  </url>\n`;
+  });
+
+  newsSitemap += `</urlset>\n`;
+  fs.writeFileSync('./news-sitemap.xml', newsSitemap);
+  console.log(`✅ News sitemap generado con ${newsArticles.length} artículos recientes`);
+
 } catch (error) {
   console.error('❌ Error al actualizar la lista de artículos:', error);
   process.exit(1);
