@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "fileName": "condena-robo-horacio-rosatti-damian-berruet-2025-07-16.html",
+      "title": "Condena Robo Horacio Rosatti Damian Berruet 2025 07 16",
+      "description": "Artículo analizado y procesado por inteligencia artificial.",
+      "imageUrl": "https://www.clarin.com/img/2024/05/31/3ks13miyy_1200x630__1.jpg",
+      "url": "/articulos/condena-robo-horacio-rosatti-damian-berruet-2025-07-16.html",
+      "date": "2025-07-16",
+      "isAI": true
+    },
+    {
       "fileName": "crisis-en-el-peronismo-negociacion-de-listas-al-ro-2025-07-16.html",
       "title": "Crisis En El Peronismo Negociacion De Listas Al Ro 2025 07 16",
       "description": "Artículo analizado y procesado por inteligencia artificial.",
@@ -199,6 +208,6 @@
       "isAI": true
     }
   ],
-  "lastUpdated": "2025-07-16T18:03:55.518Z",
-  "totalArticles": 22
+  "lastUpdated": "2025-07-16T20:03:27.064Z",
+  "totalArticles": 23
 }
