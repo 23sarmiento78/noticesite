@@ -23,6 +23,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://es.hgaruna.org/articulos/pettovello-predice-triunfo-de-lla-en-buenos-aires--2025-07-16.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
+      <news:title>Pettovello predice triunfo de LLA en Buenos Aires: ¡Sorpresa...</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://es.hgaruna.org/articulos/pettovello-sorpresa-lla-pba-datos-economicos-2025-07-16.html</loc>
     <news:news>
       <news:publication>
@@ -31,6 +42,17 @@
       </news:publication>
       <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
       <news:title>Pettovello Vaticina Sorpresa de LLA en PBA: Impacto de Datos Económicos</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/articulos/sandra-pettovello-lla-buenos-aires-elecciones-sorpresa-2025-07-16.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
+      <news:title>Sandra Pettovello: ¿LLA Sorprenderá en Buenos Aires con Datos Económicos?</news:title>
     </news:news>
   </url>
   <url>
