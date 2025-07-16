@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://es.hgaruna.org/articulos/crisis-en-el-peronismo-negociacion-de-listas-al-ro-2025-07-16.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
+      <news:title>Crisis en el Peronismo: Negociación de Listas al Rojo Vivo</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://es.hgaruna.org/articulos/fiesta-nacional-francesa-coincidencias-con-milei-y-2025-07-16.html</loc>
     <news:news>
       <news:publication>
@@ -20,6 +31,17 @@
       </news:publication>
       <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
       <news:title>Homenaje en Washington a Víctimas AMIA: Lucha Global contra el Terrorismo</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/articulos/iran-acusa-argentina-milei-apoyo-israel-conflicto-2025-07-16.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
+      <news:title>Irán Acusa a Argentina y Milei de Apoyar a Israel: Escalada Diplomática</news:title>
     </news:news>
   </url>
   <url>

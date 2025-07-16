@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "fileName": "crisis-en-el-peronismo-negociacion-de-listas-al-ro-2025-07-16.html",
+      "title": "Crisis En El Peronismo Negociacion De Listas Al Ro 2025 07 16",
+      "description": "Artículo analizado y procesado por inteligencia artificial.",
+      "imageUrl": "https://www.clarin.com/img/2023/12/22/YnLI5DJiF_1200x630__1.jpg",
+      "url": "/articulos/crisis-en-el-peronismo-negociacion-de-listas-al-ro-2025-07-16.html",
+      "date": "2025-07-16",
+      "isAI": true
+    },
+    {
       "fileName": "fiesta-nacional-francesa-coincidencias-con-milei-y-2025-07-16.html",
       "title": "Fiesta Nacional Francesa Coincidencias Con Milei Y 2025 07 16",
       "description": "Artículo analizado y procesado por inteligencia artificial.",
@@ -15,6 +24,15 @@
       "description": "Artículo analizado y procesado por inteligencia artificial.",
       "imageUrl": "https://www.clarin.com/img/2025/07/15/N1Sal0_1X_1200x630__1.jpg",
       "url": "/articulos/homenaje-washington-victimas-amia-lucha-terrorismo-2025-07-16.html",
+      "date": "2025-07-16",
+      "isAI": true
+    },
+    {
+      "fileName": "iran-acusa-argentina-milei-apoyo-israel-conflicto-2025-07-16.html",
+      "title": "Iran Acusa Argentina Milei Apoyo Israel Conflicto 2025 07 16",
+      "description": "Artículo analizado y procesado por inteligencia artificial.",
+      "imageUrl": "https://www.clarin.com/img/2024/10/03/uxDkYJ9m5_1200x630__1.jpg",
+      "url": "/articulos/iran-acusa-argentina-milei-apoyo-israel-conflicto-2025-07-16.html",
       "date": "2025-07-16",
       "isAI": true
     },
@@ -145,6 +163,6 @@
       "isAI": true
     }
   ],
-  "lastUpdated": "2025-07-16T08:03:44.624Z",
-  "totalArticles": 16
+  "lastUpdated": "2025-07-16T10:03:19.886Z",
+  "totalArticles": 18
 }
