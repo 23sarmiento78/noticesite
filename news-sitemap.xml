@@ -12,6 +12,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://es.hgaruna.org/articulos/elecciones-2025-peronismo-buenos-aires-interna-pj-2025-07-16.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
+      <news:title>Elecciones 2025: La Batalla Peronista por el Poder en Buenos Aires y su Impacto Nacional</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://es.hgaruna.org/articulos/fiesta-nacional-francesa-coincidencias-con-milei-y-2025-07-16.html</loc>
     <news:news>
       <news:publication>
@@ -42,6 +53,17 @@
       </news:publication>
       <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
       <news:title>Irán Acusa a Argentina y Milei de Apoyar a Israel: Escalada Diplomática</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://es.hgaruna.org/articulos/milei-y-la-polemica-lilia-lemoine-vs-diputada-k-2025-07-16.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
+      <news:title>Milei y la polémica: Lilia Lemoine vs. diputada K</news:title>
     </news:news>
   </url>
   <url>
