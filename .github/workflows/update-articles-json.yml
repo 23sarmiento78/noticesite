@@ -48,3 +48,6 @@ jobs:
         git add articulos-list.json sistemapGNRAL.xml news-sitemap.xml
         git commit -m "Actualizar lista de artículos y sitemap automáticamente"
         git push 
+
+    - name: Notificar a Bing con IndexNow
+      run: node indexnow.js 
