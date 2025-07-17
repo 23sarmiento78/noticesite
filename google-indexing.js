@@ -5,6 +5,15 @@ const fs = require('fs');
 // Cambia el nombre si tu archivo JSON tiene otro nombre
 const KEYFILEPATH = process.env.GOOGLE_APPLICATION_CREDENTIALS || path.join(__dirname, 'indexing-service-account.json');
 
+// Verificar que el archivo de credenciales existe
+if (!fs.existsSync(KEYFILEPATH)) {
+  console.error('❌ Error: No se encontró el archivo de credenciales en:', KEYFILEPATH);
+  console.error('Verifica que la variable GOOGLE_APPLICATION_CREDENTIALS esté configurada correctamente.');
+  process.exit(1);
+}
+
+console.log('✅ Archivo de credenciales encontrado en:', KEYFILEPATH);
+
 // Dominio base de tu sitio
 const BASE_URL = 'https://news.hgaruna.org/';
 
@@ -54,16 +63,21 @@ if (fs.existsSync(articulosDir)) {
 // Junta todas las URLs
 const URLS_TO_INDEX = [...rootUrls, ...articulosUrls];
 
+console.log(`📋 Total de URLs a indexar: ${URLS_TO_INDEX.length}`);
+
 async function indexUrl(url) {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: KEYFILEPATH,
-    scopes: ['https://www.googleapis.com/auth/indexing'],
-  });
-
-  const client = await auth.getClient();
-  const indexing = google.indexing({ version: 'v3', auth: client });
-
   try {
+    const auth = new google.auth.GoogleAuth({
+      keyFile: KEYFILEPATH,
+      scopes: ['https://www.googleapis.com/auth/indexing'],
+    });
+
+    console.log('🔐 Autenticando con Google...');
+    const client = await auth.getClient();
+    console.log('✅ Autenticación exitosa');
+    
+    const indexing = google.indexing({ version: 'v3', auth: client });
+
     const res = await indexing.urlNotifications.publish({
       requestBody: {
         url: url,
@@ -73,13 +87,25 @@ async function indexUrl(url) {
     console.log('✅ URL enviada a Google:', url);
     // console.log(res.data); // Puedes descomentar para ver la respuesta completa
   } catch (err) {
-    console.error('❌ Error al enviar la URL:', url, err.response?.data || err.message);
+    if (err.code === 401) {
+      console.error('❌ Error de autenticación (401) para URL:', url);
+      console.error('   - Verifica que la cuenta de servicio esté agregada en Search Console');
+      console.error('   - Verifica que la API de Indexing esté habilitada en Google Cloud');
+      console.error('   - Verifica que el archivo de credenciales sea válido');
+      console.error('   Detalles:', err.message);
+    } else {
+      console.error('❌ Error al enviar la URL:', url, err.response?.data || err.message);
+    }
   }
 }
 
 // Enviar todas las URLs del array
 (async () => {
+  console.log('🚀 Iniciando proceso de indexación...');
   for (const url of URLS_TO_INDEX) {
     await indexUrl(url);
+    // Pequeña pausa entre requests para no sobrecargar la API
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
+  console.log('🏁 Proceso de indexación completado');
 })();
