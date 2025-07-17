@@ -1,0 +1,27 @@
+name: Indexar URLs en Google cada 4 horas
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Cada 4 horas
+  workflow_dispatch:      # Permite ejecutarlo manualmente si lo deseas
+
+jobs:
+  indexar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Crear archivo de credenciales desde secreto
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > indexing-service-account.json
+
+      - name: Instalar dependencias
+        run: npm install googleapis
+
+      - name: Ejecutar indexador de URLs
+        run: node google-indexing.js
