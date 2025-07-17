@@ -34,6 +34,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://news.hgaruna.org/articulos/intendentes-peronistas-candidaturas-desdoblamiento-2025-07-17.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
+      <news:title>Intendentes Peronistas: Claves de su Candidatura y Desdoblamiento Electoral</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://news.hgaruna.org/articulos/victoria-villarruel-interna-milei-crisis-gobierno-2025-07-17.html</loc>
     <news:news>
       <news:publication>
