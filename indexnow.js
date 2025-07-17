@@ -4,7 +4,7 @@ const path = require('path');
 
 const INDEXNOW_API = 'https://api.indexnow.org/indexnow';
 const KEY = 'f19e638cbb894184b7144ebce7626e1b';
-const HOST =news.hgaruna.org;
+const HOST = 'news.hgaruna.org'; // Corregido: ahora es un string
 
 function extractUrlsFromSitemap(xmlPath) {
   try {
@@ -51,10 +51,18 @@ const sitemapFiles = ['sitemap.xml', 'sistemapGNRAL.xml'];
 let allUrls = [];
 for (const file of sitemapFiles) {
   const absPath = path.resolve(__dirname, file);
-  const urls = extractUrlsFromSitemap(absPath);
-  allUrls = allUrls.concat(urls);
+  if (fs.existsSync(absPath)) {
+    const urls = extractUrlsFromSitemap(absPath);
+    allUrls = allUrls.concat(urls);
+  } else {
+    console.warn(`[IndexNow] Archivo no encontrado: ${file}`);
+  }
 }
 // Eliminar duplicados
 allUrls = Array.from(new Set(allUrls));
 
-sendToIndexNow(allUrls); 
+if (allUrls.length) {
+  sendToIndexNow(allUrls);
+} else {
+  console.log('[IndexNow] No se encontraron URLs para enviar.');
+} 
