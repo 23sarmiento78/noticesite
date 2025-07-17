@@ -36,7 +36,7 @@ export default defineComponent({
     
     // Intento 3: Construir URL desde variables del Twitter Publisher
     if (!articleUrl && steps.code1?.file_name) {
-      const NETLIFY_BASE_URL = "https://es.hgaruna.org";
+      const NETLIFY_BASE_URL = "https://news.hgaruna.org";
       articleUrl = `${NETLIFY_BASE_URL}/articulos/${steps.code1.file_name}`;
       fileName = steps.code1.file_name;
       console.log('📋 Construyendo URL desde variables del Twitter Publisher');

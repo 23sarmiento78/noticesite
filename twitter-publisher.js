@@ -43,7 +43,7 @@ export default defineComponent({
     }
 
     // --- CONFIGURACIÓN DEL SITIO ---
-    const NETLIFY_BASE_URL = "https://es.hgaruna.org";
+    const NETLIFY_BASE_URL = "https://news.hgaruna.org";
     const ARTICLES_SUBFOLDER = "articulos/";
 
     // --- OBTENER Y VALIDAR DATOS DEL ARTÍCULO ---

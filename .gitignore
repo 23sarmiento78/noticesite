@@ -80,3 +80,6 @@ analysis-results/
 # Archivos de respaldo del panel
 admin-backup/
 panel-backup/ 
+indexing-service-account.json
+long-parity-366522-e628ed21f275.json
+*.json 

@@ -145,8 +145,8 @@ class SEOOptimizer {
       "@context": "https://schema.org",
       "@type": "NewsMediaOrganization",
       "name": "HGARUNA News",
-      "url": "https://es.hgaruna.org",
-      "logo": "https://es.hgaruna.org/assets/img/logo3.png",
+      "url": "https://news.hgaruna.org",
+      "logo": "https://news.hgaruna.org/assets/img/logo3.png",
       "description": "Sitio web de noticias internacionales con cobertura de deportes, tecnología, cultura y más.",
       "foundingDate": "2024",
       "address": {
@@ -161,7 +161,7 @@ class SEOOptimizer {
         "contactType": "customer service"
       },
       "sameAs": [
-        "https://service.hgaruna.org"
+        "https://news.hgaruna.org"
       ]
     };
 
@@ -194,7 +194,7 @@ class SEOOptimizer {
             "@type": "ListItem",
             "position": 1,
             "name": "Inicio",
-            "item": "https://es.hgaruna.org"
+            "item": "https://news.hgaruna.org"
           },
           {
             "@type": "ListItem",
@@ -266,7 +266,7 @@ class SEOOptimizer {
 
   optimizeInternalLinking() {
     // Agregar atributos rel a enlaces internos
-    const internalLinks = document.querySelectorAll('a[href^="/"], a[href^="https://es.hgaruna.org"]');
+    const internalLinks = document.querySelectorAll('a[href^="/"], a[href^="https://news.hgaruna.org"]');
     internalLinks.forEach(link => {
       if (!link.getAttribute('rel')) {
         link.setAttribute('rel', 'internal');
@@ -274,7 +274,7 @@ class SEOOptimizer {
     });
     
     // Agregar atributos rel a enlaces externos
-    const externalLinks = document.querySelectorAll('a[href^="http"]:not([href^="https://es.hgaruna.org"])');
+    const externalLinks = document.querySelectorAll('a[href^="http"]:not([href^="https://news.hgaruna.org"])');
     externalLinks.forEach(link => {
       if (!link.getAttribute('rel')) {
         link.setAttribute('rel', 'external nofollow');

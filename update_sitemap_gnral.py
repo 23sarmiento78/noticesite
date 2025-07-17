@@ -10,7 +10,7 @@ from typing import List, Dict, Optional
 # --- CONFIGURACIÓN ---
 # URL de tu sitemap.xml generado por Pipedream (el que solo tiene el último artículo)
 # Netlify lo servirá desde la raíz de tu sitio.
-SITEMAP_ARTICULOS_URL = "https://es.hgaruna.org/sitemap.xml"
+SITEMAP_ARTICULOS_URL = "https://news.hgaruna.org/sitemap.xml"
 
 # Ruta a tu sitemap general local en el entorno de construcción de Netlify.
 # Asegúrate de que este archivo exista en tu repositorio de GitHub.

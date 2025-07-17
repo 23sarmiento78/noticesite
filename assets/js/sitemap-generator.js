@@ -3,7 +3,7 @@ class SitemapGenerator {
   constructor() {
     this.sitemapData = [];
     this.lastModified = new Date().toISOString();
-    this.baseUrl = 'https://es.hgaruna.org';
+    this.baseUrl = 'https://news.hgaruna.org';
     this.init();
   }
 
@@ -184,7 +184,7 @@ class SitemapGenerator {
     }
 
     // En producción, enviar al servidor
-    if (window.location.hostname === 'es.hgaruna.org') {
+    if (window.location.hostname === 'news.hgaruna.org') {
       this.uploadSitemap(xml);
     }
   }

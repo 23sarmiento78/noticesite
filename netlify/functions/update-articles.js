@@ -58,7 +58,7 @@ exports.handler = async (event, context) => {
         title: title,
         description: "Artículo analizado y procesado por inteligencia artificial.",
         imageUrl: "https://placehold.co/800x450/667eea/ffffff?text=Artículo+IA",
-        url: `https://es.hgaruna.org/articulos/${fileName}`,
+        url: `https://news.hgaruna.org/articulos/${fileName}`,
         date: date,
         isAI: true
       };

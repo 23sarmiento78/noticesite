@@ -18,8 +18,8 @@ Disallow: /gorgojeo.js
 Disallow: /instagramapi.js
 
 # Sitemaps
-Sitemap: https://es.hgaruna.org/sitemap.xml
-Sitemap: https://es.hgaruna.org/sitemap-news.xml
+Sitemap: https://news.hgaruna.org/sitemap.xml
+Sitemap: https://news.hgaruna.org/sitemap-news.xml
 
 # Crawl-delay para ser respetuoso con el servidor
 Crawl-delay: 1

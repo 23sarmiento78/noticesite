@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | HGARUNA NEWS - Tu Periódico Digital</title>
+  <meta name="description" content="Contáctanos en HGARUNA NEWS para consultas, sugerencias, colaboraciones, prensa o reportes de error. Responde nuestro equipo en menos de 24 horas." />
+  <meta name="keywords" content="contacto, consultas, sugerencias, prensa, colaboraciones, HGARUNA, noticias, formulario" />
+  <meta name="author" content="HGARUNA NEWS" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="language" content="es" />
+  <meta name="geo.region" content="AR" />
+  <meta name="geo.placename" content="Buenos Aires" />
+  <meta name="distribution" content="global" />
+  <meta name="rating" content="general" />
+  <link rel="canonical" href="https://news.hgaruna.org/contacto.html" />
+  <link rel="icon" href="assets/img/logo3.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="assets/css/skeleton.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <meta property="og:title" content="Contacto | HGARUNA NEWS - Tu Periódico Digital" />
+  <meta property="og:description" content="Contáctanos en HGARUNA NEWS para consultas, sugerencias, colaboraciones, prensa o reportes de error. Responde nuestro equipo en menos de 24 horas." />
+  <meta property="og:image" content="https://news.hgaruna.org/assets/img/logo3.png" />
+  <meta property="og:url" content="https://news.hgaruna.org/contacto.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HGARUNA NEWS" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contacto | HGARUNA NEWS - Tu Periódico Digital" />
+  <meta name="twitter:description" content="Contáctanos en HGARUNA NEWS para consultas, sugerencias, colaboraciones, prensa o reportes de error. Responde nuestro equipo en menos de 24 horas." />
+  <meta name="twitter:image" content="https://news.hgaruna.org/assets/img/logo3.png" />
+  <meta name="google-site-verification" content="-JGciS_X8xCGpkt3affZHWRlY8Aly7LVq1BusI0iaTw" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contacto | HGARUNA NEWS",
+      "description": "Página de contacto de HGARUNA NEWS para consultas, sugerencias, colaboraciones, prensa o reportes de error.",
+      "url": "https://news.hgaruna.org/contacto.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "HGARUNA NEWS",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://news.hgaruna.org/assets/img/logo3.png"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "AR",
+          "addressLocality": "Buenos Aires"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "23sarmiento@gmail.com",
+          "contactType": "customer service"
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: #f6f8fa;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      color: #222;
+      letter-spacing: 1px;
+    }
+    #contact-form {
+      background: #fff;
+      max-width: 420px;
+      margin: 40px auto 32px auto;
+      padding: 32px 28px 24px 28px;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 1px solid #e3e7ed;
+      transition: box-shadow 0.2s;
+    }
+    #contact-form:focus-within {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07);
+    }
+    #contact-form label {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 2px;
+    }
+    #contact-form input,
+    #contact-form textarea,
+    #contact-form select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cfd8dc;
+      border-radius: 7px;
+      font-size: 1rem;
+      background: #f9fafb;
+      margin-bottom: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      resize: none;
+    }
+    #contact-form input:focus,
+    #contact-form textarea:focus,
+    #contact-form select:focus {
+      border-color: #0077ff;
+      box-shadow: 0 0 0 2px #0077ff22;
+      background: #fff;
+    }
+    #contact-form button[type="submit"] {
+      background: linear-gradient(90deg, #0077ff 60%, #00c6ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 12px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 2px 8px rgba(0,119,255,0.08);
+      transition: background 0.2s, transform 0.1s;
+    }
+    #contact-form button[type="submit"]:hover {
+      background: linear-gradient(90deg, #005fcc 60%, #0099cc 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    #faq {
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 28px 24px 18px 24px;
+      border: 1px solid #e3e7ed;
+    }
+    #faq h2 {
+      text-align: center;
+      color: #0077ff;
+      margin-bottom: 18px;
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
+    }
+    #faq details {
+      margin-bottom: 12px;
+      border-radius: 8px;
+      background: #f6f8fa;
+      border: 1px solid #e3e7ed;
+      padding: 10px 14px;
+      transition: background 0.2s;
+    }
+    #faq details[open] {
+      background: #eaf4ff;
+      border-color: #b3d8ff;
+    }
+    #faq summary {
+      font-weight: 500;
+      color: #222;
+      cursor: pointer;
+      outline: none;
+    }
+    #faq p {
+      margin: 8px 0 0 0;
+      color: #444;
+      font-size: 1rem;
+    }
+    @media (max-width: 600px) {
+      #contact-form, #faq {
+        max-width: 98vw;
+        padding: 12px 4vw;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Contacto</h1>
+  <form action="https://formspree.io/f/mkgznayq" method="POST" id="contact-form">
+    <label for="nombre">Nombre completo:</label><br>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+    <label for="email">Correo electrónico:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+    <label for="asunto">Asunto:</label><br>
+    <input type="text" id="asunto" name="asunto" required><br><br>
+    <label for="mensaje">Mensaje o consulta:</label><br>
+    <textarea id="mensaje" name="mensaje" rows="5" required></textarea><br><br>
+    <label for="tipo">Motivo de contacto:</label><br>
+    <select id="tipo" name="tipo" required>
+      <option value="General">Consulta general</option>
+      <option value="Sugerencia">Sugerencia</option>
+      <option value="Reporte de error">Reporte de error</option>
+      <option value="Colaboración">Colaboración</option>
+      <option value="Prensa">Prensa</option>
+      <option value="Otro">Otro</option>
+    </select><br><br>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <section id="faq">
+    <h2>Preguntas Frecuentes</h2>
+    <details>
+      <summary>¿Qué tipo de noticias publican en HGARUNA News?</summary>
+      <p>Publicamos noticias de actualidad, política, deportes, tecnología, cultura, autos y temas internacionales, priorizando la veracidad y la actualización constante.</p>
+    </details>
+    <details>
+      <summary>¿De dónde provienen los artículos?</summary>
+      <p>Los artículos pueden ser generados por inteligencia artificial, redactores humanos o importados de fuentes confiables mediante feeds RSS. Siempre se indica el origen en cada nota.</p>
+    </details>
+    <details>
+      <summary>¿Puedo colaborar o enviar una noticia?</summary>
+      <p>Sí, puedes enviar tu propuesta o noticia usando este formulario, seleccionando "Colaboración" como motivo de contacto.</p>
+    </details>
+    <details>
+      <summary>¿Cómo reporto un error o información incorrecta?</summary>
+      <p>Utiliza este formulario y selecciona "Reporte de error". Por favor, incluye el enlace y una breve descripción del problema.</p>
+    </details>
+    <details>
+      <summary>¿Qué datos personales recopila el sitio?</summary>
+      <p>Solo los datos que tú envías voluntariamente a través del formulario de contacto. Consulta nuestra <a href="politica_privacidad.html">Política de Privacidad</a> para más información.</p>
+    </details>
+    <details>
+      <summary>¿Cómo puedo darme de baja de notificaciones o correos?</summary>
+      <p>Actualmente no enviamos correos masivos ni notificaciones automáticas. Si recibes un correo no solicitado, por favor repórtalo usando este formulario.</p>
+    </details>
+    <details>
+      <summary>¿Quién administra HGARUNA News?</summary>
+      <p>HGARUNA News es administrado por un equipo independiente. Puedes contactarnos para prensa, colaboraciones o consultas generales usando este formulario.</p>
+    </details>
+  </section>
+</body>
+</html> 

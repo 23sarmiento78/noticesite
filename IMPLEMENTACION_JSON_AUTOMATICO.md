@@ -101,7 +101,7 @@ const fileName = steps.plantilla?.file_name || steps.code1?.file_name;
       "title": "Nuevo Artículo Generado por IA",
       "description": "Descripción del nuevo artículo...",
       "imageUrl": "https://...",
-      "url": "https://es.hgaruna.org/articulos/nuevo-articulo-2024-06-14.html",
+      "url": "https://news.hgaruna.org/articulos/nuevo-articulo-2024-06-14.html",
       "date": "2024-06-14",
       "isAI": true
     },

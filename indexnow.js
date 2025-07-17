@@ -4,7 +4,7 @@ const path = require('path');
 
 const INDEXNOW_API = 'https://api.indexnow.org/indexnow';
 const KEY = 'f19e638cbb894184b7144ebce7626e1b';
-const HOST = 'es.hgaruna.org';
+const HOST =news.hgaruna.org;
 
 function extractUrlsFromSitemap(xmlPath) {
   try {

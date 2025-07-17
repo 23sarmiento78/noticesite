@@ -84,7 +84,7 @@ try {
   console.log('📁 Archivo guardado: articulos-list.json');
 
   // --- Generar sitemap XML ---
-  const baseUrl = 'https://es.hgaruna.org';
+  const baseUrl = 'https://news.hgaruna.org';
   const mainPages = [
     'index.html',
     'deportes.html',

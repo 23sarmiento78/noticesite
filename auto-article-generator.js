@@ -8,7 +8,7 @@ const { TwitterApi } = require('twitter-api-v2');
 // --- CONFIGURACIÓN ---
 const RSS_FEED_URL = "https://www.clarin.com/rss/politica/";
 const ARTICLES_DIR = path.join(__dirname, 'articulos');
-const NETLIFY_BASE_URL = "https://es.hgaruna.org";
+const NETLIFY_BASE_URL = "https://news.hgaruna.org";
 
 // --- CARGAR CLAVES DESDE VARIABLES DE ENTORNO ---
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;

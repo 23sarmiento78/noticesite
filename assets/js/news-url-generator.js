@@ -1,7 +1,7 @@
 // Generador de URLs canónicas para noticias individuales
 class NewsURLGenerator {
   constructor() {
-    this.baseUrl = 'https://es.hgaruna.org';
+    this.baseUrl = 'https://news.hgaruna.org';
     this.newsCache = new Map();
     this.init();
   }
@@ -137,14 +137,14 @@ class NewsURLGenerator {
     <meta property="og:description" content="${this.cleanDescription(newsData.description)}">
     <meta property="og:url" content="${newsData.url}">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="${newsData.image || 'https://es.hgaruna.org/assets/img/logo3.png'}">
+    <meta property="og:image" content="${newsData.image || 'https://news.hgaruna.org/assets/img/logo3.png'}">
     <meta property="og:site_name" content="HGARUNA News">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${newsData.title}">
     <meta name="twitter:description" content="${this.cleanDescription(newsData.description)}">
-    <meta name="twitter:image" content="${newsData.image || 'https://es.hgaruna.org/assets/img/logo3.png'}">
+    <meta name="twitter:image" content="${newsData.image || 'https://news.hgaruna.org/assets/img/logo3.png'}">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="${newsData.url}">
@@ -156,7 +156,7 @@ class NewsURLGenerator {
       "@type": "NewsArticle",
       "headline": "${newsData.title}",
       "description": "${this.cleanDescription(newsData.description)}",
-      "image": "${newsData.image || 'https://es.hgaruna.org/assets/img/logo3.png'}",
+      "image": "${newsData.image || 'https://news.hgaruna.org/assets/img/logo3.png'}",
       "author": {
         "@type": "Organization",
         "name": "HGARUNA News"
@@ -166,7 +166,7 @@ class NewsURLGenerator {
         "name": "HGARUNA News",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://es.hgaruna.org/assets/img/logo3.png"
+          "url": "https://news.hgaruna.org/assets/img/logo3.png"
         }
       },
       "datePublished": "${newsData.date}",
