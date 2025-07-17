@@ -26,16 +26,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-<<<<<<< HEAD
-    <loc>https://news.hgaruna.org/politica_derechos_autor.html</loc>
-=======
-    <loc>https://es.hgaruna.org/ultimo.html</loc>
+    <loc>https://news.hgaruna.org/ultimo.html</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/politica_derechos_autor.html</loc>
->>>>>>> 3446cbcb21c27af6999a5b2461860871e95b9083
+    <loc>https://news.hgaruna.org/politica_derechos_autor.html</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -45,173 +41,157 @@
     <priority>1.0</priority>
   </url>
   <url>
-<<<<<<< HEAD
-    <loc>https://news.hgaruna.org/articulos/fiesta-nacional-francesa-coincidencias-con-milei-y-202507.html</loc>
-=======
-    <loc>https://es.hgaruna.org/articulos/comunicacion-seguridad-data-claves-poder-gobierno-2025-07-17.html</loc>
+    <loc>https://news.hgaruna.org/articulos/comunicacion-seguridad-data-claves-poder-gobierno-2025-07-17.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/villarruel-y-milei-crisis-interna-y-mensaje-desafi-2025-07-17.html</loc>
+    <loc>https://news.hgaruna.org/articulos/villarruel-y-milei-crisis-interna-y-mensaje-desafi-2025-07-17.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/condena-robo-horacio-rosatti-damian-berruet-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/condena-robo-horacio-rosatti-damian-berruet-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/crisis-en-el-peronismo-negociacion-de-listas-al-ro-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/crisis-en-el-peronismo-negociacion-de-listas-al-ro-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/elecciones-2025-peronismo-buenos-aires-interna-pj-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/elecciones-2025-peronismo-buenos-aires-interna-pj-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/fiesta-nacional-francesa-coincidencias-con-milei-y-2025-07-16.html</loc>
->>>>>>> 3446cbcb21c27af6999a5b2461860871e95b9083
+    <loc>https://news.hgaruna.org/articulos/fiesta-nacional-francesa-coincidencias-con-milei-y-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-<<<<<<< HEAD
-    <loc>https://news.hgaruna.org/articulos/homenaje-washington-victimas-amia-lucha-terrorismo-202507.html</loc>
-=======
-    <loc>https://es.hgaruna.org/articulos/fin-reelecciones-indefinidas-legisladores-concejales-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/fin-reelecciones-indefinidas-legisladores-concejales-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/homenaje-washington-victimas-amia-lucha-terrorismo-2025-07-16.html</loc>
->>>>>>> 3446cbcb21c27af6999a5b2461860871e95b9083
+    <loc>https://news.hgaruna.org/articulos/homenaje-washington-victimas-amia-lucha-terrorismo-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-<<<<<<< HEAD
-    <loc>https://news.hgaruna.org/articulos/pettovello-sorpresa-lla-pba-datos-economicos-202507.html</loc>
-=======
-    <loc>https://es.hgaruna.org/articulos/iran-acusa-argentina-milei-apoyo-israel-conflicto-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/iran-acusa-argentina-milei-apoyo-israel-conflicto-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/milei-y-la-polemica-lilia-lemoine-vs-diputada-k-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/milei-y-la-polemica-lilia-lemoine-vs-diputada-k-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/negociacion-listas-peronismo-kicillof-kirchner-massa-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/negociacion-listas-peronismo-kicillof-kirchner-massa-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/pettovello-predice-triunfo-de-lla-en-buenos-aires--2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/pettovello-predice-triunfo-de-lla-en-buenos-aires--2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/pettovello-sorpresa-lla-pba-datos-economicos-2025-07-16.html</loc>
->>>>>>> 3446cbcb21c27af6999a5b2461860871e95b9083
+    <loc>https://news.hgaruna.org/articulos/pettovello-sorpresa-lla-pba-datos-economicos-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-<<<<<<< HEAD
-    <loc>https://news.hgaruna.org/articulos/choque-politico-santa-fe-granata-ruiz-diaz-202507.html</loc>
-=======
-    <loc>https://es.hgaruna.org/articulos/sandra-pettovello-lla-buenos-aires-elecciones-sorpresa-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/sandra-pettovello-lla-buenos-aires-elecciones-sorpresa-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/ypf-filtraciones-fondos-buitre-procuracion-tesoro-2025-07-16.html</loc>
+    <loc>https://news.hgaruna.org/articulos/ypf-filtraciones-fondos-buitre-procuracion-tesoro-2025-07-16.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://es.hgaruna.org/articulos/choque-politico-santa-fe-granata-ruiz-diaz-2025-07-15.html</loc>
->>>>>>> 3446cbcb21c27af6999a5b2461860871e95b9083
+    <loc>https://news.hgaruna.org/articulos/choque-politico-santa-fe-granata-ruiz-diaz-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/elecciones-2023-libertad-avanza-y-pro-negocian-ali-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/elecciones-2023-libertad-avanza-y-pro-negocian-ali-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/eliminar-la-vicepresidencia-propuesta-pro-que-gene-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/eliminar-la-vicepresidencia-propuesta-pro-que-gene-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/juez-rosario-oculto-denuncia-coima-curriculum-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/juez-rosario-oculto-denuncia-coima-curriculum-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/karina-maureira-periodista-cantante-diputada-nacional-neuquen-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/karina-maureira-periodista-cantante-diputada-nacional-neuquen-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/maqueda-critica-milei-democracia-maton-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/maqueda-critica-milei-democracia-maton-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/milei-hiere-democracia-maqueda-criticas-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/milei-hiere-democracia-maqueda-criticas-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/milei-maqueda-ataque-democracia-politica-agresiva-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/milei-maqueda-ataque-democracia-politica-agresiva-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/santa-fe-narcotest-politicos-seguridad-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/santa-fe-narcotest-politicos-seguridad-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/ucr-polemica-interna-frente-provincia-bsas-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/ucr-polemica-interna-frente-provincia-bsas-2025-07-15.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://news.hgaruna.org/articulos/bullrich-vs-villarruel-una-grieta-inquebrantable-e-202507.html</loc>
+    <loc>https://news.hgaruna.org/articulos/bullrich-vs-villarruel-una-grieta-inquebrantable-e-2025-07-14.html</loc>
     <lastmod>2025-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
