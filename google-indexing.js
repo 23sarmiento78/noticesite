@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Cambia el nombre si tu archivo JSON tiene otro nombre
-const KEYFILEPATH = path.join(__dirname, 'indexing-service-account.json');
+const KEYFILEPATH = process.env.GOOGLE_APPLICATION_CREDENTIALS || path.join(__dirname, 'indexing-service-account.json');
 
 // Dominio base de tu sitio
 const BASE_URL = 'https://news.hgaruna.org/';
