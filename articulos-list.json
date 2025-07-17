@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "fileName": "cobos-aconseja-villarruel-disputa-milei-2025-07-17.html",
+      "title": "Cobos Aconseja Villarruel Disputa Milei 2025 07 17",
+      "description": "Artículo analizado y procesado por inteligencia artificial.",
+      "imageUrl": "https://www.clarin.com/img/2025/07/17/qVrfd6Ddr_1200x630__1.jpg",
+      "url": "/articulos/cobos-aconseja-villarruel-disputa-milei-2025-07-17.html",
+      "date": "2025-07-17",
+      "isAI": true
+    },
+    {
       "fileName": "comunicacion-seguridad-data-claves-poder-gobierno-2025-07-17.html",
       "title": "Comunicacion Seguridad Data Claves Poder Gobierno 2025 07 17",
       "description": "Artículo analizado y procesado por inteligencia artificial.",
@@ -271,6 +280,6 @@
       "isAI": true
     }
   ],
-  "lastUpdated": "2025-07-17T12:04:39.852Z",
-  "totalArticles": 30
+  "lastUpdated": "2025-07-17T14:02:48.979Z",
+  "totalArticles": 31
 }
