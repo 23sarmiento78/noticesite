@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "fileName": "elecciones-2025-argentina-cierre-listas-alianzas-2025-07-18.html",
+      "title": "Elecciones 2025 Argentina Cierre Listas Alianzas 2025 07 18",
+      "description": "Artículo analizado y procesado por inteligencia artificial.",
+      "imageUrl": "https://www.clarin.com/img/2025/07/10/UEqW7bdpU_1200x630__1.jpg",
+      "url": "/articulos/elecciones-2025-argentina-cierre-listas-alianzas-2025-07-18.html",
+      "date": "2025-07-18",
+      "isAI": true
+    },
+    {
       "fileName": "escandalo-politico-dirigente-libertario-falcon-verde-2025-07-18.html",
       "title": "Escandalo Politico Dirigente Libertario Falcon Verde 2025 07 18",
       "description": "Artículo analizado y procesado por inteligencia artificial.",
@@ -343,6 +352,6 @@
       "isAI": true
     }
   ],
-  "lastUpdated": "2025-07-18T14:03:24.030Z",
-  "totalArticles": 38
+  "lastUpdated": "2025-07-18T16:03:54.996Z",
+  "totalArticles": 39
 }
