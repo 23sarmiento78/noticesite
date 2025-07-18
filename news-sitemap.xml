@@ -23,6 +23,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://news.hgaruna.org/articulos/polemica-falcon-verde-justicia-libertarios-ddhh-2025-07-18.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-18T00:00:00.000Z</news:publication_date>
+      <news:title>El Falcon Verde y la Memoria: Polémica por Reivindicación de 'Justicia'</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://news.hgaruna.org/articulos/cobos-aconseja-villarruel-disputa-milei-2025-07-17.html</loc>
     <news:news>
       <news:publication>
