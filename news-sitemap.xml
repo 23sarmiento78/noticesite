@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://news.hgaruna.org/articulos/falcon-verde-polemica-memoria-historica-argentina-2025-07-18.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-18T00:00:00.000Z</news:publication_date>
+      <news:title>La Controversia del Falcon Verde: Memoria Histórica y Desafíos Políticos en Argentina</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://news.hgaruna.org/articulos/cobos-aconseja-villarruel-disputa-milei-2025-07-17.html</loc>
     <news:news>
       <news:publication>
