@@ -23,6 +23,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://news.hgaruna.org/articulos/crisis-pro-lla-milei-purga-candidatos-abella-2025-07-17.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
+      <news:title>Crisis PRO-LLA: Milei Impulsa Purga de Candidatos por Lealtad</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://news.hgaruna.org/articulos/desestimada-denuncia-corte-cristina-kirchner-2025-07-17.html</loc>
     <news:news>
       <news:publication>
@@ -97,149 +108,6 @@
       </news:publication>
       <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
       <news:title>Villarruel y Milei: Crisis interna y mensaje desafiante</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/condena-robo-horacio-rosatti-damian-berruet-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Condena Histórica: 4 Años por Intento de Robo a Horacio Rosatti</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/crisis-en-el-peronismo-negociacion-de-listas-al-ro-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Crisis en el Peronismo: Negociación de Listas al Rojo Vivo</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/elecciones-2025-peronismo-buenos-aires-interna-pj-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Elecciones 2025: La Batalla Peronista por el Poder en Buenos Aires y su Impacto Nacional</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/fiesta-nacional-francesa-coincidencias-con-milei-y-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Fiesta Nacional Francesa: Coincidencias con Milei y Apoyo a...</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/fin-reelecciones-indefinidas-legisladores-concejales-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Fin Reelecciones Indefinidas: Legisladores y Concejales Fuera de Carrera</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/homenaje-washington-victimas-amia-lucha-terrorismo-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Homenaje en Washington a Víctimas AMIA: Lucha Global contra el Terrorismo</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/iran-acusa-argentina-milei-apoyo-israel-conflicto-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Irán Acusa a Argentina y Milei de Apoyar a Israel: Escalada Diplomática</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/milei-y-la-polemica-lilia-lemoine-vs-diputada-k-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Milei y la polémica: Lilia Lemoine vs. diputada K</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/negociacion-listas-peronismo-kicillof-kirchner-massa-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Negociación de Listas Peronistas: Kicillof, Kirchner y Massa al Límite</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/pettovello-predice-triunfo-de-lla-en-buenos-aires--2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Pettovello predice triunfo de LLA en Buenos Aires: ¡Sorpresa...</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/pettovello-sorpresa-lla-pba-datos-economicos-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Pettovello Vaticina Sorpresa de LLA en PBA: Impacto de Datos Económicos</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/sandra-pettovello-lla-buenos-aires-elecciones-sorpresa-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>Sandra Pettovello: ¿LLA Sorprenderá en Buenos Aires con Datos Económicos?</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/ypf-filtraciones-fondos-buitre-procuracion-tesoro-2025-07-16.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-16T00:00:00.000Z</news:publication_date>
-      <news:title>YPF: Escándalo de Filtraciones y Reestructuración en Procuración del Tesoro</news:title>
     </news:news>
   </url>
 </urlset>
