@@ -45,6 +45,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://news.hgaruna.org/articulos/jujuy-polemica-juzgado-contravencional-caja-2025-07-18.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>HGARUNA News</news:name>
+        <news:language>es</news:language>
+      </news:publication>
+      <news:publication_date>2025-07-18T00:00:00.000Z</news:publication_date>
+      <news:title>Jujuy: La Polémica del Juzgado Contravencional y la Denuncia de 'Caja'</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://news.hgaruna.org/articulos/peronismo-kicillof-maximo-negociacion-final-2025-07-18.html</loc>
     <news:news>
       <news:publication>
@@ -64,116 +75,6 @@
       </news:publication>
       <news:publication_date>2025-07-18T00:00:00.000Z</news:publication_date>
       <news:title>El Falcon Verde y la Memoria: Polémica por Reivindicación de 'Justicia'</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/cobos-aconseja-villarruel-disputa-milei-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Disputa Milei-Villarruel: El Consejo de Cobos y el 'Llamadito' Estratégico</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/comunicacion-seguridad-data-claves-poder-gobierno-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Comunicación, Seguridad y Data: Claves del Poder en el Gobierno Moderno</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/crisis-pro-lla-milei-purga-candidatos-abella-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Crisis PRO-LLA: Milei Impulsa Purga de Candidatos por Lealtad</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/desestimada-denuncia-corte-cristina-kirchner-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Desestimada Denuncia Insólita Contra Jueces de la Corte por Caso Cristina Kirchner</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/intendente-caseros-polemica-jubilaciones-frase-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Intendente de Caseros y Jubilaciones: Polémica por Frase Desafortunada</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/intendente-jubilaciones-polemica-entre-rios-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Intendente de Caseros: Polémica por Declaraciones Extremas sobre Jubilaciones</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/intendentes-peronistas-candidaturas-desdoblamiento-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Intendentes Peronistas: Claves de su Candidatura y Desdoblamiento Electoral</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/julio-zamora-ruptura-pj-candidatura-senado-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Julio Zamora: La Explosiva Ruptura con el PJ y su Candidatura al Senado</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/victoria-villarruel-interna-milei-crisis-gobierno-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Victoria Villarruel y la Grieta en el Gobierno de Milei: "No Le Tengo Miedo a Nada"</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://news.hgaruna.org/articulos/villarruel-y-milei-crisis-interna-y-mensaje-desafi-2025-07-17.html</loc>
-    <news:news>
-      <news:publication>
-        <news:name>HGARUNA News</news:name>
-        <news:language>es</news:language>
-      </news:publication>
-      <news:publication_date>2025-07-17T00:00:00.000Z</news:publication_date>
-      <news:title>Villarruel y Milei: Crisis interna y mensaje desafiante</news:title>
     </news:news>
   </url>
 </urlset>
