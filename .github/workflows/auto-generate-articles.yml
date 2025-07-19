@@ -1,40 +1,40 @@
-name: Generar artículos automáticamente
-
-on:
-  schedule:
-    - cron: '0 */2 * * *' # Cada 2 horas
-  workflow_dispatch:
-
-jobs:
-  generar-articulos:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Instalar dependencias
-        run: |
-          npm install rss-parser axios twitter-api-v2 @google/generative-ai
-      - name: Ejecutar script de generación de artículos
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          TWITTER_APP_KEY: ${{ secrets.TWITTER_APP_KEY }}
-          TWITTER_APP_SECRET: ${{ secrets.TWITTER_APP_SECRET }}
-          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
-        run: node auto-article-generator.js
-      - name: Commit y push de nuevos artículos
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add articulos/
-          git commit -m "Artículo generado automáticamente" || echo "Sin cambios para commitear"
-          git push 
-      - name: Forzar push para disparar update-articles-json
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add articulos/* || true
-          git commit --allow-empty -m "Trigger update-articles-json workflow"
-          git push 
+# name: Generar artículos automáticamente
+#
+# on:
+#   schedule:
+#     - cron: '0 */2 * * *' # Cada 2 horas
+#   workflow_dispatch:
+#
+# jobs:
+#   generar-articulos:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout código
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#       - name: Instalar dependencias
+#         run: |
+#           npm install rss-parser axios twitter-api-v2 @google/generative-ai
+#       - name: Ejecutar script de generación de artículos
+#         env:
+#           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+#           TWITTER_APP_KEY: ${{ secrets.TWITTER_APP_KEY }}
+#           TWITTER_APP_SECRET: ${{ secrets.TWITTER_APP_SECRET }}
+#           TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+#           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+#         run: node auto-article-generator.js
+#       - name: Commit y push de nuevos artículos
+#         run: |
+#           git config --local user.email "action@github.com"
+#           git config --local user.name "GitHub Action"
+#           git add articulos/
+#           git commit -m "Artículo generado automáticamente" || echo "Sin cambios para commitear"
+#           git push 
+#       - name: Forzar push para disparar update-articles-json
+#         run: |
+#           git config --local user.email "action@github.com"
+#           git config --local user.name "GitHub Action"
+#           git add articulos/* || true
+#           git commit --allow-empty -m "Trigger update-articles-json workflow"
+#           git push

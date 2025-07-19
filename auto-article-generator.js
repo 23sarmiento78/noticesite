@@ -137,6 +137,10 @@ Fuente Original: ${latestArticle.link || "https://www.clarin.com/"}
 Por favor, genera SÓLO el objeto JSON. No añadas texto introductorio ni explicaciones fuera del JSON.
 `;
   // --- 2. Llamar a Gemini API ---
+  // DESACTIVADO TEMPORALMENTE
+  console.log('⚠️ Función de Gemini desactivada temporalmente.');
+  process.exit(0);
+  // --- El resto del código queda inactivo mientras Gemini esté desactivado ---
   const { GoogleGenerativeAI } = await import('@google/generative-ai');
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
@@ -798,4 +802,4 @@ Por favor, genera SÓLO el objeto JSON. No añadas texto introductorio ni explic
   } catch (e) {
     console.error('❌ Error al publicar en Twitter:', e.message);
   }
-})(); 
+})();

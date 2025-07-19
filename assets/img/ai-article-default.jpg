@@ -1,1 +1,16 @@
- 
+# Imagen por defecto para artículos de IA
+
+Este archivo debe ser reemplazado por una imagen real (formato JPG, PNG o WebP) con las siguientes características:
+
+- Dimensiones: 800x450 píxeles (16:9)
+- Formato: JPG, PNG o WebP
+- Tamaño: Máximo 200KB
+- Contenido: Una imagen genérica que represente "artículos generados por IA" o "inteligencia artificial"
+
+Sugerencias de contenido:
+- Iconos de IA/robot
+- Gradientes modernos
+- Elementos tecnológicos abstractos
+- Colores: Azules, púrpuras, grises modernos
+
+La imagen se usará como fallback cuando los artículos de IA no tengan una imagen específica. 
