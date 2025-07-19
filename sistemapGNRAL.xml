@@ -2,54 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://news.hgaruna.org/index.html</loc>
-    <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news.hgaruna.org/deportes.html</loc>
-    <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news.hgaruna.org/tecnologia.html</loc>
-    <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news.hgaruna.org/cultura.html</loc>
-    <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news.hgaruna.org/autos.html</loc>
-    <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news.hgaruna.org/ultimo.html</loc>
-    <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news.hgaruna.org/politica_derechos_autor.html</loc>
-    <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news.hgaruna.org/politica_privacidad.html</loc>
-    <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://news.hgaruna.org/articulos/amia-milei-justicia-terrorismo-argentina-2025-07-18.html</loc>
+    <lastmod>2025-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/elecciones-2025-argentina-cierre-listas-alianzas-2025-07-18.html</loc>
+    <lastmod>2025-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/escandalo-politico-dirigente-libertario-falcon-verde-2025-07-18.html</loc>
+    <lastmod>2025-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/falcon-verde-polemica-memoria-historica-argentina-2025-07-18.html</loc>
+    <lastmod>2025-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/jujuy-polemica-juzgado-contravencional-caja-2025-07-18.html</loc>
+    <lastmod>2025-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/peronismo-kicillof-maximo-negociacion-final-2025-07-18.html</loc>
+    <lastmod>2025-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/polemica-falcon-verde-justicia-libertarios-ddhh-2025-07-18.html</loc>
+    <lastmod>2025-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/cobos-aconseja-villarruel-disputa-milei-2025-07-17.html</loc>
+    <lastmod>2025-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://news.hgaruna.org/articulos/comunicacion-seguridad-data-claves-poder-gobierno-2025-07-17.html</loc>
+    <lastmod>2025-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/crisis-pro-lla-milei-purga-candidatos-abella-2025-07-17.html</loc>
+    <lastmod>2025-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/desestimada-denuncia-corte-cristina-kirchner-2025-07-17.html</loc>
+    <lastmod>2025-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/intendente-caseros-polemica-jubilaciones-frase-2025-07-17.html</loc>
+    <lastmod>2025-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/intendente-jubilaciones-polemica-entre-rios-2025-07-17.html</loc>
+    <lastmod>2025-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/intendentes-peronistas-candidaturas-desdoblamiento-2025-07-17.html</loc>
+    <lastmod>2025-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://news.hgaruna.org/articulos/julio-zamora-ruptura-pj-candidatura-senado-2025-07-17.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
